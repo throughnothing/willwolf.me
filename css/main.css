@@ -1,0 +1,42 @@
+h1 a { color: #333; }
+h1 a:hover { color: #777; text-decoration: none; }
+
+.blog-archives .categories, .post .categories { color: #bbb; }
+.blog-archives .title { color: #428bca; }
+
+div.post {
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #dfdfdf;
+}
+div.post div.body {
+    font-size: 18px;
+    line-height: 1.5;
+}
+div.post p.meta span.date { text-transform: uppercase; }
+div.post p { margin: 18px 0;}
+
+div.gist { font-size: 12px; }
+
+.navbar-right a {
+    display: block;
+    height: 22px;
+    width: 22px;
+    float: left;
+}
+a.archive {
+    color: #bbb;
+    margin-right: 12px;
+    font-size: 19px;
+}
+
+div#footer {
+    color: #777;
+    border-top: 1px solid #e7e7e7;
+    margin-top: 50px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+div.footer-nav a { color: #777; }
+div.footer-nav a:hover { color: #aaa; text-decoration: none; }

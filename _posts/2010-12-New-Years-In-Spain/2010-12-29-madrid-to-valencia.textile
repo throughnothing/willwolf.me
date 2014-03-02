@@ -1,0 +1,15 @@
+---
+published: false
+layout: post
+title: Driving to Valencia!
+author: Will
+mapping:
+    layers:
+        - http://api.flickr.com/services/feeds/photoset.gne?set=72157625608890323&nsid=45105880@N00&lang=en-us&georss=1
+        - https://raw.github.com/throughnothing/gpx/master/2010/20101229.gpx
+categories:
+    - travel
+    - new years
+    - spain
+---
+{% render_map %}

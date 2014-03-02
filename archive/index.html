@@ -1,0 +1,22 @@
+---
+layout: default
+title: throughnothing.com - Archive
+---
+
+<h1>Archive</h1>
+<div class="list-group striped blog-archives">
+    {% for post in site.posts reverse %}
+    <a class="list-group-item" href="{{ post.url }}">
+        <span class="text-muted small">{{ post.date | date_to_string }}</span>
+        <strong>&raquo;</strong>
+        <span class="title">{{ post.title }}</span>
+
+        {% if post.categories.size > 0 %}
+        <small class="categories pull-right">
+            {% include categories_comma.html %}
+        </small>
+        {% endif %}
+    </a>
+    {% endfor %}
+</div>
+

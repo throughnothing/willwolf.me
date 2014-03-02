@@ -1,0 +1,8 @@
+---
+layout: default
+title: throughnothing.com - William Wolf on the web
+---
+{% for post in paginator.posts %}
+    {% assign content = post.content %}
+    {% include article.html %}
+{% endfor %}
