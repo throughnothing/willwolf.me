@@ -11,3 +11,7 @@ think about are philosophy, technology, business, economics, and health/fitness.
 I currently work as the lead software developer for
 [Crowdtilt](https://www.crowdtilt.com).  My job kicks ass.
 
+* throughnothing at gmail
+* [GitHub](https://github.com/throughnothing)
+* [Twitter](https://twitter.com/throughnothing)
+

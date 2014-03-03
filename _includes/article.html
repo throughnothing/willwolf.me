@@ -16,10 +16,6 @@
 
 </div>
 
-{% if post.previous %}
-  <a class="pull-left" href="{{ post.previous.url }}">&lArr; Previous</a>
-{% endif %}
-
-{% if post.next %}
-  <a class="pull-right" href="{{ post.next.url }}">Next &rArr;</a>
+{% if single %}
+    {% include post_next_prev.html %}
 {% endif %}
