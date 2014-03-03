@@ -1,22 +1,385 @@
----
-layout: default
-title: throughnothing.com - Archive
----
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>throughnothing.com - Archive</title>
+        <meta name="viewport" content="width=device-width">
 
-<h1>Archive</h1>
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+        <!-- Bootstrap CSS -->
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">
+                            <img style="margin:-6px 3px 0 0;" src="http://1.gravatar.com/avatar/764740c772a0c1b7f9926ec08147a18a?s=22" class="img-rounded"/>
+                            throughnothing.com
+                        </a>
+                    </div>
+                    <!--<ul class="nav navbar-nav">-->
+                        <!--<li class="small"><a href="/archive.html">Archive</a></li>-->
+                    <!--</ul>-->
+                    <p class="navbar-text navbar-right">
+                        <!--<a href="/archive.xml"><span class="glyphicon glyphicon-folder-open"></span></a>-->
+                        <a alt="Archive" class="nav-glyph" href="/archive/">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                        </a>
+                        <a alt="PGP Key" class="nav-glyph" href="/pgp.txt">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </a>
+                        <a alt="RSS" href="/atom.xml"><img src="/images/rss.png"/></a>
+                    </p>
+                </div>
+            </div><!-- /.container -->
+        </nav>
+
+        <div class="container main-content">
+            <div class="col-md-8 col-md-offset-2">
+                <h1>Archive</h1>
 <div class="list-group striped blog-archives">
-    {% for post in site.posts reverse %}
-    <a class="list-group-item" href="{{ post.url }}">
-        <span class="text-muted small">{{ post.date | date_to_string }}</span>
+    
+    <a class="list-group-item" href="/2012/07/26/jekyll-mapping-and-octopress.html">
+        <span class="text-muted small">26 Jul 2012</span>
         <strong>&raquo;</strong>
-        <span class="title">{{ post.title }}</span>
+        <span class="title">Jekyll-Mapping and Octopress</span>
 
-        {% if post.categories.size > 0 %}
+        
         <small class="categories pull-right">
-            {% include categories_comma.html %}
+            
+    development,
+
+    octopress
+
+
         </small>
-        {% endif %}
+        
     </a>
-    {% endfor %}
+    
+    <a class="list-group-item" href="/2012/03/27/is-the-number-of-poor-people-declining-everywhere.html">
+        <span class="text-muted small">27 Mar 2012</span>
+        <strong>&raquo;</strong>
+        <span class="title">Is the number of poor people &quot;declining everywhere&quot;?</span>
+
+        
+        <small class="categories pull-right">
+            
+    economics,
+
+    poverty
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2012/03/19/on-startups-day-jobs-and-impact.html">
+        <span class="text-muted small">19 Mar 2012</span>
+        <strong>&raquo;</strong>
+        <span class="title">On Startups, Day Jobs, and Impact</span>
+
+        
+        <small class="categories pull-right">
+            
+    jobs,
+
+    startups
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2012/03/16/git-processes-scripts-and-ideas.html">
+        <span class="text-muted small">16 Mar 2012</span>
+        <strong>&raquo;</strong>
+        <span class="title">Git Processes, Scripts and Ideas</span>
+
+        
+        <small class="categories pull-right">
+            
+    git,
+
+    development
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2012/03/15/hello-world.html">
+        <span class="text-muted small">15 Mar 2012</span>
+        <strong>&raquo;</strong>
+        <span class="title">Hello World</span>
+
+        
+    </a>
+    
+    <a class="list-group-item" href="/2011/08/03/arriving-in-delhi.html">
+        <span class="text-muted small">03 Aug 2011</span>
+        <strong>&raquo;</strong>
+        <span class="title">Arriving in Delhi</span>
+
+        
+        <small class="categories pull-right">
+            
+    travel,
+
+    india
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2011/07/16/new-continent-for-us-asia.html">
+        <span class="text-muted small">16 Jul 2011</span>
+        <strong>&raquo;</strong>
+        <span class="title">A New Continent For Us: Asia</span>
+
+        
+        <small class="categories pull-right">
+            
+    india,
+
+    travel
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2011/07/15/city-life.html">
+        <span class="text-muted small">15 Jul 2011</span>
+        <strong>&raquo;</strong>
+        <span class="title">City Life - DC</span>
+
+        
+        <small class="categories pull-right">
+            
+    life,
+
+    moving
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2011/06/26/now.html">
+        <span class="text-muted small">26 Jun 2011</span>
+        <strong>&raquo;</strong>
+        <span class="title">Now</span>
+
+        
+        <small class="categories pull-right">
+            
+    simplicity
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2011/04/08/single-speed.html">
+        <span class="text-muted small">08 Apr 2011</span>
+        <strong>&raquo;</strong>
+        <span class="title">Single Speed</span>
+
+        
+        <small class="categories pull-right">
+            
+    biking,
+
+    simplicity,
+
+    health
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/12/08/the-best-christmas-gift-you-can-give.html">
+        <span class="text-muted small">08 Dec 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">The Best Christmas Gift You Can Give</span>
+
+        
+        <small class="categories pull-right">
+            
+    christmas,
+
+    simplicity
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/12/06/running-barefoot.html">
+        <span class="text-muted small">06 Dec 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Running Barefoot</span>
+
+        
+        <small class="categories pull-right">
+            
+    running,
+
+    barefoot,
+
+    health
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/12/04/5-ways-to-enjoy-your-commute.html">
+        <span class="text-muted small">04 Dec 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">5 Ways to Enjoy Your Commute</span>
+
+        
+        <small class="categories pull-right">
+            
+    simplicity
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/12/03/successful-people-read-books.html">
+        <span class="text-muted small">03 Dec 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Successful People Read Books</span>
+
+        
+        <small class="categories pull-right">
+            
+    reading,
+
+    productivity
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/12/02/art.html">
+        <span class="text-muted small">02 Dec 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Art</span>
+
+        
+        <small class="categories pull-right">
+            
+    art
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/10/23/steppin-out-ford-diabetes.html">
+        <span class="text-muted small">23 Oct 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Steppin' Out for Diabetes Run</span>
+
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/10/22/minimal-text-editors.html">
+        <span class="text-muted small">22 Oct 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Minimal Text Editors</span>
+
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/10/21/velociraptor-attacks.html">
+        <span class="text-muted small">21 Oct 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Workplace Velociraptor Incidents</span>
+
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/10/20/creative-commons--branding-confusion.html">
+        <span class="text-muted small">20 Oct 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Creative Commons' Branding Confusion</span>
+
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/10/18/Raw-Organic-Live-Food-Bars.html">
+        <span class="text-muted small">18 Oct 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Raw Organic Live Food Bars</span>
+
+        
+        <small class="categories pull-right">
+            
+    food,
+
+    paleo,
+
+    whole foods
+
+
+        </small>
+        
+    </a>
+    
+    <a class="list-group-item" href="/2010/10/12/barefoot-observations.html">
+        <span class="text-muted small">12 Oct 2010</span>
+        <strong>&raquo;</strong>
+        <span class="title">Barefoot Observations</span>
+
+        
+        <small class="categories pull-right">
+            
+    running,
+
+    barefoot,
+
+    health
+
+
+        </small>
+        
+    </a>
+    
 </div>
 
+
+            </div>
+        </div>
+
+        <div id="footer" class="container-fluid">
+            <div class="col-md-8 col-md-offset-2 text-center footer-nav">
+                <ul class="list-inline">
+                    <li><a href="/archive/">archive</a></li> |
+                    <li><a href="/pgp.txt">pgp</a></li> |
+                    <li><a href="/atom.xml">rss</a></li> |
+                    <li>
+                        <a href="/uncopyright/">&hearts;</a>
+                        <a href="/about/">William Wolf</a>
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- #footer -->
+
+    </body>
+</html>

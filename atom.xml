@@ -1,27 +1,963 @@
----
-layout: nil
----
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[{{ site.title | cdata_escape }}]]></title>
-  <link href="{{ site.url }}/atom.xml" rel="self"/>
-  <link href="{{ site.url }}/"/>
-  <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <id>{{ site.url }}/</id>
+  <title><![CDATA[]]></title>
+  <link href="/atom.xml" rel="self"/>
+  <link href="/"/>
+  <updated>2014-03-02T17:07:05-08:00</updated>
+  <id>/</id>
   <author>
-    <name><![CDATA[{{ site.author | strip_html }}]]></name>
-    {% if site.email %}<email><![CDATA[{{ site.email }}]]></email>{% endif %}
+    <name><![CDATA[]]></name>
+    
   </author>
 
-  {% for post in site.posts limit: 20 %}
+  
   <entry>
-    <title type="html"><![CDATA[{% if site.titlecase %}{{ post.title | titlecase | cdata_escape }}{% else %}{{ post.title | cdata_escape }}{% endif %}]]></title>
-    <link href="{{ site.url }}{{ post.url }}"/>
-    <updated>{{ post.date | date_to_xmlschema }}</updated>
-    <id>{{ site.url }}{{ post.id }}</id>
-    <content type="html"><![CDATA[{{ post.content | expand_urls: site.url | cdata_escape }}]]></content>
+    <title type="html"><![CDATA[Jekyll-Mapping and Octopress]]></title>
+    <link href="/2012/07/26/jekyll-mapping-and-octopress.html"/>
+    <updated>2012-07-26T11:11:00-07:00</updated>
+    <id>/2012/07/26/jekyll-mapping-and-octopress</id>
+    <content type="html"><![CDATA[<p>For a while now, I&#39;ve been wanting to add some sort of maps support to
+<a href="http://octopress.org/">octopress</a>/<a href="https://github.com/mojombo/jekyll">jekyll</a>,
+and I finally recently had some time to look into it a little bit more.
+It seems some others out there have had the same idea, because I stumbled
+across two plugins that did something close (but not exactly) to what I wanted:
+<a href="https://github.com/mguentner/octolayer">octolayer</a> and
+<a href="https://github.com/matthewowen/jekyll-mapping">jekyll-mapping</a>.</p>
+
+<p>The reason I&#39;m interested in this is that when I travel, I like to log <code>gpx</code>
+tracks of the places we go, and geotag my photos, etc.  It&#39;s nice to be able to
+display a map of where I went each day, and I can always go back and find
+exactly where that awesome restaurant was (in case I go back, or to tell
+friends).</p>
+
+<p>I wasn&#39;t really sure how/if jekyll plugins would map to octopress (since
+octopress does use jekyll, but its plugin structure still seems to be slightly
+different), so I started off looking into octolayer.</p>
+
+<h2>Octolayer</h2>
+
+<p>Octolayer was only setup to use <a href="http://openlayers.org/">openlayers</a>, and it
+could only do specific long/lat co-ordinates.  I really wanted to be able to use
+google maps, but I figured i&#39;d give this a try and see how things went.</p>
+
+<p>I liked the way that octolayer was set up, and the ease of installing it, but
+the openlayers API looked really messy to me, and I didn&#39;t feel like spending a
+bunch of time learning it when I really wanted google maps anyway, so I opened
+up an <a href="https://github.com/matthewowen/jekyll-mapping/issues/1">issue</a> with
+<a href="https://github.com/matthewowen/">matthewowen</a> to see what his
+thoughts were about adding the functionality I wanted to <code>jekyll-mapping</code>.</p>
+
+<h2>Jekyll-Mapping</h2>
+
+<p>Matthew responded pretty quickly, and showed me that he really already had basic
+support for what I wanted.  Fantastic.  All you had to do was put this in your
+config section of your posts:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">mapping:
+    layers:
+        - http://path/to/kml_file.kml
+        - http://path/to/gpx_file.gpx
+</code></pre></div>
+<p>Then put this in your post body wherever you want the map to render:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{% render_map %}
+</code></pre></div>
+<p>That&#39;s it!  It seemed to work pretty well at first, but then I quickly realized
+that the way the code was set up, it would only work on the post page, and would
+not be able to display multiple maps on a page that lists several posts (or even
+one post with multiple maps).  The javascript used an id to find the
+<code>jekyll-mapping</code> element, and it was tightly bound to a single-post page.</p>
+
+<p>I decided to head into <code>#octopress</code> and ask around (I&#39;ve never mucked with
+octopress source or plugins before), and got some really useful tips and help
+from <a href="https://github.com/imathis">Brandon Mathis</a>, Octopress&#39; creator.</p>
+
+<p>After a bit of tinkering, I ended up with
+<a href="https://github.com/throughnothing/jekyll-mapping/compare/refactor">this changeset</a>
+that gave me pretty much everything I wanted (for now):</p>
+
+<script src="https://gist.github.com/3183238.js"> </script>
+
+<p>With this, I can put multiple layers on a map (I usually put a <code>.gpx</code> layer for
+the day, as well as a layer from flickr with my geotagged photoset for that day
+in each relevant post), and display multiple posts, each with a map, per page.</p>
+]]></content>
   </entry>
-  {% endfor %}
+  
+  <entry>
+    <title type="html"><![CDATA[Is the number of poor people &quot;declining everywhere&quot;?]]></title>
+    <link href="/2012/03/27/is-the-number-of-poor-people-declining-everywhere.html"/>
+    <updated>2012-03-27T22:43:00-07:00</updated>
+    <id>/2012/03/27/is-the-number-of-poor-people-declining-everywhere</id>
+    <content type="html"><![CDATA[<p>The economist recently ran an article titled <a href="http://%20www.economist.com/node/21548963/">For the first time ever,the number of poor people is declining everywhere</a>.
+That&#39;s a pretty amazing statistic if it&#39;s true, so I couldn&#39;t help but check
+it out.</p>
+
+<p>The article starts out by telling us:</p>
+
+<blockquote>
+<p>The best estimates for global poverty come from the World Bank’s Development
+Research Group, which has just updated from 2005 its figures for those
+living in absolute poverty (not be confused with the relative measure
+commonly used in rich countries). The new estimates show that in 2008, the
+first year of the finance-and-food crisis, both the number and share of the
+population living on less than $1.25 a day (at 2005 prices, the most
+commonly accepted poverty line) was falling in every part of the world. This
+was the first instance of declines across the board since the bank started
+collecting the figures in 1981 (see chart).</p>
+</blockquote>
+
+<p>Right off the bat I&#39;m a little skeptical that <strong>the best</strong> estimates for
+global poverty from anywhere in the world come from...a bank -- much less the
+almighty World Bank.  But that&#39;s just me, let&#39;s dig into the actual numbers.</p>
+
+<p>The research from the World Bank defines a person in poverty as one who lives on
+less than $1.25 a day, and these dollars are fixed at 2005 dollar values.  So
+their data tells us that, when adjusted for inflation, there are a smaller
+percentage of people today living on less than $1.25 a day, than there have
+been since 1981.</p>
+
+<p>I couldn&#39;t help but wonder what the dollar has done since 1981. I found this
+interesting chart from the Federal Reserve:</p>
+
+<p><img class="center" src="/images/dolllarindex.png" title="&#34;US Dollar Index&#34;" alt="&#34;US Dollar Index&#34;"></p>
+
+<p>Isn&#39;t it rather interesting that the dollar index is virtually at the lowest
+point it has been at since records began (even before 1981)?</p>
+
+<p>I&#39;m a big believer that hard assets have more stable value over time than
+fiat, government-printed paper, which means they are a better measure of
+value over time -- a better yardstick, so to speak -- so I also looked up a chart from
+<a href="http://pricedingold.com">princedingold</a> comparing US dollars with the price
+of gold since the late 18th century (the relatively straight lines in the
+beginning are due to the fact that the dollar was linked to gold up until 1971):</p>
+
+<p><img class="center" src="/images/USD-1787-log.png" title="&#34;US Dollar Vs. Gold&#34;" alt="&#34;US Dollar Vs. Gold&#34;"></p>
+
+<p>Again, we see that the US Dollar vs Gold is at an all time low.  What this
+tells us is that, nominally, the value of the US dollar is the lowest it has
+been ever.  This means that someone living off of $1.25 in 1981 was doing
+much better off than someone living off of $1.25 today.  Based off the first
+chart above, let&#39;s say the dollar index was around 100 in 1981, and that it
+stands right around 70 today.  That means that today, you would have to live
+on $1.79 just to have the same standard of living you had in 1981 with $1.25.
+If you use the gold values from the second chart it&#39;s even worse.  Based on that
+measurement you&#39;d have to live on closer to $3 a day today to have the same
+standard of living you had in 1981 -- nearly 300% more!</p>
+
+<p>These examples are all nominal, of course, and the World Bank tells us that they
+are adjusting everything to 2005 dollars (what they did before 2005 I have no
+idea).  I don&#39;t know exactly how they are doing this adjustment, but I would
+guess they are using something like the <a href="http://www.bls.gov/cpi/">CPI</a>.</p>
+
+<p>Now, the CPI doesn&#39;t make for that good of a yardstick either.  It has been
+changed many times over the years, and during the recent housing boom,
+the CPI didn&#39;t even include house prices!  Right now the CPI doesn&#39;t include
+food or gas prices, the two things whose price is increasing the most!  So how
+accurate can the CPI really be, and how accurate can adjustments made off of it
+(or any similar measure) really be compared to real value.  For those
+interested, <a href="http://advisorperspectives.com/dshort/">Doug Short</a> has some great
+alternative inflation measurements and
+<a href="http://advisorperspectives.com/dshort/updates/Inflation-Since-1872.php">writeups</a>
+that are worth a look.</p>
+
+<p>My point here isn&#39;t really to prove their numbers wrong, but just to point out
+a few of the many problems with data such as this.  Measuring poverty by those
+living on X oz. of gold would have it&#39;s problems as well, so there is no perfect
+solution.  But if we did use the gold measurement, and adjust based on that,
+I&#39;d bet that the conclusion is probably <em>very</em> different.</p>
+
+<p>Look, we all want poverty to go down, but the World Bank in particular has
+an interest in making sure countries the world over want to take more of
+their strings-attached loans to &#39;better their countries&#39;.  We&#39;ve seen how the
+banks act in the United States, does anyone think they act in the interest of
+the poor?</p>
+
+<p>My personal opinion is that global poverty is likely on the decline, especially
+over the long run.  I believe there are many today worse off than they were
+last year, the year before, or even in 1981, but in aggregate, I think it&#39;s
+likely that the global standard of living is increasing.  We are a resilient,
+resourceful, and creative species, and we continue to progress and better our
+standard of living.</p>
+
+<p>The sensational title from the Economist states &quot;For the first time ever...&quot;
+Really?  Since the dawn of the first humans on this earth, this is the first
+time global poverty has ever declined?  I think someone was fishing for readers,
+and hey, they got this reader to bite.  But let&#39;s take their data with a huge
+grain of salt.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[On Startups, Day Jobs, and Impact]]></title>
+    <link href="/2012/03/19/on-startups-day-jobs-and-impact.html"/>
+    <updated>2012-03-19T04:36:00-07:00</updated>
+    <id>/2012/03/19/on-startups-day-jobs-and-impact</id>
+    <content type="html"><![CDATA[<p>It&#39;s been about 5 months since I quit my day job and decided to plunge
+head-first into the world of <a href="https://www.crowdtilt.com">startups</a>.
+It&#39;s been an amazing ride so far, and I know I&#39;ve only begun to scratch
+the surface of what&#39;s to come.</p>
+
+<p>Don&#39;t get me wrong, I&#39;ve been incredibly fortunate to have some
+<a href="https://www.readwriteweb.com/archives/webmailus_acquired_by_rackspace.php">great</a>
+<a href="http://www.siteworx.com">jobs</a> with some incredibly
+intelligent and talented people.  I&#39;ve learned
+a lot along the way, and the experiences have been great.  The breakneck
+pace of the past 5 months at <a href="https://www.crowdtilt.com">crowdtilt</a>, however,
+is something I hadn&#39;t experienced before.  It&#39;s amazing how fast
+perspectives can change.</p>
+
+<p>With a small team (we&#39;ve currently got 2 developers) everyone has lots
+of autonomy, responsibility, and most importantly (for me, at least)
+each person has the ability to have a <strong>huge</strong> impact on the business (and
+on people&#39;s lives).  Every person on the team is empowered to make decisions,
+move as quickly as possible, and really own the things they do.  This is often
+lost at larger corporations, where there&#39;s more beauracracy and processes to
+get in the way of what us developers really want to be doing (coding and
+getting things done &trade;).  In this environment abstract teams own things,
+while people and individuality are lost.  Thus far I&#39;ve been really happy with
+our focus, our pace, and our ability to keep tedious processes and long
+decision-chains to a bare minimum.</p>
+
+<p>Ownership and impact are two things that I think are really big in a startup
+environment -- in fact, they&#39;re huge.  To really own the tasks at hand while 
+taking on the responsibility of getting them done and making the hundreds of
+small decisions that inevitably come with any project is really rewarding
+and also satisfying.  When you are given the power to make these decisions
+it helps the company move faster, which is very exciting, but it also adds
+creativity and brainpower to the companies growth engine -- after all,
+startups don&#39;t just want instruction-followers, they want creators and doers.</p>
+
+<p>As we look to grow our team, we&#39;re going to put a lot of focus on keeping these
+things in tact.  We want to make sure everyone is empowered, self-motivated and
+has access to all the tools they need to do great work.  We want to find
+people who have a passion for creating great things, thrive with autonomy, and
+want the opportunity to have a very large impact every single day.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git Processes, Scripts and Ideas]]></title>
+    <link href="/2012/03/16/git-processes-scripts-and-ideas.html"/>
+    <updated>2012-03-16T02:56:00-07:00</updated>
+    <id>/2012/03/16/git-processes-scripts-and-ideas</id>
+    <content type="html"><![CDATA[<p>Lately I&#39;ve been refining some of my git processes (as well as learning
+a lot about git along the way).  I thought I&#39;d write up a post to share
+some of the ways i&#39;ve been using git.</p>
+
+<h2>Workflow</h2>
+
+<p>Our typical workflow at <a href="https://www.crowdtilt.com">crowdtilt</a> is pretty
+standard.  We have a <code>dev</code> branch, a <code>master</code> branch, and various feature/topic
+branches.  We also make heavy use of github for pull requests/code reviews.</p>
+
+<p>When I go to develop a new feature/bugfix, I start by creating a new branch
+off of the latest <code>dev</code>, and start coding.  I often make many small commits
+along the way because I&#39;m a strong believer in commit early, commit often.  I
+also push my branch to github pretty frequently just to be on the safe side.</p>
+
+<p>Once my feature branch has been tested, and is ready to be merged into <code>dev</code>,
+I rebase all of my small commits into 1.  We try to keep all of our PR&#39;s to 1
+commit just to keep our git history clean, useful, and readable as a history
+of concise and (hopefully) small changes.  To do this, I have been simply
+using:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ git rebase -i dev
+</code></pre></div>
+<p>This will drop me into vim with a lits of all the commits between <code>dev</code>&#39;s
+<code>HEAD</code> and my current branch&#39;s <code>HEAD</code>.  It will look something like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pick 1dea3ff Commit #1
+pick 57a5a28 Commit #2
+pick 3f21ade Commit #3
+</code></pre></div>
+<p>I simply squash all the commits into one by replacing <code>pick</code> with <code>s</code> on
+all but the first line.  This gives me something like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pick 1dea3ff Commit #1
+s 57a5a28 Commit #2
+s 3f21ade Commit #3
+</code></pre></div>
+<p>This tells git that I want to squash all of these commits into one.  Once
+I quit and save it&#39;ll then let me give a new commit message for my new
+mega-commit.</p>
+
+<p>Here I try to follow convention with a short summary on the first line,
+and then a lengthier description describing my feature/bugfix/whatever in
+a paragraph below that.</p>
+
+<p>Once I have my branch neatly tidied up with one descriptive commit, it&#39;s time
+to pull request.</p>
+
+<h2>Pull Requests and hub</h2>
+
+<p>I love the github web interface for reviewing code and checking out diffs, but
+it is very tedious to go to the website, find your branch, and make the pull
+request through the web interface.  Enter
+<a href="https://github.com/defunkt/hub">hub</a> -- a wonderful command-line tool that
+lets you create pull requests (amongst lots of other cool things) right
+from the command line.</p>
+
+<p>To do a pull request right from my coding directory, I can simply run:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot;
+</code></pre></div>
+<p>The caveat here is that hub (and github, too) default all pull requests
+to merge into the <code>master</code> branch.  We always merge into <code>dev</code>, and then
+merge <code>dev</code> into <code>master</code> when we are ready to deploy changes to production
+(I&#39;ll talk more about our deploy processes in another article). So to get
+it to merge into <code>dev</code>, we must run the following:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev
+</code></pre></div>
+<p>This is closer to what we need, but by default what this will do is setup
+a pull request on github from <code>throughnothing:feature-branch</code> to
+<code>crowdtilt:dev</code>.  It does this because it assumes that I want to do a pull
+request from my users fork to the original users repository.  We don&#39;t really
+have each developer fork our repos, we just all work on the same repo in our
+own branches, so we really want it to do a pull-request from
+<code>crowdtilt:feature-branch</code> to <code>crowdtilt:dev</code>.  This means we need:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch
+</code></pre></div>
+<p>It seemed really simple at first, but now it&#39;s a lot to type.  Time for some
+<code>~/.bashrc</code> magic.  To make things as simple as possible for our development
+process, I&#39;ve written this little bash function to put in our <code>~/.bashrc</code> files
+to smooth things out:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">pullreq<span class="o">()</span> <span class="o">{</span>
+    <span class="o">[</span> -z <span class="nv">$BRANCH</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">BRANCH</span><span class="o">=</span><span class="s2">&quot;dev&quot;</span>
+    <span class="nv">HEAD</span><span class="o">=</span><span class="k">$(</span>git symbolic-ref HEAD 2&gt; /dev/null<span class="k">)</span>
+    <span class="o">[</span> -z <span class="nv">$HEAD</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="k">return</span> <span class="c"># Return if no head</span>
+    <span class="nv">REMOTE</span><span class="o">=</span><span class="sb">`</span>cat .git/config <span class="p">|</span> grep <span class="s2">&quot;remote \&quot;origin\&quot;&quot;</span> -A 2 <span class="p">|</span> tail -n1 <span class="p">|</span> sed <span class="s1">&#39;s/.*:\([^\/]*\).*/\1/&#39;</span><span class="sb">`</span>
+
+    hub pull-request -b <span class="nv">$BRANCH</span> -h <span class="nv">$REMOTE</span>:<span class="k">${</span><span class="nv">HEAD</span><span class="p">#refs/heads/</span><span class="k">}</span> <span class="nv">$1</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>This accepts a <code>BRANCH</code> environment variable that can be set, but will default
+to <code>dev</code> (which is pretty much 90+% of our use cases).  It also parses the
+github user that the origin of the repository</p>
+
+<p>Not only has <code>hub</code> greatly streamlined our pull request process, but when
+combined with the bash function, it eliminates errors of pull requesting
+feature branches to be merged into <code>master</code> (and even having them
+<em>accidentally</em> merged into master directly -- that never happens, right?)
+instead of <code>dev</code>.</p>
+
+<p>Using this script, when we&#39;re ready to do a deploy and merge <code>dev</code> into <code>master</code>
+we simply can run (from the <code>dev</code> branch):</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ BRANCH=master pullreq
+</code></pre></div>
+<p>And the pull request will be created to merge dev into master so we can review
+it on github.</p>
+
+<h2>Managing Branch Chaos</h2>
+
+<p>I said earlier that I was a believer in commit early, commit often.  Well, I&#39;m
+also a believer in small branches.  We pretty much make branches for everything.
+Even if it&#39;s just a simple css change, or a one-line bug-fix, I like to
+quarantine changesets into a branch of their own.  So many times i&#39;ll be
+caught in the middle of a simple change and have to go tend to something else.
+Having branches lets me quickly commit &quot;saving my place&quot;, or &quot;WIP&quot;
+in my branch, and get to work looking at something in another branch.
+My feature branch will be there waiting for me when I&#39;m ready to go back to it.</p>
+
+<p>Additionally, smaller branches make for smaller merges, which are easier to
+review, and less prone to introducing glaring errors that could have been
+caught.</p>
+
+<p>A side-effect of all this branching and pushing and merging is that you can
+quickly get confused about which branches have been merged and which haven&#39;t.
+The list of branches shown on github and on the command line grows to make it
+harder for you to find the branches you still care about.  So of course,
+we can delete the branches as we go, but this is very tedious to do so
+frequently as you have to delete the branch locally, and on github:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ pullreq
+# Review code on github
+$ git checkout dev &amp;&amp; git merge feature-branch &amp;&amp; git push origin dev
+$ gut branch -D feature-branch  # delete feature-branch locally
+$ git push origin :feature-branch # delete feature-branch on github
+</code></pre></div>
+<p>Enter more <code>~/.bashrc</code> goodness.  I wanted a way to streamline
+this process as well because i was typing the above waaay too frequently, so
+I came up with two handy bash functions:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">git_purge_local_branches() {
+  [ -z $1 ] &amp;&amp; return
+  BRANCHES=`git branch --merged $1 | grep -v &#39;^*&#39; | grep -v &#39;master&#39; | grep -v &#39;dev&#39; | tr -d &#39;\n&#39;`
+  echo &quot;Running: git branch -d $BRANCHES&quot;
+  git branch -d $BRANCHES
+}
+
+git_purge_remote_branches() {
+  [ -z $1 ] &amp;&amp; return
+  git remote prune origin
+
+  BRANCHES=`git branch -r --merged $1 | grep &#39;origin&#39; | grep -v &#39;/master$&#39; | grep -v &#39;/dev$&#39; | sed &#39;s/origin\//:/g&#39; | tr -d &#39;\n&#39;`
+  echo &quot;Running: git push origin $BRANCHES&quot;
+  git push origin $BRANCHES
+}
+</code></pre></div>
+<p><code>git_purge_local_branches()</code> will -- as the name implies -- purge local
+branches that have been merged into the branch you give it.  And
+<code>git_purge_remote_branches()</code> will do the same but it will remove the branches
+from the <code>origin</code> remote.  So every now and then, when we get a lot of branches
+hanging around getting in our way, we can clean them up with:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ git_purge_local_branches dev
+$ git_purge_remote_branches dev
+</code></pre></div>
+<p>And of course, because running 2 commands just became too much, I created
+<code>git_purge</code>...one purge to rule them all:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">git_purge() {
+  branch=$1
+  [ -z $branch ] &amp;&amp; branch=&quot;dev&quot;
+  git_purge_local_branches $branch
+  git_purge_remote_branches $branch
+}
+</code></pre></div>
+<p>So now its super easy to manage our branch chaos.  When I start to see too
+many branches building up, I can simply <code>git_purge</code> and it&#39;ll wipe out
+any branches locally and on the origin that have already been merged
+into dev.  Then we&#39;re back to a blissful state of branch zen.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>That pretty much sums up my current git processes.  I really enjoy how
+streamlined things have become, how well our processes work, and how easy it is
+to keep our branches clean and clutter-free while at the same time encouraging
+us to branch, branch, branch!</p>
+
+<p>How are you using git?  Tell me how I can make my workflow even better and more
+kick-ass :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="/2012/03/15/hello-world.html"/>
+    <updated>2012-03-15T22:00:00-07:00</updated>
+    <id>/2012/03/15/hello-world</id>
+    <content type="html"><![CDATA[<p>Hello.  This is a test.  This is only a test.</p>
+
+<p><code>perl Perl
+say &quot;Hello, World&quot;;
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Arriving in Delhi]]></title>
+    <link href="/2011/08/03/arriving-in-delhi.html"/>
+    <updated>2011-08-03T00:00:00-07:00</updated>
+    <id>/2011/08/03/arriving-in-delhi</id>
+    <content type="html"><![CDATA[<div class="jekyll-mapping"
+                        data-latitude=""
+                        data-longitude=""
+                        data-layers="https://raw.github.com/throughnothing/gpx/master/2011/20110805.gpx"
+                        data-locations=""
+                        data-title="Arriving in Delhi"
+                        style="height:320px;width:790px;"></div>
+
+<p>The wheels touch down as the Colombian woman to my left clenches her teeth, eyes
+shut, bracing herself against her seat.  “I hate the landings,” she says in
+response to the “are you ok?” look I must be giving her as her eyes pry open.
+She’s done this many times before — she actually lives in Gurgaon now — but i
+guess she still can’t get over the landings.  This one wasn’t too bad, we both
+agree.</p>
+
+<p>After 15 hours in a row of seats that don’t recline, we are in India.  For me,
+it’s my first time in Asia.  I don’t really have a good idea what to expect.
+I’m by myself, and  my only real plan is to get through customs then find
+Angelle and our driver.  I’m not so sure as to where, or how.</p>
+
+<p>I haven’t checked any bags, so I breeze through customs unquestioned and
+un-searched.  Just before heading out the door, I remember Angelle’s advice to
+get rupees in the airport before I leave, so I wander around, find the ATM and
+take out 4,000 INR.  I have no idea how much money that is, but it’s the most
+the ATM will let me take out — hopefully I have enough to cover it! (Turns out
+it’s only ~$90 USD — whew!)</p>
+
+<p>Cash in hand (well, actually stowed away securely in my zippered shorts pocket),
+I head for the airport exit.  As I pass through the sliding doors I’m met with a
+wave of heat — not overwhelmingly hot, just a stark contrast from the frigid
+airport air — and with it a strong, pungent smell of body odor.</p>
+
+<p>Before the smell completely registers, I see hundreds and hundreds of people
+waving arms, yelling, and — most noticeably — staring in my direction.  All of a
+sudden the quiet, sterile airport atmosphere is consumed by a chaotic, noisy,
+bustling crowd.</p>
+
+<p>“How am I going to find Angelle in this?”  I have no idea.  I walk around for a
+few minutes as more passengers file out of the airport, suitcases in tow,
+uniting with friends and family.  As they filter out, the scene grows more
+cluttered with movement, people, taxis, and noise (did I mention the body
+odor?).  I decide to head to the right, away from the commotion, in hopes that
+maybe Angelle would be somewhere outside of it all.</p>
+
+<p>Bingo.  Somehow, just as I move away from the crowds, I hear my name, and turn
+to see Angelle’s smiling face.  The hardest part is over; I had no other
+objectives or plans for today.  I have no idea where I am, or even where I’m
+going, but for now, I don’t need to.  I’m where I need to be, and I know that
+I’ll get where I’m going.</p>
+
+<p>I’m quickly introduced to our driver, Anil, who gives me a wide, friendly smile
+and leads us to the car.  Angelle has told me strories about the roads and the
+driving in India, so I’m ready for the new experience — or so I thought.</p>
+
+<p><img class="center" src="http://farm7.static.flickr.com/6001/6012458138_85695ce556_z.jpg"></p>
+
+<p>After a few minutes on the road, I came to the conclusion that I shouldn’t look
+around too much while on the roads — If I do, I’m  worried about a crash every
+few seconds.  It’s not the speed at which they drive — they actually don’t
+(can’t?) go that fast — it’s the manner in which they drive.  Complete disregard
+for lanes, direction, and other cars is the norm.  Merging is an act of “who
+will budge first,” and it always seems like you’re going to lose. Honking is the
+rule rather than the exception.  Lacking a horn is less safe than lacking
+headlights or rear view mirrors.  Honking is how you let other drivers know
+where you are — and you want them to know!  It seems they don’t care to use
+their mirrors to find out.  If they haven’t heard a horn to their right, they’ll
+gladly swerve that way without looking.</p>
+
+<p>It’s around 10pm Delhi time when we pull up to Angelle’s office.  She’s going to
+work now (late — it’s 12:30pm EST), and I’m headed to the apartment next.  Two
+of her co-workers, Shravan an Brendan, are getting off of work now, and join us
+for the ride home.</p>
+
+<p><img class="center" src="http://farm7.static.flickr.com/6029/6012494682_04e5de6514_z.jpg"></p>
+
+<p>At last we arrive at the apartment.  I’m clenching my seat, much like the
+Colombian woman on the plane…maybe now I know something of how she felt (how
+does she handle the driving in India, I wonder?).  We make our way up to the
+tenth floor and I enter the massive apartment for the first time.</p>
+
+<p>I’m surprisingly not that tired, and Anil let’s me know that he’ll be cooking us
+dinner shortly.  I haven’t eaten in just under 24 hours at this point.  I turned
+down all food on the plane, and intentionally brought no snacks with me.  This
+was all part of my little experiment to fight jet lag by fasting.  I think it
+worked remarkably well.  I find myself in India, after about 19 hours of travel
+time, 24 hours since my last meal, and I’m neither tired nor starving.  I had
+fought off a good bit of hunger during the flight, but it subsided without much
+grief.  I think fasting on long flights will be my new normal.  The food on
+airplanes isn’t really worth eating anyway.  The hardest part is convincing the
+airline personnel that you really, really, REALLY don’t want any of their meals!</p>
+
+<p>I wait patiently for Anil’s dinner of naan,  a garlic with eggplant mixture, and
+an okra with onion mixture.  Upon sitting at the expansive dinner table, the
+first thing I notice is the lack of utensils present.  Anil plops a large
+spoonful of the two concoctions onto my plate, drops a piece of naan, and
+motions for me to eat. I wait for Brendan to begin sopping up his food with the
+naan, and then follow suit.  This is delicious.  Spicy, and unique.  Simple
+ingredients, yet complex flavors.  I clean my plate and finish all the leftovers
+after confirming that no one else wants them — I guess the hunger came back once
+I got started!</p>
+
+<p>We chat for a bit, and resign ourselves to bed.  Right on cue I seem to be
+getting tired, adjusted, almost perfectly o the new time zone.</p>
+
+<p>I won’t be getting too much sleep, however: in a few hours we’ll be on a bus to
+Jaipur.  I have no idea what to expect.  As I fall sleep, I’m excited to be in
+India.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A New Continent For Us: Asia]]></title>
+    <link href="/2011/07/16/new-continent-for-us-asia.html"/>
+    <updated>2011-07-16T00:00:00-07:00</updated>
+    <id>/2011/07/16/new-continent-for-us-asia</id>
+    <content type="html"><![CDATA[<p>I just dropped Angelle off at the airport for her 5 week jaunt in India.  She&#39;s
+fortunate to be going for work, so mostly all of her expenses are paid for, and
+it is a wonderful opportunity for her to go.  I&#39;ll be meeting up with her in a
+few weeks for the last leg of the trip as well, and I can&#39;t wait.</p>
+
+<p>Neither of us have been to Asia before, so we are both very excited to see a new
+continent.  New cultures, places, and experiences are always exciting, and I&#39;m
+thrilled to see what India has to offer us.</p>
+
+<p>I&#39;m going to be going for just over 2 weeks, and I&#39;m planning to pack as light
+as I can, though my laptop (for work) and DSLR will take up the most space.
+I&#39;ll put together a post with my packing list once I&#39;ve got everything nailed
+down, but for now I&#39;ve got a few weeks by myself here in DC for some running,
+bike riding, and quiet reflection before I head off to a new continent.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[City Life - DC]]></title>
+    <link href="/2011/07/15/city-life.html"/>
+    <updated>2011-07-15T00:00:00-07:00</updated>
+    <id>/2011/07/15/city-life</id>
+    <content type="html"><![CDATA[<p>We’ve moved.  For the first time in my life I now live in a big city.  It’s only
+been a week, but so far I’m loving it.  We moved into the Dupont area of DC last
+Saturday, and have been getting settled in all week.  I most enjoy taking Belle
+(our white Maltise) on multiple walks during the day throughout the city.
+Night-time cruises on my bike have also been great as the weather has been
+perfect all week.</p>
+
+<p>Our living space is a little bit smaller than before, but I consider that a
+bonus.  It forces us to re-evaluate our possessions, and find what is necessary.
+We got rid of a bed, a dresser, and downsized our wardrobes and kitchen things.
+It actually feels like we have more space, and getting rid of old junk is very
+freeing.</p>
+
+<p>As for the city life, there are so many people out and about all the time , and
+so much going on, it can sometimes seem like overload.  Lucky for us, Rock Creek
+Park provides a quiet getaway from the hustle and bustle of the city when
+needed.  We have been enjoying night time strolls along the Dupont area, and
+just wandering aimlessly to get to know the area.  I’m excited for what the
+future holds here.</p>
+
+<p>It took Zeus and Belle a few days to get adjusted to the new place, but I think
+they are both getting pretty situated now.  Zeus no longer hides in the kitchen
+cabinets all day, and Belle already knows how to find her way back home after a
+good walk.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Now]]></title>
+    <link href="/2011/06/26/now.html"/>
+    <updated>2011-06-26T00:00:00-07:00</updated>
+    <id>/2011/06/26/now</id>
+    <content type="html"><![CDATA[<p>All we have is now.  I try to remind myself of this when I get caught up in
+reminiscing about the past, or worrying about the future.  The past no longer
+is, and the future never will be.  All we have is the present moment; now and
+always.</p>
+
+<p>If we aren&#39;t happy in this present moment, can we ever be happy?  Being here,
+now, is one of the things I&#39;m continually working on.  I&#39;m far from perfect, and
+probably drift away from the present moment thousands of times a day.  The trick
+is catching yourself when this happens, and being mindful of it.  Keep
+persistently catching yourself, and reminding yourself that right now is all
+you&#39;ve got.  Breathe.  The more we can catch ourselves slipping out of the
+present, the more aware we can become of ourselves, our surroundings, and the
+lives we actually lead.  Now.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Single Speed]]></title>
+    <link href="/2011/04/08/single-speed.html"/>
+    <updated>2011-04-08T00:00:00-07:00</updated>
+    <id>/2011/04/08/single-speed</id>
+    <content type="html"><![CDATA[<p>I like Biking.  I&#39;m drawn to the simplicity and elegance of the bicycle.  I&#39;ve
+been biking to work pretty regularly (read: whenever its above 35 degrees), for
+a while now, and I love it.</p>
+
+<p>One way to make biking even simpler is to get rid of the gears.  I&#39;ve been
+looking for a decent bike to turn into a single speed for a while, and finally a
+deal came up on craigslist that I couldn&#39;t pass up...and it was already a single
+speed.</p>
+
+<p>I rode it to work and back twice this week (12 miles each way), and I&#39;m loving
+it.  It is definitely a little more strenuous at times, but its so simple, and
+you never have to think about changing gears.  When you&#39;re on a single speed,
+the only thing you can do is pedal, and maybe that&#39;s the way it should be.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Best Christmas Gift You Can Give]]></title>
+    <link href="/2010/12/08/the-best-christmas-gift-you-can-give.html"/>
+    <updated>2010-12-08T00:00:00-08:00</updated>
+    <id>/2010/12/08/the-best-christmas-gift-you-can-give</id>
+    <content type="html"><![CDATA[<blockquote><p>Remember, if Christmas isn't found in your heart, you won't find it under a tree.</p><footer><strong>Charlotte Carpenter</strong></footer></blockquote>
+
+<p><strong>The best Christmas gift you can give is your time.</strong> Your friends and family more than likely have everything they really need, but what they often may not get enough of is your time. Spend time with them. Quality time. Listen to them. Laugh with them. Let them know you are there for them.</p>
+
+<h2>Gifts are just more stuff</h2>
+
+<p>Stuff that most of us don&#39;t need. If you have money you&#39;d like to get rid of during the Christmas season, give it to a charity, or someone genuinely in need. Explain to others what you are doing, and even link back to this post if you think it will help them see why quality time and good company are better than any gift.</p>
+
+<h2>Time is the most valuable commodity in the world</h2>
+
+<p>Sharing some of yours with others means more than that iPad, golf club, or purse you could buy them (and its better for the planet as well). Stop reading blogs and go share your time with someone special. You won&#39;t regret it. Go. Now.</p>
+
+<h2>Other Great Christmas Posts</h2>
+
+<ul>
+<li><a href="http://zenhabits.net/bah/">The Case Against Buying Christmas Presents</a></li>
+<li><a href="http://www.becomingminimalist.com/2010/11/26/35-gifts-your-children-will-never-forget/">35 Gifts Your Children Will Never Forget</a></li>
+<li><a href="http://www.farbeyondthestars.com/1-simple-strategy-to-save-2000-this-holiday-and-make-everyone-love-you-forever/">1 Simple Strategy To Save $2000 this Holiday and Make Everyone Love You Forever</a></li>
+<li><a href="http://guynameddave.com/2010/12/christmas-and-kids-no-guilty-gifts/">Christmas And Kids - No Guilty Gifts</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Running Barefoot]]></title>
+    <link href="/2010/12/06/running-barefoot.html"/>
+    <updated>2010-12-06T00:00:00-08:00</updated>
+    <id>/2010/12/06/running-barefoot</id>
+    <content type="html"><![CDATA[<blockquote><p>Running should be free, man.</p><footer><strong>Christopher McDougall</strong></footer></blockquote>
+
+<p>Barefoot running (and running with minimalist footwear) is a rapidly growing trend today.  Encouraged by Christopher Mcdougall&#39;s Born to Run, and activists such as Barefoot Ken Bob and Barefoot Ted, the movement really seems to be taking off. When I first heard about barefoot running earlier this year, I was very skeptical. People don&#39;t REALLY run barefoot, do they?!</p>
+
+<p>Yes, they do, and I now count myself amongst their growing ranks. I can tell you from personal experience that running barefoot has changed my life. I truly believe that it can change yours too.</p>
+
+<p>You see, before March of this year I was not a runner. I couldn&#39;t tell you the last time I had run (for fun anyway), and I certainly didn&#39;t enjoy running. If you had told me then that I would be in love with running in just a few short months, I certainly would have laughed.</p>
+
+<h2>How Fast Things Change</h2>
+
+<p>As I write this today, not only am I in love with running, but in October I finished my first marathon (which I will write more about shortly) -- and I’m looking forward to running more!</p>
+
+<p>How did I go from docile couch potato to a running addict? The real secret for me was barefoot running.</p>
+
+<h2>Why Barefoot Running?</h2>
+
+<p>Simply put, barefoot running is wonderful. It releases your inner child and makes you feel like a kid again. Barefoot running allows your body to teach you how to run the way you are designed to.</p>
+
+<p>I&#39;m convinced that the main thing preventing most people from running is that they don&#39;t enjoy it. This was certainly true for me. I had tried running in the past but just never found it fun. Barefoot running changed this for me completely.</p>
+
+<h2>Steps to Running Barefoot</h2>
+
+<p>If you&#39;re interested in barefoot running, you&#39;ve already got everything you need to get started (great news for all you minimalists!). I will just provide some simple steps that I&#39;ve learned from my own experiences running barefoot.</p>
+
+<ol>
+<li><p>Start Slowly. Very slowly. Seriously, you can&#39;t go too slowly. Your feet have likely been in shoe-casts for many many years, and your muscles and bones have probably atrophied to an extent. It will take some time to get them strengthened to where they need to be before you begin putting a lot of raw mileage on your feet. Too much too soon and you pulling muscles, tearing up your soles, and even stress fractures in your feet. I can&#39;t stress this point enough.</p></li>
+<li><p>Love it. This should come pretty easily, but if it doesn&#39;t, stop and figure out why. If you aren&#39;t enjoying it, really don&#39;t continue until you find the joy in it. You don&#39;t want to run miserably anyway, right?</p></li>
+<li><p>Don&#39;t Push Yourself. When you or your feet feel tired, stop. You don&#39;t want to overwork your feet, and once you start pushing yourself, you may lose the enjoyment. If you resolve to call it a day once your body tells you to, you&#39;ll be able to continue to get in good runs day after day and enjoy every minute of them.</p></li>
+<li><p>Don&#39;t measure your progress. Counterintuitive, I know, but people often get too obsessed with their mileage and their times. Just focus on your body and learn to understand what it is telling you. This will improve your form and help increase your distance naturally over time at a pace that your body can handle. Measuring how far you run may cause you to become frustrated, or to try to push yourself to do too much too soon. Avoid this by not using a gps, stopwatch, or other measuring device. This will also help keep your mind clear and enable you to achieve flow in your running.</p></li>
+<li><p>The rest will come naturally. If you follow the 4 steps above, the rest will fall into place. Your mileage will increase, your form will improve, and you will be loving it.</p></li>
+</ol>
+
+<p>Hopefully this short introduction to barefoot running will motivate you to get out there and start enjoying running. Remember to take it slow and make sure you are having fun.</p>
+
+<h2>Links</h2>
+
+<p>Here are some additional links about barefoot running that you may find useful:</p>
+
+<ul>
+<li><a href="http://www.barefootted.com/">Barefoot Ted</a> - One of the leaders of the barefoot movement thanks to &quot;Born To Run&quot; and Christopher McDougal. He is starting his own running sandal company (Luna Sandals), and has a very useful discussion group on his site.</li>
+<li><a href="http://therunningbarefoot.com/">Running Barefoot</a> - Barefoot Ken Bob&#39;s (the original barefoot runner) site is a wealth of information on barefoot running!</li>
+<li><a href="http://birthdayshoes.com/">Birthday Shoes</a> - The unofficial fan site of vibram five fingers and other minimalist shoes. Full of great reviews, tips, and user stories.</li>
+<li><a href="http://chrismcdougall.com/blog/">Chris McDougall</a> - Author of the great book, &quot;Born to Run.&quot; He found barefoot running by accident (just like many of us, I believe) and tells the thrilling story of his experiences in Mexico with the Tarahumara Indians.</li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[5 Ways to Enjoy Your Commute]]></title>
+    <link href="/2010/12/04/5-ways-to-enjoy-your-commute.html"/>
+    <updated>2010-12-04T00:00:00-08:00</updated>
+    <id>/2010/12/04/5-ways-to-enjoy-your-commute</id>
+    <content type="html"><![CDATA[<blockquote><p>Patience is something you admire in the driver behind you and scorn in the<br/>one ahead.</p><footer><strong>Mac McCleary</strong></footer></blockquote>
+
+<p>Unfortunately, it seems as if many of us dread our morning commute. We don&#39;t
+even like to think about it -- all the traffic, the stopping, the starting,
+the rushing, the worrying. But it doesn&#39;t have to be this way.</p>
+
+<p>You can enjoy your commute. It will take some lifestyle adjustments, some
+time, and a re-thinking of your routine, but you can do it. Below are five
+steps that you can use to start improving and enjoying your commute today.</p>
+
+<h2>1. Wake Up Earlier</h2>
+
+<p>By far the number one thing you can do to make your commute more enjoyable
+is to wake up earlier. They say that time is money, but time is also
+happiness. How often do you have time to simply sit, and enjoy the morning?
+Waking up earlier gives you the time to clear your head, relax, and get
+ready at your own pace. Instead of getting dressed while guzzling down your
+morning coffee, sit down and just sip. Maybe you can even observe a
+beautiful sunrise without worrying about being late.</p>
+
+<p>Of course, you don&#39;t want to wake up earlier at the expense of losing even
+more sleep (I&#39;m assuming that you aren&#39;t getting enough already), so you
+will need to find ways to go to bed earlier. Cutting out some TV or internet
+browsing at night is well worth the extra sleep you&#39;ll get, and certainly
+worth the calm, relaxed morning you&#39;ll have the next day.</p>
+
+<h2>2. Bike (or Run/Walk) to Work</h2>
+
+<p>I started biking to work about a year ago, and my only regret is not doing
+it sooner. For some of you this may not be an option if you live too far
+from work, but if you&#39;re close enough, give this a shot! You&#39;ll love it.
+Biking to work is exhilarating, like being a child again. It&#39;s great for the
+environment, your body, and your wallet.</p>
+
+<p>It may take you longer to get to work this way (you&#39;re getting up earlier
+now, right?), but you&#39;ll be having fun, enjoying the outdoors, and avoiding
+the stresses of your old commute.</p>
+
+<p>Get out of your metal box, and experience the world on your next commute!</p>
+
+<h2>3. Eliminate Advertisements and Background Noise</h2>
+
+<p>If you&#39;re one of the lucky ones who can do number two above, then you&#39;ll
+already have this one covered (don&#39;t wear headphones while biking/running!).
+For the rest of you, try to limit -- or eliminate completely -- your
+exposure to advertising during your commute. I think many of us keep the
+radio on for background noise -- to keep our mind numb during the drive.
+Stop doing this. It can be a distraction from your driving, and it doesn&#39;t
+help clear your mind, or reduce your stress. If your mind needs something to
+chew on, roll down a window and listen to the sounds of the world around
+you, it&#39;s really much better than whatever your favorite radio host is
+rambling on about, and you may be surprised by how much you enjoy this.</p>
+
+<p>You don&#39;t need to be bombarded by advertisements and talk show hosts pushing
+their interests on you. Without these distractions, you&#39;ll give your mind a
+rest, and you&#39;ll likely be more focused on your driving.</p>
+
+<p>If you really can&#39;t stand having the radio off completely, try to stick with
+some CDs or music from an mp3 player. That way, you can choose music that
+you know you like, and avoid the commercials and radio static.</p>
+
+<h2>4. Go Slowly</h2>
+
+<p>Since you&#39;ve woken up earlier, you now have enough time to get to work, so
+go slowly. Take your time. Enjoy the trees changing colors, the squirrels
+playing, the colors of the early morning sun. You may even notice beautiful
+things in your own neighborhood that you hadn&#39;t seen before (I know I did).
+Don&#39;t get angry when someone cuts you off, just let it happen, knowing that
+you&#39;ve got plenty of time to get where you&#39;re going.</p>
+
+<h2>5. Be Present. Breathe.</h2>
+
+<p>Going slowly will help you to be present. Try to be completely present and
+aware of each moment as it slips by. Be aware of your surroundings. A great
+way to focus right now is to simply breathe. Breathe in and out. Pay
+attention to each breath and the movement of the breath throughout your
+body. At first it may be difficult to stay focused, but over time it will
+become more natural, and you&#39;ll look forward to your commute as a calm,
+mind-clearing start to your work day.</p>
+
+<p>If you practice these steps regularly, you&#39;ll begin to look forward to your
+commute. Your commute will become a form of mental preparation for the day
+ahead, free of the stress, worrying, and rushing.</p>
+
+<p>How are you working to improve your morning routine and commute?</p>
+
+<blockquote><p>Leave sooner, drive slower, live longer.</p><footer><strong>Unknown</strong></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Successful People Read Books]]></title>
+    <link href="/2010/12/03/successful-people-read-books.html"/>
+    <updated>2010-12-03T00:00:00-08:00</updated>
+    <id>/2010/12/03/successful-people-read-books</id>
+    <content type="html"><![CDATA[<blockquote><p>I find television to be very educating. Every time somebody turns on the set, I go in the other room and read a book.</p><footer><strong>Groucho Marx</strong></footer></blockquote>
+
+<p>I was re-reading an old
+<a href="http://www.ridiculouslyextraordinary.com/101-life-lessons/">blog post</a> by
+<a href="http://www.ridiculouslyextraordinary.com/">Karol Gadja</a> over at Ridiculously Extraordinary about life lessons, when one item on his list suddenly stood out and got my mind working.</p>
+
+<h2>Successful People Read Books</h2>
+
+<p>Its true. In fact, after reading it, it seems so obvious, but its something I hadn&#39;t thought of in this way before. I follow a lot of bloggers who (I think) write very well and are successful, and almost all of them seem to devour books pretty regularly.</p>
+
+<p>Of course, this all makes perfect sense. Reading expands our knowledge base, and introduces us to new, creative ideas. Reading also helps expose us to different writing styles and different cultures -- both of which can improve our own writing.</p>
+
+<p>Those who read regularly are keeping their minds active and constantly bombarded with new experiences, thoughts, questions, provocations, and images. Under these circumstances it would be hard for the mind to not pop out a unique idea of its own.</p>
+
+<p>If you want to be a well-rounded, successful, thought-filled individual, turn off the TV and pick up a book. What are you reading today?</p>
+
+<blockquote><p>The man who does not read good books has no advantage over the man who can't read them.</p><footer><strong>Mark Twain</strong></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Art]]></title>
+    <link href="/2010/12/02/art.html"/>
+    <updated>2010-12-02T00:00:00-08:00</updated>
+    <id>/2010/12/02/art</id>
+    <content type="html"><![CDATA[<p>art is simple<br>
+art is complex<br>
+art is colorful<br>
+art is blind<br>
+art is funny<br>
+art is serious<br>
+art is frustrating<br>
+art is liberating<br>
+art is concrete<br>
+art is abstract<br>
+art is flagrant<br>
+art is humble<br>
+art is<br>
+we are<br>
+art  </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Steppin' Out for Diabetes Run]]></title>
+    <link href="/2010/10/23/steppin-out-ford-diabetes.html"/>
+    <updated>2010-10-23T00:00:00-07:00</updated>
+    <id>/2010/10/23/steppin-out-ford-diabetes</id>
+    <content type="html"><![CDATA[<div class="jekyll-mapping"
+                        data-latitude=""
+                        data-longitude=""
+                        data-layers="http://api.flickr.com/services/feeds/photoset.gne?set=72157625227380948&nsid=45105880@N00&lang=en-us&georss=1 https://raw.github.com/throughnothing/gpx/master/2010/20101023.gpx"
+                        data-locations=""
+                        data-title="Steppin' Out for Diabetes Run"
+                        style="height:320px;width:790px;"></div>
+<p>Today my company, <a href="http://www.siteworx.com">Siteworx</a>, was one of the sponsors of the <a href="http://main.diabetes.org/site/TR/StepOut/DistrictofColumbiaMetroArea?pg=entry&amp;fr_id=7239">Steppin&#8217; Out for Diabetes</a> walk/run in Washington D.C.  The course starts and ends by the Nationals stadium in southern D.C.</p>
+<p>We got there pretty early, before many other people were there.  At least parking was easy!  Plus we had to support our Siteworx crew that was out there even earlier than us setting up the nice booth :)</p>
+<p><a href="http://farm2.static.flickr.com/1437/5109403986_ccf2f3f523_z.jpg"><img src="http://farm2.static.flickr.com/1437/5109403986_ccf2f3f523_z.jpg" title="Pre-walk/run setup" alt="Pre-walk/run setup" /></a></p>
+<p><a href="http://farm2.static.flickr.com/1316/5108806297_cf1c743837_z.jpg"><img src="http://farm2.static.flickr.com/1316/5108806297_cf1c743837_z.jpg" title="Siteworx Booth" alt="Siteworx Booth" /></a></p>
+<p>It was a pretty chilly morning, we all wore vibrams to the event to keep our feet warm, but Andy and I were planning on shedding the vibrams for the run.</p>
+<p><a href="http://farm2.static.flickr.com/1235/5109403350_4cb9be14a1_z.jpg"><img src="http://farm2.static.flickr.com/1235/5109403350_4cb9be14a1_z.jpg" title="Before the run,<br />
+by the Siteworx booth" alt="Before the run,<br />
+by the Siteworx booth" /></a></p>
+<p>After walking around for a bit and checking out all that there was to see (not much, except for a pretty good dance group doing some cool stuff), it was time to shed the shoes!</p>
+<p><a href="http://farm2.static.flickr.com/1356/5109405878_db6da2cc4d_z.jpg"><img src="http://farm2.static.flickr.com/1356/5109405878_db6da2cc4d_z.jpg" title="Shedding the<br />
+Vibrams and Injinjis" alt="Shedding the<br />
+Vibrams and Injinjis" /></a></p>
+<p><a href="http://farm2.static.flickr.com/1423/5109406534_878910336f_z.jpg"><img src="http://farm2.static.flickr.com/1423/5109406534_878910336f_z.jpg" title="Pre-race Feet" alt="Pre-race Feet" /></a><br />
+After some waiting around, the &#8220;race&#8221; was off to a&#8230;.slow start.  We initially had to weave through the hundreds of walkers until we got out of the stadium and into the streets where there was more room to get out in front of all the walkers.  Once we got to that point it was smooth sailing&#8230;.almost.</p>
+<p><a href="http://farm2.static.flickr.com/1329/5109108626_8221b2055c_z.jpg"><img src="http://farm2.static.flickr.com/1329/5109108626_8221b2055c_z.jpg" title="Andy and Kevin Running on the DC Streets" alt="Andy and Kevin Running on the DC Streets" /></a></p>
+<p>The main complaint I have is that the course was very poorly marked in many locations, and it seemed other runners and walkers were having difficulty following and seeing the signs as well.  I&#8217;m still not sure if we did the entire course correctly (we definitely made a few wrong turns and had to loop back), but according to my iPhone we only ended up running 4 miles, not the complete 5. But at least we made it to the finish, and we were feeling great.</p>
+<p><a href="http://farm5.static.flickr.com/4127/5109407228_323c49ac43_z.jpg"><img src="http://farm5.static.flickr.com/4127/5109407228_323c49ac43_z.jpg" title="Me, Andy, and Kevin at the finish line" alt="Me, Andy, and Kevin at the finish line" /></a></p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Minimal Text Editors]]></title>
+    <link href="/2010/10/22/minimal-text-editors.html"/>
+    <updated>2010-10-22T00:00:00-07:00</updated>
+    <id>/2010/10/22/minimal-text-editors</id>
+    <content type="html"><![CDATA[<p>Lately I&#8217;ve been wanting to do more writing.  I want to jot down my thoughts more often, and hopefully get better at both writing them down, and using writing as a way to organize and record my thoughts.  I&#8217;ve almost always used vim as my text editor, development platform, and just about everything else you can imagine, but lately i&#8217;ve been looking for something that might help me avoid the distractions of being in a terminal, and having multiple windows visible behind what i&#8217;m working on (usually browsers) etc.</p>
+<p>So in looking for some good minimal text editors, I came across two that I am going to be trying out.  The first, and probably more minimal of the two is <a href="http://pyroom.org">PyRoom</a>.  PyRoom is written in python and basically takes up your entire screen, with the middle section (height/width is adjustable) used for simple, plain text.  It doesn&#8217;t have the power of vim in terms of keyboard shortcuts, but it does basic editing, and allows multiple buffers.  It does have a few keyboard shortcuts for closing buffers, switching buffers, etc., which is nice, but I want my insert/normal modes!  As I said, PyRoom is very minimal, with no menus or anything except for one preferences dialog that you can get to with Ctrl+p.  The colors are customizable, as well as the height/width as I said before, but other than that there isn&#8217;t much to customize.</p>
+<p>The other editor I will be trying out is <a href="http://gottcode.org/focuswriter/">FocusWriter</a>.  FocusWriter is actually cross-platform, so I can use it on my Mac at work if I so desire.  It has a lot more features, and is a lot less minimal than PyRoom &#8212; it does rich text editing, has menus, and even a hidden menu bar that can be pulled up.  When FocusWriter is run, the interface seems about the same as PyRoom, but by moving the mouse to the top, or bottom of the screen, you can show the menus, tab-bars, and toolbars that normally stay hidden from view.</p>
+<p>One nice feature about FocusWriter that I like is that you can set a daily goal for writing, such as 30 minutes, or 1,000 words, etc.  This may be nice as I try to get myself to do more writing, so that I could set goals and try to force myself to actually just write every day, no matter how terrible it may be :P</p>
+<p>So I&#8217;m going to try these two editors out for a while and see how it goes.  So far I&#8217;ve typed this whole post in PyRoom and like it.  It keeps the distractions at bay and lets me focus on my writing.  I feel like I may end up falling back to vim eventualy just because I love the power of vim for editing text, but it seems that these editors may provide a better level of focus that may be worth it.  We shall see.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Workplace Velociraptor Incidents]]></title>
+    <link href="/2010/10/21/velociraptor-attacks.html"/>
+    <updated>2010-10-21T00:00:00-07:00</updated>
+    <id>/2010/10/21/velociraptor-attacks</id>
+    <content type="html"><![CDATA[<p>Fortunately, it has now been 18 days since the last Velociraptor Incident in our Siteworx Reston Headquarters.  Let&#8217;s hope the trend continues.</p>
+<p><a href="http://farm2.static.flickr.com/1239/5102658706_26bbbfccde_z.jpg"><img src="http://farm2.static.flickr.com/1239/5102658706_26bbbfccde_z.jpg" title="Velociraptor Incidents" alt="Velociraptor Incidents" /></a></p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creative Commons' Branding Confusion]]></title>
+    <link href="/2010/10/20/creative-commons--branding-confusion.html"/>
+    <updated>2010-10-20T00:00:00-07:00</updated>
+    <id>/2010/10/20/creative-commons--branding-confusion</id>
+    <content type="html"><![CDATA[<p>Nina Paley recently <a href="http://questioncopyright.org/CC-branding-confusion">wrote about</a> some of the issues she has had releasing some of her work under a Creative Commons-Share Alike license, as well some of the confusion brought about by the various creative commons licenses.</p>
+<blockquote>
+<p>About a year and a half ago I released my film Sita Sings the Blues under a Creative Commons Attribution-ShareAlike license. That license allows truly free distribution, including commercial use, as long as the free license remains in place. But my experience is that most people see the words &#8220;Creative Commons&#8221; and simply assume the license is Non-Commercial &#8212; because the majority of Creative Commons licenses they&#8217;ve seen elsewhere have been Non-Commercial.</p>
+<p>This is a real problem. Some artists have re-released Sita remixes under Creative Commons Non-Commercial licenses. Many bloggers and journalists assume the non-commercial restrictions, even when the license is correctly named:</p>
+<p>The film was made available under a Creative Commons Attribution-Share Alike License, allowing third parties to share the creative content for non-commercial purposes freely as long as the author of the content is attributed as the creator of the work. &#8212;Frontline, India&#8217;s National Magazine</p>
+<p>Initially I tried to explain what &#8220;ShareAlike&#8221; means, and asked &#8220;Sita&#8221; remixers to please switch to ShareAlike, per the terms of the ShareAlike license under which I released it. I felt like an ass; I don&#8217;t want to be a licensing cop. After a while, mis-identifications of the project&#8217;s license became so widespread I gave up trying to correct them. &#8220;Creative Commons&#8221; means &#8220;Non-Commercial&#8221; to most people. Fighting it is a sisyphean task.</p>
+</blockquote>
+<p>There seems to be a lot of confusion around Creative Commons with many people assuming that it is <em>always</em> non-commercial, and others not understanding creative commons licenses at all.  The real tragedy is that Nina is trying to essentially have her work be open and available to anyone for any purpose, and people are still not understanding that.  Nina concludes:</p>
+<blockquote>
+<p>I need a license that people understand. I&#8217;m tempted by the <span class="caps">WTFPL</span> but I would have to fork it to add a copyleft provision. The Do Whatever You Want And Don&#8217;t Restrict Others From Doing Whatever They Want Public License? <span class="caps">WTFDROPL</span>?</p>
+<p>Are there any other useable Copyleft licenses out there that aren&#8217;t associated with non-commercial restrictions? I&#8217;m open to suggestions.</p>
+</blockquote>
+<p>It is an interesting question.  Being one who is very interested in the topic, I am very aware of the differences between the various Creative Commons Licenses, and never really thought there would be such confusion, but obviously that was a wrong assumption.</p>
+<p>In some searching for other <a href="http://en.wikipedia.org/wiki/Copyleft">copyleft</a> licenses, I came across the <a href="http://artlibre.org/licence/lal/en">Free Art License</a>, which may be of some use to Nina.</p>
+<p>This brings up another interesting thought, however, and that is with regards to copyleft licenses versus public domain, or &#8220;uncopyright.&#8221;  You may have noticed that all the material on my site(s) is &#8220;uncopyrighted&#8221; and that I release all of the content into the public domain.  Reading this article did make me think again about copyleft vs. public domain, as copyleft has the restriction that anyone creating derivative works from the original work, is forced to release their derivative works under the same license without restrictions.  This seems like it may have the benefit that society as a whole is guaranteed to have access to share, use, and benefit from any derivative works in exactly the same way that it could from the original.  It does, however, impose the creator&#8217;s will onto others, and I still find this unnatural.  Copyleft essentially makes use of copyright to achieve its ends, but I&#8217;m still not sold that copyright is the way to go.  I will continue to release my content into the public domain, and use that as my &#8220;license&#8221; of choice wherever possible.</p>
+<p>As another side note, when is <a href="http://www.flickr.com">flickr</a> going to add a &#8220;public domain&#8221; option to their licensing options?  For now I am forced to chose Creative Commons-Share Alike, as that is the most liberal license (and a copyleft license), but I would prefer to be able to chose &#8220;public domain&#8221;.  Come on flickr, can&#8217;t we get that?!</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raw Organic Live Food Bars]]></title>
+    <link href="/2010/10/18/Raw-Organic-Live-Food-Bars.html"/>
+    <updated>2010-10-18T00:00:00-07:00</updated>
+    <id>/2010/10/18/Raw-Organic-Live-Food-Bars</id>
+    <content type="html"><![CDATA[<p><span class="fl">T</span> oday, while checking out at Whole Foods with Angelle, I decided to take a look at some of the energy/power bars overflowing the checkout aisle.  I usually never bother to look because they are almost always loaded with junk that I don&#8217;t want.</p>
+<p>This time, however, a <a href="http://www.rawindulgence.com/">Raw Organic Live Food Bar</a> caught my eye and got me to investigate.</p>
+<p><a href="http://farm2.static.flickr.com/1389/5097941029_f4189b618a_z.jpg"><img src="http://farm2.static.flickr.com/1389/5097941029_f4189b618a_z.jpg" title="Raw Organic Live Food Bar Cashew &amp; Agave Nectar" alt="Raw Organic Live Food Bar Cashew &amp; Agave Nectar" /></a></p>
+<p>I jumped to the ingredients first, as I usually do, and was quite surprised.  The ingredients list for each of their bars was 5-7 ingredients, with no chemical names, or anything that grandma&#8217; wouldn&#8217;t recognize (as food).  It seems like these things are made out of <em>food</em>!</p>
+<p><a href="http://farm2.static.flickr.com/1118/5097941605_b52883ef1d_z.jpg"><img src="http://farm2.static.flickr.com/1118/5097941605_b52883ef1d_z.jpg" title="Raw Organic Live Food Bar Cashew &amp; Agave Nectar Label" alt="Raw Organic Live Food Bar Cashew &amp; Agave Nectar Label" /></a></p>
+<p>I picked up a Cashew &amp; Agave Nectar bar to give it a try, and it turned out to taste pretty tasty, too.  I could tell that they had a decent amount of sugar though &#8212; probably from the dates and agave nectar. According to the packaging these things pack in 30 grams of carbs, which is definitely a little bit high for me.  The bar also contains 19 grams of sugars, and 7g of protein.</p>
+<p>As a general rule I try to avoid &#8220;power bars&#8221; and &#8220;health bars&#8221; and things of that nature &#8212; regardless of their ingredients &#8212; just because they are so processed and generaly don&#8217;t resemble anything that actually looks like food.  Today I decided to give these a try, and probably won&#8217;t buy one again for a looong time, but maybe if I&#8217;m on the go and in a bind and can find these somewhere, it would be better than the alternatives.  I&#8217;m also thinking maybe airplane/travel meals?  I&#8217;ve been thinking about things I&#8217;ll be able to bring with me to eat at the airport and on the plain for my upcoming trip to Greece.  My hope is that i&#8217;ll be able to find a Chipotle in the airport, but I&#8217;m guessing that probably won&#8217;t happen in Europe :P</p>]]></content>
+  </entry>
+  
 </feed>
 

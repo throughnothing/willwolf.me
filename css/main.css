@@ -9,7 +9,7 @@ div.post {
     margin-bottom: 30px;
     border-bottom: 1px solid #dfdfdf;
 }
-div.post div.body {
+div.post div.body, div.page div.body {
     font-size: 18px;
     line-height: 1.5;
 }
@@ -24,7 +24,7 @@ div.gist { font-size: 12px; }
     width: 22px;
     float: left;
 }
-a.archive {
+a.nav-glyph {
     color: #bbb;
     margin-right: 12px;
     font-size: 19px;
