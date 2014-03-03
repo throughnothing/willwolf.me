@@ -33,9 +33,16 @@
                         <a alt="Archive" class="nav-glyph" href="/archive/">
                             <span class="glyphicon glyphicon-folder-open"></span>
                         </a>
+                        <!--TODO: Photos section?-->
+                        <!--<a alt="About" class="nav-glyph" href="/photos/">-->
+                            <!--<span class="glyphicon glyphicon-camera"></span>-->
+                        <!--</a>-->
                         <a alt="PGP Key" class="nav-glyph" href="/pgp.txt">
                             <span class="glyphicon glyphicon-lock"></span>
                         </a>
+                        <!--<a alt="About" class="nav-glyph" href="/about/">-->
+                            <!--<span class="glyphicon glyphicon-question-sign"></span>-->
+                        <!--</a>-->
                         <a alt="RSS" href="/atom.xml"><img src="/images/rss.png"/></a>
                     </p>
                 </div>
@@ -47,16 +54,14 @@
                 
     
     <div class="post">
-    <h1><a href="/2012/07/26/jekyll-mapping-and-octopress.html">Jekyll-Mapping and Octopress</a></h1>
+    <h1><a href="/2014/03/02/Updated-Layout.html">Updated Site Layout</a></h1>
     <p class="meta text-muted">
-        <span class="date">26 Jul 2012</span>
+        <span class="date">02 Mar 2014</span>
 
         
         | <span class="categories">
             
-    development,
-
-    octopress
+    site
 
 
         </span>
@@ -64,81 +69,32 @@
     </p>
 
     <div class="body">
-        <p>For a while now, I&#39;ve been wanting to add some sort of maps support to
-<a href="http://octopress.org/">octopress</a>/<a href="https://github.com/mojombo/jekyll">jekyll</a>,
-and I finally recently had some time to look into it a little bit more.
-It seems some others out there have had the same idea, because I stumbled
-across two plugins that did something close (but not exactly) to what I wanted:
-<a href="https://github.com/mguentner/octolayer">octolayer</a> and
-<a href="https://github.com/matthewowen/jekyll-mapping">jekyll-mapping</a>.</p>
+        <p>Updating my layout for 2014, and switching back to plain
+<a href="http://jekyllrb.com">Jekyll</a>, away from
+<a href="http://octopress.org">Octopress</a>.  Octopress was a little too complicated,
+did a little too much magic, was confusing/difficult to re-style,
+and was much too difficult to maintain/keep up-to-date.</p>
 
-<p>The reason I&#39;m interested in this is that when I travel, I like to log <code>gpx</code>
-tracks of the places we go, and geotag my photos, etc.  It&#39;s nice to be able to
-display a map of where I went each day, and I can always go back and find
-exactly where that awesome restaurant was (in case I go back, or to tell
-friends).</p>
-
-<p>I wasn&#39;t really sure how/if jekyll plugins would map to octopress (since
-octopress does use jekyll, but its plugin structure still seems to be slightly
-different), so I started off looking into octolayer.</p>
-
-<h2>Octolayer</h2>
-
-<p>Octolayer was only setup to use <a href="http://openlayers.org/">openlayers</a>, and it
-could only do specific long/lat co-ordinates.  I really wanted to be able to use
-google maps, but I figured i&#39;d give this a try and see how things went.</p>
-
-<p>I liked the way that octolayer was set up, and the ease of installing it, but
-the openlayers API looked really messy to me, and I didn&#39;t feel like spending a
-bunch of time learning it when I really wanted google maps anyway, so I opened
-up an <a href="https://github.com/matthewowen/jekyll-mapping/issues/1">issue</a> with
-<a href="https://github.com/matthewowen/">matthewowen</a> to see what his
-thoughts were about adding the functionality I wanted to <code>jekyll-mapping</code>.</p>
-
-<h2>Jekyll-Mapping</h2>
-
-<p>Matthew responded pretty quickly, and showed me that he really already had basic
-support for what I wanted.  Fantastic.  All you had to do was put this in your
-config section of your posts:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">mapping:
-    layers:
-        - http://path/to/kml_file.kml
-        - http://path/to/gpx_file.gpx
-</code></pre></div>
-<p>Then put this in your post body wherever you want the map to render:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">{% render_map %}
-</code></pre></div>
-<p>That&#39;s it!  It seemed to work pretty well at first, but then I quickly realized
-that the way the code was set up, it would only work on the post page, and would
-not be able to display multiple maps on a page that lists several posts (or even
-one post with multiple maps).  The javascript used an id to find the
-<code>jekyll-mapping</code> element, and it was tightly bound to a single-post page.</p>
-
-<p>I decided to head into <code>#octopress</code> and ask around (I&#39;ve never mucked with
-octopress source or plugins before), and got some really useful tips and help
-from <a href="https://github.com/imathis">Brandon Mathis</a>, Octopress&#39; creator.</p>
-
-<p>After a bit of tinkering, I ended up with
-<a href="https://github.com/throughnothing/jekyll-mapping/compare/refactor">this changeset</a>
-that gave me pretty much everything I wanted (for now):</p>
-
-<script src="https://gist.github.com/3183238.js"> </script>
-
-<p>With this, I can put multiple layers on a map (I usually put a <code>.gpx</code> layer for
-the day, as well as a layer from flickr with my geotagged photoset for that day
-in each relevant post), and display multiple posts, each with a map, per page.</p>
+<p>I&#39;m liking plain old <a href="http://jekyllrb.com">Jekyll</a> +
+<a href="htpp://getbootstrap.com">Bootstrap</a> much better, and it actually reduces the
+friction to making new posts. So, with that, hopefully I&#39;ll be able to push some
+of my thoughts here more frequently this year.</p>
 
     </div>
 
 </div>
 
 
-  <a class="pull-left" href="/2012/03/27/is-the-number-of-poor-people-declining-everywhere.html">&lArr; Previous</a>
 
 
 
+<div class="container">
+    
+        <a class="pull-left" href="/page2">&lArr; Older</a>
+    
 
-
+    
+</div>
 
             </div>
         </div>
@@ -156,6 +112,15 @@ in each relevant post), and display multiple posts, each with a map, per page.</
                 </ul>
             </div>
         </div> <!-- #footer -->
+
+        
+    
+            <script>
+                var jekyllMappingAPIKey = 'AIzaSyDR_kxahanR8o80ytxAQySRp4nGo7JAmnU';
+            </script>
+            <script src="/javascripts/gmaps.js"></script>
+        
+
 
     </body>
 </html>

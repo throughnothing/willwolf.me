@@ -33,9 +33,16 @@
                         <a alt="Archive" class="nav-glyph" href="/archive/">
                             <span class="glyphicon glyphicon-folder-open"></span>
                         </a>
+                        <!--TODO: Photos section?-->
+                        <!--<a alt="About" class="nav-glyph" href="/photos/">-->
+                            <!--<span class="glyphicon glyphicon-camera"></span>-->
+                        <!--</a>-->
                         <a alt="PGP Key" class="nav-glyph" href="/pgp.txt">
                             <span class="glyphicon glyphicon-lock"></span>
                         </a>
+                        <!--<a alt="About" class="nav-glyph" href="/about/">-->
+                            <!--<span class="glyphicon glyphicon-question-sign"></span>-->
+                        <!--</a>-->
                         <a alt="RSS" href="/atom.xml"><img src="/images/rss.png"/></a>
                     </p>
                 </div>
@@ -47,33 +54,221 @@
                 
     
     <div class="post">
-    <h1><a href="/2012/03/15/hello-world.html">Hello World</a></h1>
+    <h1><a href="/2012/03/16/git-processes-scripts-and-ideas.html">Git Processes, Scripts and Ideas</a></h1>
     <p class="meta text-muted">
-        <span class="date">15 Mar 2012</span>
+        <span class="date">16 Mar 2012</span>
 
+        
+        | <span class="categories">
+            
+    git,
+
+    development
+
+
+        </span>
         
     </p>
 
     <div class="body">
-        <p>Hello.  This is a test.  This is only a test.</p>
+        <p>Lately I&#39;ve been refining some of my git processes (as well as learning
+a lot about git along the way).  I thought I&#39;d write up a post to share
+some of the ways i&#39;ve been using git.</p>
 
-<p><code>perl Perl
-say &quot;Hello, World&quot;;
-</code></p>
+<h2>Workflow</h2>
+
+<p>Our typical workflow at <a href="https://www.crowdtilt.com">crowdtilt</a> is pretty
+standard.  We have a <code>dev</code> branch, a <code>master</code> branch, and various feature/topic
+branches.  We also make heavy use of github for pull requests/code reviews.</p>
+
+<p>When I go to develop a new feature/bugfix, I start by creating a new branch
+off of the latest <code>dev</code>, and start coding.  I often make many small commits
+along the way because I&#39;m a strong believer in commit early, commit often.  I
+also push my branch to github pretty frequently just to be on the safe side.</p>
+
+<p>Once my feature branch has been tested, and is ready to be merged into <code>dev</code>,
+I rebase all of my small commits into 1.  We try to keep all of our PR&#39;s to 1
+commit just to keep our git history clean, useful, and readable as a history
+of concise and (hopefully) small changes.  To do this, I have been simply
+using:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ git rebase -i dev
+</code></pre></div>
+<p>This will drop me into vim with a lits of all the commits between <code>dev</code>&#39;s
+<code>HEAD</code> and my current branch&#39;s <code>HEAD</code>.  It will look something like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pick 1dea3ff Commit #1
+pick 57a5a28 Commit #2
+pick 3f21ade Commit #3
+</code></pre></div>
+<p>I simply squash all the commits into one by replacing <code>pick</code> with <code>s</code> on
+all but the first line.  This gives me something like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">pick 1dea3ff Commit #1
+s 57a5a28 Commit #2
+s 3f21ade Commit #3
+</code></pre></div>
+<p>This tells git that I want to squash all of these commits into one.  Once
+I quit and save it&#39;ll then let me give a new commit message for my new
+mega-commit.</p>
+
+<p>Here I try to follow convention with a short summary on the first line,
+and then a lengthier description describing my feature/bugfix/whatever in
+a paragraph below that.</p>
+
+<p>Once I have my branch neatly tidied up with one descriptive commit, it&#39;s time
+to pull request.</p>
+
+<h2>Pull Requests and hub</h2>
+
+<p>I love the github web interface for reviewing code and checking out diffs, but
+it is very tedious to go to the website, find your branch, and make the pull
+request through the web interface.  Enter
+<a href="https://github.com/defunkt/hub">hub</a> -- a wonderful command-line tool that
+lets you create pull requests (amongst lots of other cool things) right
+from the command line.</p>
+
+<p>To do a pull request right from my coding directory, I can simply run:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot;
+</code></pre></div>
+<p>The caveat here is that hub (and github, too) default all pull requests
+to merge into the <code>master</code> branch.  We always merge into <code>dev</code>, and then
+merge <code>dev</code> into <code>master</code> when we are ready to deploy changes to production
+(I&#39;ll talk more about our deploy processes in another article). So to get
+it to merge into <code>dev</code>, we must run the following:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev
+</code></pre></div>
+<p>This is closer to what we need, but by default what this will do is setup
+a pull request on github from <code>throughnothing:feature-branch</code> to
+<code>crowdtilt:dev</code>.  It does this because it assumes that I want to do a pull
+request from my users fork to the original users repository.  We don&#39;t really
+have each developer fork our repos, we just all work on the same repo in our
+own branches, so we really want it to do a pull-request from
+<code>crowdtilt:feature-branch</code> to <code>crowdtilt:dev</code>.  This means we need:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch
+</code></pre></div>
+<p>It seemed really simple at first, but now it&#39;s a lot to type.  Time for some
+<code>~/.bashrc</code> magic.  To make things as simple as possible for our development
+process, I&#39;ve written this little bash function to put in our <code>~/.bashrc</code> files
+to smooth things out:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">pullreq<span class="o">()</span> <span class="o">{</span>
+    <span class="o">[</span> -z <span class="nv">$BRANCH</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">BRANCH</span><span class="o">=</span><span class="s2">&quot;dev&quot;</span>
+    <span class="nv">HEAD</span><span class="o">=</span><span class="k">$(</span>git symbolic-ref HEAD 2&gt; /dev/null<span class="k">)</span>
+    <span class="o">[</span> -z <span class="nv">$HEAD</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="k">return</span> <span class="c"># Return if no head</span>
+    <span class="nv">REMOTE</span><span class="o">=</span><span class="sb">`</span>cat .git/config <span class="p">|</span> grep <span class="s2">&quot;remote \&quot;origin\&quot;&quot;</span> -A 2 <span class="p">|</span> tail -n1 <span class="p">|</span> sed <span class="s1">&#39;s/.*:\([^\/]*\).*/\1/&#39;</span><span class="sb">`</span>
+
+    hub pull-request -b <span class="nv">$BRANCH</span> -h <span class="nv">$REMOTE</span>:<span class="k">${</span><span class="nv">HEAD</span><span class="p">#refs/heads/</span><span class="k">}</span> <span class="nv">$1</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>This accepts a <code>BRANCH</code> environment variable that can be set, but will default
+to <code>dev</code> (which is pretty much 90+% of our use cases).  It also parses the
+github user that the origin of the repository</p>
+
+<p>Not only has <code>hub</code> greatly streamlined our pull request process, but when
+combined with the bash function, it eliminates errors of pull requesting
+feature branches to be merged into <code>master</code> (and even having them
+<em>accidentally</em> merged into master directly -- that never happens, right?)
+instead of <code>dev</code>.</p>
+
+<p>Using this script, when we&#39;re ready to do a deploy and merge <code>dev</code> into <code>master</code>
+we simply can run (from the <code>dev</code> branch):</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ BRANCH=master pullreq
+</code></pre></div>
+<p>And the pull request will be created to merge dev into master so we can review
+it on github.</p>
+
+<h2>Managing Branch Chaos</h2>
+
+<p>I said earlier that I was a believer in commit early, commit often.  Well, I&#39;m
+also a believer in small branches.  We pretty much make branches for everything.
+Even if it&#39;s just a simple css change, or a one-line bug-fix, I like to
+quarantine changesets into a branch of their own.  So many times i&#39;ll be
+caught in the middle of a simple change and have to go tend to something else.
+Having branches lets me quickly commit &quot;saving my place&quot;, or &quot;WIP&quot;
+in my branch, and get to work looking at something in another branch.
+My feature branch will be there waiting for me when I&#39;m ready to go back to it.</p>
+
+<p>Additionally, smaller branches make for smaller merges, which are easier to
+review, and less prone to introducing glaring errors that could have been
+caught.</p>
+
+<p>A side-effect of all this branching and pushing and merging is that you can
+quickly get confused about which branches have been merged and which haven&#39;t.
+The list of branches shown on github and on the command line grows to make it
+harder for you to find the branches you still care about.  So of course,
+we can delete the branches as we go, but this is very tedious to do so
+frequently as you have to delete the branch locally, and on github:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ pullreq
+# Review code on github
+$ git checkout dev &amp;&amp; git merge feature-branch &amp;&amp; git push origin dev
+$ gut branch -D feature-branch  # delete feature-branch locally
+$ git push origin :feature-branch # delete feature-branch on github
+</code></pre></div>
+<p>Enter more <code>~/.bashrc</code> goodness.  I wanted a way to streamline
+this process as well because i was typing the above waaay too frequently, so
+I came up with two handy bash functions:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">git_purge_local_branches() {
+  [ -z $1 ] &amp;&amp; return
+  BRANCHES=`git branch --merged $1 | grep -v &#39;^*&#39; | grep -v &#39;master&#39; | grep -v &#39;dev&#39; | tr -d &#39;\n&#39;`
+  echo &quot;Running: git branch -d $BRANCHES&quot;
+  git branch -d $BRANCHES
+}
+
+git_purge_remote_branches() {
+  [ -z $1 ] &amp;&amp; return
+  git remote prune origin
+
+  BRANCHES=`git branch -r --merged $1 | grep &#39;origin&#39; | grep -v &#39;/master$&#39; | grep -v &#39;/dev$&#39; | sed &#39;s/origin\//:/g&#39; | tr -d &#39;\n&#39;`
+  echo &quot;Running: git push origin $BRANCHES&quot;
+  git push origin $BRANCHES
+}
+</code></pre></div>
+<p><code>git_purge_local_branches()</code> will -- as the name implies -- purge local
+branches that have been merged into the branch you give it.  And
+<code>git_purge_remote_branches()</code> will do the same but it will remove the branches
+from the <code>origin</code> remote.  So every now and then, when we get a lot of branches
+hanging around getting in our way, we can clean them up with:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ git_purge_local_branches dev
+$ git_purge_remote_branches dev
+</code></pre></div>
+<p>And of course, because running 2 commands just became too much, I created
+<code>git_purge</code>...one purge to rule them all:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">git_purge() {
+  branch=$1
+  [ -z $branch ] &amp;&amp; branch=&quot;dev&quot;
+  git_purge_local_branches $branch
+  git_purge_remote_branches $branch
+}
+</code></pre></div>
+<p>So now its super easy to manage our branch chaos.  When I start to see too
+many branches building up, I can simply <code>git_purge</code> and it&#39;ll wipe out
+any branches locally and on the origin that have already been merged
+into dev.  Then we&#39;re back to a blissful state of branch zen.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>That pretty much sums up my current git processes.  I really enjoy how
+streamlined things have become, how well our processes work, and how easy it is
+to keep our branches clean and clutter-free while at the same time encouraging
+us to branch, branch, branch!</p>
+
+<p>How are you using git?  Tell me how I can make my workflow even better and more
+kick-ass :)</p>
 
     </div>
 
 </div>
 
 
-  <a class="pull-left" href="/2011/08/03/arriving-in-delhi.html">&lArr; Previous</a>
 
 
 
-  <a class="pull-right" href="/2012/03/16/git-processes-scripts-and-ideas.html">Next &rArr;</a>
+<div class="container">
+    
+        <a class="pull-left" href="/page6">&lArr; Older</a>
+    
 
-
-
+    
+        <a class="pull-right" href="/page4">Newer &rArr;</a>
+    
+</div>
 
             </div>
         </div>
@@ -91,6 +286,15 @@ say &quot;Hello, World&quot;;
                 </ul>
             </div>
         </div> <!-- #footer -->
+
+        
+    
+            <script>
+                var jekyllMappingAPIKey = 'AIzaSyDR_kxahanR8o80ytxAQySRp4nGo7JAmnU';
+            </script>
+            <script src="/javascripts/gmaps.js"></script>
+        
+
 
     </body>
 </html>
