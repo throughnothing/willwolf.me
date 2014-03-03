@@ -1,5 +1,4 @@
 {% if post %}
-<div class="container">
     {% if post.previous %}
       <a class="pull-left" href="{{ post.previous.url }}">&lArr; Previous</a>
     {% endif %}
@@ -7,5 +6,4 @@
     {% if post.next %}
       <a class="pull-right" href="{{ post.next.url }}">Next &rArr;</a>
     {% endif %}
-</div>
 {% endif %}

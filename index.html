@@ -7,12 +7,10 @@ title: throughnothing.com - William Wolf on the web
     {% include article.html %}
 {% endfor %}
 
-<div class="container">
-    {% if paginator.next_page %}
-        <a class="pull-left" href="{{ paginator.next_page_path }}">&lArr; Older</a>
-    {% endif %}
+{% if paginator.next_page %}
+    <a class="pull-left" href="{{ paginator.next_page_path }}">&lArr; Older</a>
+{% endif %}
 
-    {% if paginator.previous_page %}
-        <a class="pull-right" href="{{ paginator.previous_page_path }}">Newer &rArr;</a>
-    {% endif %}
-</div>
+{% if paginator.previous_page %}
+    <a class="pull-right" href="{{ paginator.previous_page_path }}">Newer &rArr;</a>
+{% endif %}
