@@ -1,6 +1,6 @@
 ---
-layout: post
-title: "About"
+layout: page
+title: About
 date: 2012-03-15 22:16
 ---
 
