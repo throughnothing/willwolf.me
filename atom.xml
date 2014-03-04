@@ -4,13 +4,32 @@
   <title><![CDATA[]]></title>
   <link href="/atom.xml" rel="self"/>
   <link href="/"/>
-  <updated>2014-03-02T17:54:32-08:00</updated>
+  <updated>2014-03-04T00:29:23-08:00</updated>
   <id>/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Processes, Processes, Processes]]></title>
+    <link href="/2014/03/03/Processes.html"/>
+    <updated>2014-03-03T23:58:27Z</updated>
+    <id>/2014/03/03/Processes</id>
+    <content type="html"><![CDATA[<p>Structured processes are incredibly useful, and often necessary,
+beasts.  They are, however, almost never the <em>most</em> important things for a
+project.  We shouldn&#39;t hold on to and adhere to processes just because.
+Processes are in place to ensure the quality and timeliness of our work.
+When they cease to work towards this end, its <em>ok</em> to break the mold.
+Live a little sometimes: let go, buck the man, don&#39;t mark that jira ticket
+<code>closed</code> even though it&#39;s been deployed, it&#39;ll be ok, I promise.  Say &#39;no&#39; to a
+meeting when you&#39;re in the zone getting-shit-done™, tackle a ticket that isn&#39;t
+assigned to you, or even <em>gasp</em> fix a bug that hasn&#39;t even been filed yet.</p>
+
+<p>What process have you ignored recently?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Updated Site Layout]]></title>
@@ -846,20 +865,6 @@ After some waiting around, the &#8220;race&#8221; was off to a&#8230;.slow start
 <p>In some searching for other <a href="http://en.wikipedia.org/wiki/Copyleft">copyleft</a> licenses, I came across the <a href="http://artlibre.org/licence/lal/en">Free Art License</a>, which may be of some use to Nina.</p>
 <p>This brings up another interesting thought, however, and that is with regards to copyleft licenses versus public domain, or &#8220;uncopyright.&#8221;  You may have noticed that all the material on my site(s) is &#8220;uncopyrighted&#8221; and that I release all of the content into the public domain.  Reading this article did make me think again about copyleft vs. public domain, as copyleft has the restriction that anyone creating derivative works from the original work, is forced to release their derivative works under the same license without restrictions.  This seems like it may have the benefit that society as a whole is guaranteed to have access to share, use, and benefit from any derivative works in exactly the same way that it could from the original.  It does, however, impose the creator&#8217;s will onto others, and I still find this unnatural.  Copyleft essentially makes use of copyright to achieve its ends, but I&#8217;m still not sold that copyright is the way to go.  I will continue to release my content into the public domain, and use that as my &#8220;license&#8221; of choice wherever possible.</p>
 <p>As another side note, when is <a href="http://www.flickr.com">flickr</a> going to add a &#8220;public domain&#8221; option to their licensing options?  For now I am forced to chose Creative Commons-Share Alike, as that is the most liberal license (and a copyleft license), but I would prefer to be able to chose &#8220;public domain&#8221;.  Come on flickr, can&#8217;t we get that?!</p>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Raw Organic Live Food Bars]]></title>
-    <link href="/2010/10/18/Raw-Organic-Live-Food-Bars.html"/>
-    <updated>2010-10-18T00:00:00-07:00</updated>
-    <id>/2010/10/18/Raw-Organic-Live-Food-Bars</id>
-    <content type="html"><![CDATA[<p><span class="fl">T</span> oday, while checking out at Whole Foods with Angelle, I decided to take a look at some of the energy/power bars overflowing the checkout aisle.  I usually never bother to look because they are almost always loaded with junk that I don&#8217;t want.</p>
-<p>This time, however, a <a href="http://www.rawindulgence.com/">Raw Organic Live Food Bar</a> caught my eye and got me to investigate.</p>
-<p><a href="http://farm2.static.flickr.com/1389/5097941029_f4189b618a_z.jpg"><img src="http://farm2.static.flickr.com/1389/5097941029_f4189b618a_z.jpg" title="Raw Organic Live Food Bar Cashew &amp; Agave Nectar" alt="Raw Organic Live Food Bar Cashew &amp; Agave Nectar" /></a></p>
-<p>I jumped to the ingredients first, as I usually do, and was quite surprised.  The ingredients list for each of their bars was 5-7 ingredients, with no chemical names, or anything that grandma&#8217; wouldn&#8217;t recognize (as food).  It seems like these things are made out of <em>food</em>!</p>
-<p><a href="http://farm2.static.flickr.com/1118/5097941605_b52883ef1d_z.jpg"><img src="http://farm2.static.flickr.com/1118/5097941605_b52883ef1d_z.jpg" title="Raw Organic Live Food Bar Cashew &amp; Agave Nectar Label" alt="Raw Organic Live Food Bar Cashew &amp; Agave Nectar Label" /></a></p>
-<p>I picked up a Cashew &amp; Agave Nectar bar to give it a try, and it turned out to taste pretty tasty, too.  I could tell that they had a decent amount of sugar though &#8212; probably from the dates and agave nectar. According to the packaging these things pack in 30 grams of carbs, which is definitely a little bit high for me.  The bar also contains 19 grams of sugars, and 7g of protein.</p>
-<p>As a general rule I try to avoid &#8220;power bars&#8221; and &#8220;health bars&#8221; and things of that nature &#8212; regardless of their ingredients &#8212; just because they are so processed and generaly don&#8217;t resemble anything that actually looks like food.  Today I decided to give these a try, and probably won&#8217;t buy one again for a looong time, but maybe if I&#8217;m on the go and in a bind and can find these somewhere, it would be better than the alternatives.  I&#8217;m also thinking maybe airplane/travel meals?  I&#8217;ve been thinking about things I&#8217;ll be able to bring with me to eat at the airport and on the plain for my upcoming trip to Greece.  My hope is that i&#8217;ll be able to find a Chipotle in the airport, but I&#8217;m guessing that probably won&#8217;t happen in Europe :P</p>]]></content>
   </entry>
   
 </feed>
