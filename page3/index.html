@@ -107,13 +107,13 @@ thoughts were about adding the functionality I wanted to <code>jekyll-mapping</c
 <p>Matthew responded pretty quickly, and showed me that he really already had basic
 support for what I wanted.  Fantastic.  All you had to do was put this in your
 config section of your posts:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">mapping:
+<div class="highlight"><pre><code class="language-text" data-lang="text">mapping:
     layers:
         - http://path/to/kml_file.kml
         - http://path/to/gpx_file.gpx
 </code></pre></div>
 <p>Then put this in your post body wherever you want the map to render:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">{% render_map %}
+<div class="highlight"><pre><code class="language-text" data-lang="text">{% render_map %}
 </code></pre></div>
 <p>That&#39;s it!  It seemed to work pretty well at first, but then I quickly realized
 that the way the code was set up, it would only work on the post page, and would

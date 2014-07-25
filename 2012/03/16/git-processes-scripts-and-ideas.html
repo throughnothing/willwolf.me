@@ -91,17 +91,17 @@ I rebase all of my small commits into 1.  We try to keep all of our PR&#39;s to 
 commit just to keep our git history clean, useful, and readable as a history
 of concise and (hopefully) small changes.  To do this, I have been simply
 using:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ git rebase -i dev
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rebase -i dev
 </code></pre></div>
 <p>This will drop me into vim with a lits of all the commits between <code>dev</code>&#39;s
 <code>HEAD</code> and my current branch&#39;s <code>HEAD</code>.  It will look something like this:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">pick 1dea3ff Commit #1
+<div class="highlight"><pre><code class="language-text" data-lang="text">pick 1dea3ff Commit #1
 pick 57a5a28 Commit #2
 pick 3f21ade Commit #3
 </code></pre></div>
 <p>I simply squash all the commits into one by replacing <code>pick</code> with <code>s</code> on
 all but the first line.  This gives me something like this:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">pick 1dea3ff Commit #1
+<div class="highlight"><pre><code class="language-text" data-lang="text">pick 1dea3ff Commit #1
 s 57a5a28 Commit #2
 s 3f21ade Commit #3
 </code></pre></div>
@@ -126,14 +126,14 @@ lets you create pull requests (amongst lots of other cool things) right
 from the command line.</p>
 
 <p>To do a pull request right from my coding directory, I can simply run:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot;
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot;
 </code></pre></div>
 <p>The caveat here is that hub (and github, too) default all pull requests
 to merge into the <code>master</code> branch.  We always merge into <code>dev</code>, and then
 merge <code>dev</code> into <code>master</code> when we are ready to deploy changes to production
 (I&#39;ll talk more about our deploy processes in another article). So to get
 it to merge into <code>dev</code>, we must run the following:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev
 </code></pre></div>
 <p>This is closer to what we need, but by default what this will do is setup
 a pull request on github from <code>throughnothing:feature-branch</code> to
@@ -142,20 +142,20 @@ request from my users fork to the original users repository.  We don&#39;t reall
 have each developer fork our repos, we just all work on the same repo in our
 own branches, so we really want it to do a pull-request from
 <code>crowdtilt:feature-branch</code> to <code>crowdtilt:dev</code>.  This means we need:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch
 </code></pre></div>
 <p>It seemed really simple at first, but now it&#39;s a lot to type.  Time for some
 <code>~/.bashrc</code> magic.  To make things as simple as possible for our development
 process, I&#39;ve written this little bash function to put in our <code>~/.bashrc</code> files
 to smooth things out:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">pullreq<span class="o">()</span> <span class="o">{</span>
-    <span class="o">[</span> -z <span class="nv">$BRANCH</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">BRANCH</span><span class="o">=</span><span class="s2">&quot;dev&quot;</span>
-    <span class="nv">HEAD</span><span class="o">=</span><span class="k">$(</span>git symbolic-ref HEAD 2&gt; /dev/null<span class="k">)</span>
-    <span class="o">[</span> -z <span class="nv">$HEAD</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="k">return</span> <span class="c"># Return if no head</span>
-    <span class="nv">REMOTE</span><span class="o">=</span><span class="sb">`</span>cat .git/config <span class="p">|</span> grep <span class="s2">&quot;remote \&quot;origin\&quot;&quot;</span> -A 2 <span class="p">|</span> tail -n1 <span class="p">|</span> sed <span class="s1">&#39;s/.*:\([^\/]*\).*/\1/&#39;</span><span class="sb">`</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pullreq() {
+    [ -z $BRANCH ] &amp;&amp; BRANCH=&quot;dev&quot;
+    HEAD=$(git symbolic-ref HEAD 2&gt; /dev/null)
+    [ -z $HEAD ] &amp;&amp; return # Return if no head
+    REMOTE=`cat .git/config | grep &quot;remote \&quot;origin\&quot;&quot; -A 2 | tail -n1 | sed 's/.*:\([^\/]*\).*/\1/'`
 
-    hub pull-request -b <span class="nv">$BRANCH</span> -h <span class="nv">$REMOTE</span>:<span class="k">${</span><span class="nv">HEAD</span><span class="p">#refs/heads/</span><span class="k">}</span> <span class="nv">$1</span>
-<span class="o">}</span>
+    hub pull-request -b $BRANCH -h $REMOTE:${HEAD#refs/heads/} $1
+}
 </code></pre></div>
 <p>This accepts a <code>BRANCH</code> environment variable that can be set, but will default
 to <code>dev</code> (which is pretty much 90+% of our use cases).  It also parses the
@@ -169,7 +169,7 @@ instead of <code>dev</code>.</p>
 
 <p>Using this script, when we&#39;re ready to do a deploy and merge <code>dev</code> into <code>master</code>
 we simply can run (from the <code>dev</code> branch):</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ BRANCH=master pullreq
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ BRANCH=master pullreq
 </code></pre></div>
 <p>And the pull request will be created to merge dev into master so we can review
 it on github.</p>
@@ -195,7 +195,7 @@ The list of branches shown on github and on the command line grows to make it
 harder for you to find the branches you still care about.  So of course,
 we can delete the branches as we go, but this is very tedious to do so
 frequently as you have to delete the branch locally, and on github:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ pullreq
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ pullreq
 # Review code on github
 $ git checkout dev &amp;&amp; git merge feature-branch &amp;&amp; git push origin dev
 $ gut branch -D feature-branch  # delete feature-branch locally
@@ -204,9 +204,9 @@ $ git push origin :feature-branch # delete feature-branch on github
 <p>Enter more <code>~/.bashrc</code> goodness.  I wanted a way to streamline
 this process as well because i was typing the above waaay too frequently, so
 I came up with two handy bash functions:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">git_purge_local_branches() {
+<div class="highlight"><pre><code class="language-text" data-lang="text">git_purge_local_branches() {
   [ -z $1 ] &amp;&amp; return
-  BRANCHES=`git branch --merged $1 | grep -v &#39;^*&#39; | grep -v &#39;master&#39; | grep -v &#39;dev&#39; | tr -d &#39;\n&#39;`
+  BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
   echo &quot;Running: git branch -d $BRANCHES&quot;
   git branch -d $BRANCHES
 }
@@ -215,7 +215,7 @@ git_purge_remote_branches() {
   [ -z $1 ] &amp;&amp; return
   git remote prune origin
 
-  BRANCHES=`git branch -r --merged $1 | grep &#39;origin&#39; | grep -v &#39;/master$&#39; | grep -v &#39;/dev$&#39; | sed &#39;s/origin\//:/g&#39; | tr -d &#39;\n&#39;`
+  BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
   echo &quot;Running: git push origin $BRANCHES&quot;
   git push origin $BRANCHES
 }
@@ -225,12 +225,12 @@ branches that have been merged into the branch you give it.  And
 <code>git_purge_remote_branches()</code> will do the same but it will remove the branches
 from the <code>origin</code> remote.  So every now and then, when we get a lot of branches
 hanging around getting in our way, we can clean them up with:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ git_purge_local_branches dev
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git_purge_local_branches dev
 $ git_purge_remote_branches dev
 </code></pre></div>
 <p>And of course, because running 2 commands just became too much, I created
 <code>git_purge</code>...one purge to rule them all:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">git_purge() {
+<div class="highlight"><pre><code class="language-text" data-lang="text">git_purge() {
   branch=$1
   [ -z $branch ] &amp;&amp; branch=&quot;dev&quot;
   git_purge_local_branches $branch
