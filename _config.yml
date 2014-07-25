@@ -1,6 +1,6 @@
 name: throughnothing.com
 markdown: redcarpet
-pygments: true
+highlighter: true
 paginate: 1
 permalink: /:year/:month/:day/:title.html
 
