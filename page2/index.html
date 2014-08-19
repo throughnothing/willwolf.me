@@ -52,14 +52,16 @@
                 
     
     <div class="post">
-    <h1><a href="/2014/03/02/Updated-Layout.html">Updated Site Layout</a></h1>
+    <h1><a href="/2012/03/16/git-processes-scripts-and-ideas.html">Git Processes, Scripts and Ideas</a></h1>
     <p class="meta text-muted">
-        <span class="date">02 Mar 2014</span>
+        <span class="date">16 Mar 2012</span>
 
         
         | <span class="categories">
             
-    site
+    git,
+
+    development
 
 
         </span>
@@ -67,16 +69,339 @@
     </p>
 
     <div class="body">
-        <p>Updating my layout for 2014, and switching back to plain
-<a href="http://jekyllrb.com">Jekyll</a>, away from
-<a href="http://octopress.org">Octopress</a>.  Octopress was a little too complicated,
-did a little too much magic, was confusing/difficult to re-style,
-and was much too difficult to maintain/keep up-to-date.</p>
+        <p>Lately I&#39;ve been refining some of my git processes (as well as learning
+a lot about git along the way).  I thought I&#39;d write up a post to share
+some of the ways i&#39;ve been using git.</p>
 
-<p>I&#39;m liking plain old <a href="http://jekyllrb.com">Jekyll</a> +
-<a href="htpp://getbootstrap.com">Bootstrap</a> much better, and it actually reduces the
-friction to making new posts. So, with that, hopefully I&#39;ll be able to push some
-of my thoughts here more frequently this year.</p>
+<h2>Workflow</h2>
+
+<p>Our typical workflow at <a href="https://www.crowdtilt.com">crowdtilt</a> is pretty
+standard.  We have a <code>dev</code> branch, a <code>master</code> branch, and various feature/topic
+branches.  We also make heavy use of github for pull requests/code reviews.</p>
+
+<p>When I go to develop a new feature/bugfix, I start by creating a new branch
+off of the latest <code>dev</code>, and start coding.  I often make many small commits
+along the way because I&#39;m a strong believer in commit early, commit often.  I
+also push my branch to github pretty frequently just to be on the safe side.</p>
+
+<p>Once my feature branch has been tested, and is ready to be merged into <code>dev</code>,
+I rebase all of my small commits into 1.  We try to keep all of our PR&#39;s to 1
+commit just to keep our git history clean, useful, and readable as a history
+of concise and (hopefully) small changes.  To do this, I have been simply
+using:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rebase -i dev
+</code></pre></div>
+<p>This will drop me into vim with a lits of all the commits between <code>dev</code>&#39;s
+<code>HEAD</code> and my current branch&#39;s <code>HEAD</code>.  It will look something like this:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">pick 1dea3ff Commit #1
+pick 57a5a28 Commit #2
+pick 3f21ade Commit #3
+</code></pre></div>
+<p>I simply squash all the commits into one by replacing <code>pick</code> with <code>s</code> on
+all but the first line.  This gives me something like this:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">pick 1dea3ff Commit #1
+s 57a5a28 Commit #2
+s 3f21ade Commit #3
+</code></pre></div>
+<p>This tells git that I want to squash all of these commits into one.  Once
+I quit and save it&#39;ll then let me give a new commit message for my new
+mega-commit.</p>
+
+<p>Here I try to follow convention with a short summary on the first line,
+and then a lengthier description describing my feature/bugfix/whatever in
+a paragraph below that.</p>
+
+<p>Once I have my branch neatly tidied up with one descriptive commit, it&#39;s time
+to pull request.</p>
+
+<h2>Pull Requests and hub</h2>
+
+<p>I love the github web interface for reviewing code and checking out diffs, but
+it is very tedious to go to the website, find your branch, and make the pull
+request through the web interface.  Enter
+<a href="https://github.com/defunkt/hub">hub</a> -- a wonderful command-line tool that
+lets you create pull requests (amongst lots of other cool things) right
+from the command line.</p>
+
+<p>To do a pull request right from my coding directory, I can simply run:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot;
+</code></pre></div>
+<p>The caveat here is that hub (and github, too) default all pull requests
+to merge into the <code>master</code> branch.  We always merge into <code>dev</code>, and then
+merge <code>dev</code> into <code>master</code> when we are ready to deploy changes to production
+(I&#39;ll talk more about our deploy processes in another article). So to get
+it to merge into <code>dev</code>, we must run the following:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev
+</code></pre></div>
+<p>This is closer to what we need, but by default what this will do is setup
+a pull request on github from <code>throughnothing:feature-branch</code> to
+<code>crowdtilt:dev</code>.  It does this because it assumes that I want to do a pull
+request from my users fork to the original users repository.  We don&#39;t really
+have each developer fork our repos, we just all work on the same repo in our
+own branches, so we really want it to do a pull-request from
+<code>crowdtilt:feature-branch</code> to <code>crowdtilt:dev</code>.  This means we need:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch
+</code></pre></div>
+<p>It seemed really simple at first, but now it&#39;s a lot to type.  Time for some
+<code>~/.bashrc</code> magic.  To make things as simple as possible for our development
+process, I&#39;ve written this little bash function to put in our <code>~/.bashrc</code> files
+to smooth things out:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pullreq() {
+    [ -z $BRANCH ] &amp;&amp; BRANCH=&quot;dev&quot;
+    HEAD=$(git symbolic-ref HEAD 2&gt; /dev/null)
+    [ -z $HEAD ] &amp;&amp; return # Return if no head
+    REMOTE=`cat .git/config | grep &quot;remote \&quot;origin\&quot;&quot; -A 2 | tail -n1 | sed 's/.*:\([^\/]*\).*/\1/'`
+
+    hub pull-request -b $BRANCH -h $REMOTE:${HEAD#refs/heads/} $1
+}
+</code></pre></div>
+<p>This accepts a <code>BRANCH</code> environment variable that can be set, but will default
+to <code>dev</code> (which is pretty much 90+% of our use cases).  It also parses the
+github user that the origin of the repository</p>
+
+<p>Not only has <code>hub</code> greatly streamlined our pull request process, but when
+combined with the bash function, it eliminates errors of pull requesting
+feature branches to be merged into <code>master</code> (and even having them
+<em>accidentally</em> merged into master directly -- that never happens, right?)
+instead of <code>dev</code>.</p>
+
+<p>Using this script, when we&#39;re ready to do a deploy and merge <code>dev</code> into <code>master</code>
+we simply can run (from the <code>dev</code> branch):</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ BRANCH=master pullreq
+</code></pre></div>
+<p>And the pull request will be created to merge dev into master so we can review
+it on github.</p>
+
+<h2>Managing Branch Chaos</h2>
+
+<p>I said earlier that I was a believer in commit early, commit often.  Well, I&#39;m
+also a believer in small branches.  We pretty much make branches for everything.
+Even if it&#39;s just a simple css change, or a one-line bug-fix, I like to
+quarantine changesets into a branch of their own.  So many times i&#39;ll be
+caught in the middle of a simple change and have to go tend to something else.
+Having branches lets me quickly commit &quot;saving my place&quot;, or &quot;WIP&quot;
+in my branch, and get to work looking at something in another branch.
+My feature branch will be there waiting for me when I&#39;m ready to go back to it.</p>
+
+<p>Additionally, smaller branches make for smaller merges, which are easier to
+review, and less prone to introducing glaring errors that could have been
+caught.</p>
+
+<p>A side-effect of all this branching and pushing and merging is that you can
+quickly get confused about which branches have been merged and which haven&#39;t.
+The list of branches shown on github and on the command line grows to make it
+harder for you to find the branches you still care about.  So of course,
+we can delete the branches as we go, but this is very tedious to do so
+frequently as you have to delete the branch locally, and on github:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ pullreq
+# Review code on github
+$ git checkout dev &amp;&amp; git merge feature-branch &amp;&amp; git push origin dev
+$ gut branch -D feature-branch  # delete feature-branch locally
+$ git push origin :feature-branch # delete feature-branch on github
+</code></pre></div>
+<p>Enter more <code>~/.bashrc</code> goodness.  I wanted a way to streamline
+this process as well because i was typing the above waaay too frequently, so
+I came up with two handy bash functions:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">git_purge_local_branches() {
+  [ -z $1 ] &amp;&amp; return
+  BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
+  echo &quot;Running: git branch -d $BRANCHES&quot;
+  git branch -d $BRANCHES
+}
+
+git_purge_remote_branches() {
+  [ -z $1 ] &amp;&amp; return
+  git remote prune origin
+
+  BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
+  echo &quot;Running: git push origin $BRANCHES&quot;
+  git push origin $BRANCHES
+}
+</code></pre></div>
+<p><code>git_purge_local_branches()</code> will -- as the name implies -- purge local
+branches that have been merged into the branch you give it.  And
+<code>git_purge_remote_branches()</code> will do the same but it will remove the branches
+from the <code>origin</code> remote.  So every now and then, when we get a lot of branches
+hanging around getting in our way, we can clean them up with:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git_purge_local_branches dev
+$ git_purge_remote_branches dev
+</code></pre></div>
+<p>And of course, because running 2 commands just became too much, I created
+<code>git_purge</code>...one purge to rule them all:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">git_purge() {
+  branch=$1
+  [ -z $branch ] &amp;&amp; branch=&quot;dev&quot;
+  git_purge_local_branches $branch
+  git_purge_remote_branches $branch
+}
+</code></pre></div>
+<p>So now its super easy to manage our branch chaos.  When I start to see too
+many branches building up, I can simply <code>git_purge</code> and it&#39;ll wipe out
+any branches locally and on the origin that have already been merged
+into dev.  Then we&#39;re back to a blissful state of branch zen.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>That pretty much sums up my current git processes.  I really enjoy how
+streamlined things have become, how well our processes work, and how easy it is
+to keep our branches clean and clutter-free while at the same time encouraging
+us to branch, branch, branch!</p>
+
+<p>How are you using git?  Tell me how I can make my workflow even better and more
+kick-ass :)</p>
+
+    </div>
+
+</div>
+
+
+
+
+    
+    <div class="post">
+    <h1><a href="/2012/03/15/hello-world.html">Hello World</a></h1>
+    <p class="meta text-muted">
+        <span class="date">15 Mar 2012</span>
+
+        
+    </p>
+
+    <div class="body">
+        <p>Hello.  This is a test.  This is only a test.</p>
+
+<p><code>perl Perl
+say &quot;Hello, World&quot;;
+</code></p>
+
+    </div>
+
+</div>
+
+
+
+
+    
+    <div class="post">
+    <h1><a href="/2011/07/16/new-continent-for-us-asia.html">A New Continent For Us: Asia</a></h1>
+    <p class="meta text-muted">
+        <span class="date">16 Jul 2011</span>
+
+        
+        | <span class="categories">
+            
+    india,
+
+    travel
+
+
+        </span>
+        
+    </p>
+
+    <div class="body">
+        <p>I just dropped Angelle off at the airport for her 5 week jaunt in India.  She&#39;s
+fortunate to be going for work, so mostly all of her expenses are paid for, and
+it is a wonderful opportunity for her to go.  I&#39;ll be meeting up with her in a
+few weeks for the last leg of the trip as well, and I can&#39;t wait.</p>
+
+<p>Neither of us have been to Asia before, so we are both very excited to see a new
+continent.  New cultures, places, and experiences are always exciting, and I&#39;m
+thrilled to see what India has to offer us.</p>
+
+<p>I&#39;m going to be going for just over 2 weeks, and I&#39;m planning to pack as light
+as I can, though my laptop (for work) and DSLR will take up the most space.
+I&#39;ll put together a post with my packing list once I&#39;ve got everything nailed
+down, but for now I&#39;ve got a few weeks by myself here in DC for some running,
+bike riding, and quiet reflection before I head off to a new continent.</p>
+
+    </div>
+
+</div>
+
+
+
+
+    
+    <div class="post">
+    <h1><a href="/2011/07/15/city-life.html">City Life - DC</a></h1>
+    <p class="meta text-muted">
+        <span class="date">15 Jul 2011</span>
+
+        
+        | <span class="categories">
+            
+    life,
+
+    moving
+
+
+        </span>
+        
+    </p>
+
+    <div class="body">
+        <p>We’ve moved.  For the first time in my life I now live in a big city.  It’s only
+been a week, but so far I’m loving it.  We moved into the Dupont area of DC last
+Saturday, and have been getting settled in all week.  I most enjoy taking Belle
+(our white Maltise) on multiple walks during the day throughout the city.
+Night-time cruises on my bike have also been great as the weather has been
+perfect all week.</p>
+
+<p>Our living space is a little bit smaller than before, but I consider that a
+bonus.  It forces us to re-evaluate our possessions, and find what is necessary.
+We got rid of a bed, a dresser, and downsized our wardrobes and kitchen things.
+It actually feels like we have more space, and getting rid of old junk is very
+freeing.</p>
+
+<p>As for the city life, there are so many people out and about all the time , and
+so much going on, it can sometimes seem like overload.  Lucky for us, Rock Creek
+Park provides a quiet getaway from the hustle and bustle of the city when
+needed.  We have been enjoying night time strolls along the Dupont area, and
+just wandering aimlessly to get to know the area.  I’m excited for what the
+future holds here.</p>
+
+<p>It took Zeus and Belle a few days to get adjusted to the new place, but I think
+they are both getting pretty situated now.  Zeus no longer hides in the kitchen
+cabinets all day, and Belle already knows how to find her way back home after a
+good walk.</p>
+
+    </div>
+
+</div>
+
+
+
+
+    
+    <div class="post">
+    <h1><a href="/2011/06/26/now.html">Now</a></h1>
+    <p class="meta text-muted">
+        <span class="date">26 Jun 2011</span>
+
+        
+        | <span class="categories">
+            
+    simplicity
+
+
+        </span>
+        
+    </p>
+
+    <div class="body">
+        <p>All we have is now.  I try to remind myself of this when I get caught up in
+reminiscing about the past, or worrying about the future.  The past no longer
+is, and the future never will be.  All we have is the present moment; now and
+always.</p>
+
+<p>If we aren&#39;t happy in this present moment, can we ever be happy?  Being here,
+now, is one of the things I&#39;m continually working on.  I&#39;m far from perfect, and
+probably drift away from the present moment thousands of times a day.  The trick
+is catching yourself when this happens, and being mindful of it.  Keep
+persistently catching yourself, and reminding yourself that right now is all
+you&#39;ve got.  Breathe.  The more we can catch ourselves slipping out of the
+present, the more aware we can become of ourselves, our surroundings, and the
+lives we actually lead.  Now.</p>
 
     </div>
 
