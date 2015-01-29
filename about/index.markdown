@@ -2,6 +2,7 @@
 layout: page
 title: About
 date: 2012-03-15 22:16
+about_active: active 
 ---
 
 Hi there.  I'm William Wolf, a software developer living in San Francisco.

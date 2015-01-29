@@ -18,12 +18,12 @@ div.post p { margin: 18px 0;}
 
 div.gist { font-size: 12px; }
 
-.navbar-right a {
-    display: block;
-    height: 22px;
-    width: 22px;
-    float: left;
-}
+/*.navbar-right a {*/
+    /*display: block;*/
+    /*height: 22px;*/
+    /*width: 22px;*/
+    /*float: left;*/
+/*}*/
 a.nav-glyph {
     color: #bbb;
     margin-right: 12px;

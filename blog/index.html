@@ -1,7 +1,9 @@
 ---
 layout: default
-title: throughnothing.com - William Wolf on the web
+title: throughnothing.com - Blog
+blog_active: active
 ---
+
 {% for post in paginator.posts %}
     {% assign content = post.content %}
     {% include article.html %}
