@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{Title}{block:PostTitle} &#8212; {PostTitle}{/block:PostTitle}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://throughnothing.com/css/main.css">
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Scripts -->
+
+    <script src="http://static.tumblr.com/4kpnlef/Pttmhz2ap/jquery-1.9.1.min.js"></script>
+    
+    </head>
+       
+    <body>
+
+<!-- Nav Bar -->
+        <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="col-md-8 col-md-offset-2">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://throughnothing.com">throughnothing.com</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Blog</a></li>
+                        <li><a target="_twitter" href="https://twitter.com/throughnothing">Twitter</a></li>
+                        <li><a target="_github" href="https://github.com/throughnothing">Github</a></li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a target="_pgp" href="http://throughnothing.com/pgp.txt">PGP</a></li>
+                        <li><a target="_btc" href="https://coinbase.com/throughnothing">&#x0243;</a>
+
+                    </ul>
+                </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </nav>
+        
+        
+        
+        <div class="container main-content">
+            <div class="col-md-8 col-md-offset-2">
+            
+                <!-- POST -->
+                {block:Posts}{block:Text}
+                <div class="post">
+                    <h1><a href="{Permalink}">{Title}</a></h1>
+                    <p class="meta text-muted">
+                        <span class="date">{ShortMonth}.{DayOfMonth} {Year}</span>
+                    </p>
+                    <div class="body">
+                        {Body}
+                    </div>
+                </div>
+                {/block:Text}
+                {/block:Posts}
+                
+
+                
+                {block:NextPage}
+                    <a class="pull-left" href="{NextPage}">&lArr; Older</a>
+                {/block:NextPage}
+                
+                {block:PreviousPage}
+                    <a class="pull-right" href="{PreviousPage}">Newer &rArr;</a>
+                {/block:PreviousPage}
+
+
+
+            </div>
+        </div>
+
+        <div id="footer" class="container-fluid">
+            <div class="col-md-8 col-md-offset-2 text-center footer-nav">
+                <ul class="list-inline">
+                    <li><a target="_pgp" href="http://throughnothing.com/pgp.txt">pgp</a></li> |
+                    <!--<li><a href="/atom.xml">rss</a></li> |-->
+                    <li>
+                        <a target="_btc" href="https://coinbase.com/throughnothing">&#x0243;</a>
+                    </li> |
+                    <li>
+                        <a href="http://throughnothing.com/uncopyright/">&hearts;</a>
+                        <a href="http://throughnothing.com/">William Wolf</a>
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- #footer -->
+
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+
+{block:IfGoogleAnalytics}
+<!-- Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '{text:Google Analytics}']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{/block:IfGoogleAnalytics}
+
+
+    </body>
+</html>
