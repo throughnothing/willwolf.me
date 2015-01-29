@@ -14,6 +14,7 @@ I write code on [GitHub](https://github.com/throughnothing).
 
 
 I'm a geek that loves technology, philosophy, economics, Ƀitcoin, health,
-and generally all things voluntary.
+and generally all things voluntary. By day, I'm the Directory of
+Technology at [Tilt](https://www.tilt.com).
 
 </center>
