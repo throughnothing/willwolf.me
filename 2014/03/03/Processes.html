@@ -1,52 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Processes, Processes, Processes</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
         <!-- Bootstrap CSS -->
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/main.css">
 
     </head>
     <body>
 
-        <nav class="navbar navbar-default" role="navigation">
+        <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="col-md-8 col-md-offset-2">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/">
-                            <img width="22" height="22" style="margin:-6px 3px 0 0;" src="http://www.gravatar.com/avatar/764740c772a0c1b7f9926ec08147a18a?s=22" class="img-rounded"/>throughnothing.com</a>
-                    </div>
-                    <!--<ul class="nav navbar-nav">-->
-                        <!--<li class="small"><a href="/archive.html">Archive</a></li>-->
-                    <!--</ul>-->
-                    <p class="navbar-text navbar-right">
-                        <!--<a href="/archive.xml"><span class="glyphicon glyphicon-folder-open"></span></a>-->
-                        <a alt="Archive" class="nav-glyph" href="/archive/">
-                            <span class="glyphicon glyphicon-folder-open"></span>
-                        </a>
-                        <!--TODO: Photos section?-->
-                        <!--<a alt="About" class="nav-glyph" href="/photos/">-->
-                            <!--<span class="glyphicon glyphicon-camera"></span>-->
-                        <!--</a>-->
-                        <a alt="PGP Key" class="nav-glyph" href="/pgp.txt">
-                            <span class="glyphicon glyphicon-lock"></span>
-                        </a>
-                        <!--<a alt="About" class="nav-glyph" href="/about/">-->
-                            <!--<span class="glyphicon glyphicon-question-sign"></span>-->
-                        <!--</a>-->
-                        <a alt="RSS" href="/atom.xml"><img src="/images/rss.png"/></a>
-                    </p>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">throughnothing.com</a>
                 </div>
-            </div><!-- /.container -->
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <!--<li class="active"><a href="#">Home</a></li>-->
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class=""><a href="http://blog.throughnothing.com">Blog</a></li>
+                        <li class=""><a href="/about/">About</a></li>
+                        <li><a href="/pgp.txt">PGP</a></li>
+                        <li><a href="/atom.xml">RSS</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+                </div>
+            </div>
         </nav>
-
         <div class="container main-content">
             <div class="col-md-8 col-md-offset-2">
                 
@@ -94,7 +90,7 @@ assigned to you, or even <em>gasp</em> fix a bug that hasn&#39;t even been filed
         <div id="footer" class="container-fluid">
             <div class="col-md-8 col-md-offset-2 text-center footer-nav">
                 <ul class="list-inline">
-                    <li><a href="/archive/">archive</a></li> |
+                    <li><a href="http://blog.throughnothing.com">blog</a></li> |
                     <li><a href="/pgp.txt">pgp</a></li> |
                     <li><a href="/atom.xml">rss</a></li> |
                     <li>
