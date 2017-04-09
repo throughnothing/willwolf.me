@@ -9,4 +9,5 @@ old_partial: $partial("templates/post-list.html")$
 I'm a geek that loves technology, philosophy, economics, cryptocurrencies,
 health, and generally all things voluntary.
 
-You can follow my [reading](), [writing](), and [coding](),
+You can follow my [reading](), [writing](), and [coding]().  Currently I
+build paymetns systems at Airbnb.
