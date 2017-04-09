@@ -1,0 +1,171 @@
+// Colors
+
+$color1_1: #010308;
+$color1_2: #00030A;
+$color1_3: #2F3F73;
+$color1_4: #D4D9EA;
+$color1_5: #8BA3F3;
+
+$color2_1: #0C0801;
+$color2_2: #0F0B00;
+$color2_3: #AA8739;
+$color2_4: #FFF6E4;
+$color2_5: #FFD883;
+
+$color3_1: #050B00;
+$color3_2: #070E00;
+$color3_3: #659933;
+$color3_4: #EBF8DE;
+$color3_5: #BDFB81;
+
+$color4_1: #0B0004;
+$color4_2: #0E0005;
+$color4_3: #963254;
+$color4_4: #F7DDE6;
+$color4_5: #FB81AA;
+
+@mixin hover_transition {
+    $time: 1s;
+    transition: all $time ease;
+}
+
+// End Colors
+
+
+body {
+    color: $color1_1;
+    background-color: #fff;
+    font-size: 18px;
+    line-height: 1.25em;
+    /* From Bootstrap: https://v4-alpha.getbootstrap.com/content/reboot/#native-font-stack */
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+}
+
+hr {
+    color: $color1_2;
+    border-top: 3px solid $color1_4;
+    border-bottom: none;
+}
+
+a {
+    @include hover_transition;
+    text-decoration: none;
+    color: $color1_5;
+}
+
+a:hover {
+    @include hover_transition;
+    color: desaturate(darken($color2_5, 15%), 20%);
+    text-shadow: 0 0 1px rgba($color1_2,0.1);
+}
+
+
+// Small Screens
+@media (max-width: 800px) {
+    .sidebar {
+        justify-content: center;
+    }
+    .content {
+        margin: 50px 20px;
+    }
+
+    .side-nav {
+        flex-direction: row;
+        align-content: space-around;
+        justify-content: space-around;
+    }
+}
+
+// Large Screens
+@media (min-width: 800px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 15rem;
+        flex-direction: column;
+    }
+    .content {
+        margin: 5rem 2rem 0 20rem;
+        max-width: 800px;
+    }
+
+    .side-nav {
+        flex-direction: column;
+        align-items: center;
+        align-content: flex-start;
+        justify-content: center;
+    }
+}
+
+.sidebar {
+    margin: 0;
+    background-color: $color1_3;
+    box-shadow: 0 0 20px 0 $color4_4 - 90;
+    padding: 3em 1em;
+    color: $color1_4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-nav {
+    margin: 2em 0 2em 0;
+    display: flex;
+    width: 90%;
+}
+
+.side-nav a {
+    color: lighten($color1_4, 0%);
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba($color2_2,0.7);
+    font-size: 1.3em;
+    margin: 0.4rem 0;
+}
+
+.side-nav a:hover {
+    @include hover_transition;
+    color: $color2_5;
+}
+
+.face-logo {
+    @include hover_transition;
+    display: block;
+    background: #eee url(/images/me.jpg) -7px 0px no-repeat;
+    height: 80pt;
+    width: 80pt;
+    border: 3px solid #fff;
+    // position: relative;
+    border-radius: 100%;
+    background-size: 110%;
+    box-shadow: 0 0 3px darken($color1_4,40%), inset 0 0 10px $color1_2;
+}
+
+.face-logo:hover {
+    @include hover_transition;
+    border: 3px solid $color2_5;
+    box-shadow: 0 0 20px darken($color2_5,40%), inset 0 0 10px $color2_5;
+}
+.side-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 160px;
+}
+// Icons
+.side-footer a {
+    @include hover_transition;
+    height: 25px;
+    width: 25px;
+    svg {
+        @include hover_transition;
+        fill: rgba(desaturate(darken($color1_4, 8%), 40%), 0.35);
+    }
+    svg:hover {
+        @include hover_transition;
+        // fill: desaturate(darken($color2_5, 30%), 40%);
+        fill: rgba(desaturate($color2_5, 10%), 0.9);
+    }
+}

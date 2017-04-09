@@ -35,7 +35,7 @@ main = hakyllWith configuration $ do
             items <- loadAll "css/*" :: Compiler [Item String]
             makeItem $ concatMap itemBody items
 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
+    match (fromList ["about.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
