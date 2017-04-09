@@ -2,6 +2,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
+import           Hakyll.Web.Sass (sassCompiler)
+
 
 --------------------------------------------------------------------------------
 
@@ -17,7 +19,14 @@ main = hakyllWith configuration $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/*" $ compile compressCssCompiler
+    match "images/icons/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    -- Compile SASS
+    match "css/*" $ do
+        let compressCssItem = fmap compressCss
+        compile (compressCssItem <$> sassCompiler)
 
     -- Combine all CSS
     create ["all.css"] $ do
@@ -61,8 +70,8 @@ main = hakyllWith configuration $ do
                     listField "posts" postCtx (return posts) `mappend`
                     defaultContext
 
-            -- pandocCompiler
-            getResourceBody
+            pandocCompiler
+            -- getResourceBody
                 >>= applyAsTemplate indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
                 >>= relativizeUrls
