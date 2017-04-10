@@ -51,7 +51,7 @@ publish: rebuild
 	# Restoration
 	git checkout ${DEVELOP_BRANCH}
 	git branch -D ${SITE_BRANCH}
-	git stash pop
+	git stash pop & exit 0
 
 # Hakyll site definition compilation
 compile:
