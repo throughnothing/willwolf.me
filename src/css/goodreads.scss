@@ -1,0 +1,30 @@
+@import '_colors';
+@import '_mixins';
+
+.goodreads-book-grid-widget {
+  h2 {
+    a { @include hover_transition; color: $color1_2 }
+    a:hover { @include hover_transition; color: $color1_5 }
+    padding-bottom: 12px;
+    border-bottom: 3px solid $color1_4;
+  }
+}
+
+.gr_grid_container {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.gr_grid_book_container {
+  margin: 10px 17px;
+  img {
+    box-shadow: 1px 1px 7px rgba($color1_1, 0.7);
+    border-radius: 5%;
+  }
+}
+
+.gr_grid_branding {
+  display: none;
+}

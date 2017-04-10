@@ -17,7 +17,7 @@ clean: compile
 rebuild: compile
 	cd ${SRC} && ${STACK} exec ${SITE} rebuild
 
-serve: compile
+serve: rebuild
 	cd ${SRC} && ${STACK} exec ${SITE} watch
 
 
