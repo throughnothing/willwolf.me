@@ -31,7 +31,7 @@ main = hakyllWith configuration $ do
             items <- loadAll "css/*" :: Compiler [Item String]
             makeItem $ concatMap itemBody items
 
-    match (fromList ["about.markdown", "reading.html", "index.markdown"]) $ do
+    match (fromList ["about.markdown", "reading.html"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -44,32 +44,31 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
-    -- create ["archive.html"] $ do
-    --     route idRoute
-    --     compile $ do
-    --         posts <- recentFirst =<< loadAll "posts/*"
-    --         let archiveCtx =
-    --                 listField "posts" postCtx (return posts) `mappend`
-    --                 defaultContext
+    create ["archive.html"] $ do
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll "posts/*"
+            let archiveCtx =
+                    listField "posts" postCtx (return posts) `mappend`
+                    defaultContext
 
-    --         makeItem ""
-    --             >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-    --             >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-    --             >>= relativizeUrls
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                >>= relativizeUrls
 
-    -- match "index.markdown" $ do
-    --     route   $ setExtension "html"
-    --     compile $ do
-    --         posts <- recentFirst =<< loadAll "posts/*"
-    --         let indexCtx =
-    --                 listField "posts" postCtx (return posts) `mappend`
-    --                 defaultContext
+    match "index.markdown" $ do
+        route   $ setExtension "html"
+        compile $ do
+            posts <- recentFirst =<< loadAll "posts/*"
+            let indexCtx =
+                    listField "posts" postCtx (return posts) `mappend`
+                    defaultContext
 
-    --         pandocCompiler
-    --         -- getResourceBody
-    --             >>= applyAsTemplate indexCtx
-    --             >>= loadAndApplyTemplate "templates/default.html" indexCtx
-    --             >>= relativizeUrls
+            getResourceBody
+                >>= applyAsTemplate indexCtx
+                >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= relativizeUrls
 
     match "templates/*" $ compile templateBodyCompiler
 
