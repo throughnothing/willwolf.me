@@ -14,11 +14,11 @@
   display: flex;
   flex-flow: wrap;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .gr_grid_book_container {
-  margin: 10px 17px;
+  margin: 10px 15px;
   img {
     box-shadow: 1px 1px 7px rgba($color1_1, 0.7);
     border-radius: 5%;
