@@ -57,7 +57,7 @@ main = hakyllWith configuration $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-    match "index.markdown" $ do
+    match "index.html" $ do
         route   $ setExtension "html"
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
