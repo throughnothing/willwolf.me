@@ -1,7 +1,7 @@
 SRC=src
 STACK=stack
 SITE=site
-SITE_BRANCH=master-test
+SITE_BRANCH=master
 DEVELOP_BRANCH=dev
 OUTPUT_DIR=output
 
