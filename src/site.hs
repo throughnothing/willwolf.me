@@ -15,7 +15,11 @@ configuration = defaultConfiguration
 
 main :: IO ()
 main = hakyllWith configuration $ do
-    match (fromList ["images/*", "keybase.txt", "pgp.txt"]) $ do
+    match "images/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match (fromList ["keybase.txt", "pgp.txt"]) $ do
         route   idRoute
         compile copyFileCompiler
 
