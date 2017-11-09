@@ -1,4 +1,4 @@
-# throughnothing.com
+# willwolf.me
 
 This site is built using [Hakyll](https://jaspervdj.be/hakyll/).
 
