@@ -4,7 +4,7 @@ date: '2016-01-09T18:13:44-08:00'
 tags:
 - bitcoin
 ---
-I was re-reading an old Mish article on Bitcoin, and read this phrase from Mish:
+I was re-reading an old [Mish article](http://globaleconomicanalysis.blogspot.com/2013/04/mish-interview-with-bitcoin-jesus.html) on Bitcoin, and read this phrase from Mish:
 
 > Yet, should that happen or even be suspected, how long will it take before there is a government crackdown on bitcoin? Should such a thing happen, the value of bitcoin can plunge to next to nothing if confidence is lost.
 
