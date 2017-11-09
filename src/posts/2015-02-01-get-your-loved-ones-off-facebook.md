@@ -1,12 +1,9 @@
 ---
-layout: post
 title: Get your loved ones off Facebook.
 date: '2015-02-01T13:37:41-08:00'
 tags:
-- link
 - facebook
 - privacy
-tumblr_url: http://blog.throughnothing.com/post/109809827544/get-your-loved-ones-off-facebook
 ---
 [Get your loved ones off Facebook](http://www.salimvirani.com/facebook/).
 

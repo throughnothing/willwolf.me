@@ -1,11 +1,9 @@
 ---
-layout: post
 title: There's always a reason why "This time is different"
 date: '2015-02-24T21:57:25-08:00'
 tags:
 - text
 - economics
-tumblr_url: http://blog.throughnothing.com/post/112024276854/theres-always-a-reason-why-this-time-is
 ---
 
 And, I think it’s usually wrong.  I was thinking about my previous post on productivity increases, and realizing a lot of people would probably argue that “this time is different.”

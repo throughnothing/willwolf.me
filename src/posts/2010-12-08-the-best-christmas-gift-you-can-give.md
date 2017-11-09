@@ -6,9 +6,8 @@ categories:
     - simplicity
 ---
 
-{% blockquote Charlotte Carpenter %}
-Remember, if Christmas isn't found in your heart, you won't find it under a tree.
-{% endblockquote %}
+> Remember, if Christmas isn't found in your heart, you won't find it under a tree.
+> -- Charlotte Carpenter
 
 __The best Christmas gift you can give is your time.__ Your friends and family more than likely have everything they really need, but what they often may not get enough of is your time. Spend time with them. Quality time. Listen to them. Laugh with them. Let them know you are there for them.
 

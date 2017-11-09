@@ -6,9 +6,8 @@ categories:
     - productivity
 ---
 
-{% blockquote Groucho Marx %}
-I find television to be very educating. Every time somebody turns on the set, I go in the other room and read a book.
-{% endblockquote %}
+> I find television to be very educating. Every time somebody turns on the set, I go in the other room and read a book.
+> -- Groucho Marx
 
 I was re-reading an old
 [blog post](http://www.ridiculouslyextraordinary.com/101-life-lessons/) by
@@ -24,6 +23,6 @@ Those who read regularly are keeping their minds active and constantly bombarded
 
 If you want to be a well-rounded, successful, thought-filled individual, turn off the TV and pick up a book. What are you reading today?
 
-{% blockquote Mark Twain %}
-The man who does not read good books has no advantage over the man who can't read them.
-{% endblockquote %}
+
+> The man who does not read good books has no advantage over the man who can't read them.
+> -- Mark Twain

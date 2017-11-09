@@ -70,7 +70,7 @@ After a bit of tinkering, I ended up with
 [this changeset](https://github.com/throughnothing/jekyll-mapping/compare/refactor)
 that gave me pretty much everything I wanted (for now):
 
-{% gist 3183238 %}
+<script src="https://gist.github.com/throughnothing/3183238.js"></script>
 
 With this, I can put multiple layers on a map (I usually put a `.gpx` layer for
 the day, as well as a layer from flickr with my geotagged photoset for that day

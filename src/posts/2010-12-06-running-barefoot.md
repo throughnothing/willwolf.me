@@ -6,9 +6,8 @@ categories:
     - barefoot
     - health
 ---
-{% blockquote Christopher McDougall %}
-Running should be free, man.
-{% endblockquote %}
+> Running should be free, man.
+> -- Christopher McDougall
 
 Barefoot running (and running with minimalist footwear) is a rapidly growing trend today.  Encouraged by Christopher Mcdougall's Born to Run, and activists such as Barefoot Ken Bob and Barefoot Ted, the movement really seems to be taking off. When I first heard about barefoot running earlier this year, I was very skeptical. People don't REALLY run barefoot, do they?!
 

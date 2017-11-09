@@ -15,6 +15,7 @@ body {
 
 h1 {
     color: darken($color_font, 10%);
+    line-height: 1.2em;
 }
 
 hr {
@@ -31,6 +32,34 @@ a {
 a:hover {
     @include hover_transition;
     color: desaturate(lighten($color5, 0%), 0%);
+}
+
+blockquote {
+    margin: 40px 0;
+    padding: 10px 50px;
+    border-left: 0.25rem solid darken($color1, 10%);
+    background-color: darken($color1, 2%);
+    // border-radius: 10px ;
+    color: darken($color1, 60%);
+}
+
+p.caption {
+    margin: 0;
+    margin-top: -30px;
+    padding: 0;
+    font-size: 0.8em;
+    color: darken($color1, 40%);
+    font-style: italic;
+    text-align: center;
+}
+
+.post {
+    margin-bottom: 80px;
+}
+
+.post img {
+    display: block;
+    margin: 30px auto;
 }
 
 // Small Screens
@@ -63,7 +92,7 @@ a:hover {
         flex-direction: column;
     }
     .content {
-        margin: 5rem 2rem 0 20rem;
+        margin: 4rem 2rem 0 20rem;
         max-width: 800px;
     }
 

@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Git Processes, Scripts and Ideas"
 date: 2012-03-16 02:56
-comments: true
 categories:
 - git
 - development
