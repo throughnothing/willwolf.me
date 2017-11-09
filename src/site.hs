@@ -17,7 +17,7 @@ main = hakyllWith configuration $ do
         route   idRoute
         compile copyFileCompiler
 
-    match (fromList ["keybase.txt", "pgp.txt"]) $ do
+    match (fromList ["keybase.txt", "williamwolf.asc"]) $ do
         route   idRoute
         compile copyFileCompiler
 
