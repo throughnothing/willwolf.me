@@ -3,8 +3,6 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
-
-
 --------------------------------------------------------------------------------
 
 configuration :: Configuration
@@ -48,7 +46,7 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
-    create ["archive.html"] $ do
+    create ["writing.html"] $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
@@ -57,7 +55,7 @@ main = hakyllWith configuration $ do
                     defaultContext
 
             makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+                >>= loadAndApplyTemplate "templates/writing.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 

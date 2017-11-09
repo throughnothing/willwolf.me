@@ -1,42 +1,42 @@
 @import '_colors';
 @import '_mixins';
+@import '_code';
 
 body {
-    color: $color1_1;
-    background-color: #fff;
+    background-color: $color1;
+    color: $color_font;
     font-size: 18px;
-    line-height: 1.25em;
+    line-height: 1.4em;
     /* From Bootstrap: https://v4-alpha.getbootstrap.com/content/reboot/#native-font-stack */
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    // font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    font-family: Calluna Sans, sans-serif;
     margin: 0;
 }
 
 h1 {
-    color: $color1_2;
-    text-shadow: 1px 1px 2px rgba($color1_3, 1);
+    color: darken($color_font, 10%);
 }
 
 hr {
-    color: $color1_2;
-    border-top: 3px solid $color1_4;
+    border-top: 3px solid desaturate(lighten($color2, 70%), 45%);
     border-bottom: none;
 }
 
 a {
     @include hover_transition;
     text-decoration: none;
-    color: $color1_5;
+    color: $color4;
 }
 
 a:hover {
     @include hover_transition;
-    color: desaturate(darken($color2_5, 15%), 20%);
-    text-shadow: 0 0 1px rgba($color1_2,0.1);
+    color: desaturate(lighten($color5, 0%), 0%);
 }
 
 // Small Screens
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .sidebar {
+        padding: 20px 0 !important;
         justify-content: center;
     }
     .content {
@@ -44,14 +44,16 @@ a:hover {
     }
 
     .side-nav {
+        max-width: 220px;
         flex-direction: row;
         align-content: space-around;
         justify-content: space-around;
+        margin: 10px 0 !important;
     }
 }
 
 // Large Screens
-@media (min-width: 800px) {
+@media (min-width: 900px) {
     .sidebar {
         position: fixed;
         top: 0;
@@ -75,10 +77,10 @@ a:hover {
 
 .sidebar {
     margin: 0;
-    background-color: $color1_3;
-    box-shadow: 0 0 20px 0 $color4_4 - 90;
+    background-color: $color2;
+    border-top: 5px solid $color5;
     padding: 3em 1em;
-    color: $color1_4;
+    color: $color1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,35 +93,31 @@ a:hover {
 }
 
 .side-nav a {
-    color: lighten($color1_4, 0%);
+    color: lighten($color1, 0%);
     font-weight: bold;
-    text-shadow: 1px 1px 0 rgba($color2_2,0.7);
     font-size: 1.3em;
     margin: 0.4rem 0;
 }
 
 .side-nav a:hover {
     @include hover_transition;
-    color: $color2_5;
+    color: lighten($color4, 0%);
 }
 
 .face-logo {
     @include hover_transition;
     display: block;
-    background: #eee url(/images/me.jpg) -7px 0px no-repeat;
+    background: $color2 url(/images/me.jpg) -7px 0px no-repeat;
     height: 80pt;
     width: 80pt;
-    border: 3px solid #fff;
-    // position: relative;
+    border: 3px solid $color1;
     border-radius: 100%;
     background-size: 110%;
-    box-shadow: 0 0 3px darken($color1_4,40%), inset 0 0 10px $color1_2;
 }
 
 .face-logo:hover {
     @include hover_transition;
-    border: 3px solid $color2_5;
-    box-shadow: 0 0 20px darken($color2_5,40%), inset 0 0 10px $color2_5;
+    border: 3px solid $color4;
 }
 .side-footer {
     display: flex;
@@ -130,15 +128,24 @@ a:hover {
 // Icons
 .side-footer a {
     @include hover_transition;
-    height: 25px;
-    width: 25px;
+    height: 24px;
+    width: 24px;
     svg {
         @include hover_transition;
-        fill: rgba(desaturate(darken($color1_4, 8%), 40%), 0.35);
+        fill: rgba(desaturate(darken($color1, 0%), 0%), 0.35);
     }
     svg:hover {
         @include hover_transition;
-        // fill: desaturate(darken($color2_5, 30%), 40%);
-        fill: rgba(desaturate($color2_5, 10%), 0.9);
+        fill: rgba(desaturate($color4, 0%), 1);
     }
+}
+
+div.home-body {
+    margin: 0 auto;
+    width: 450px;
+    text-align-last: center;
+}
+
+.post-date {
+    color: desaturate(lighten($color_font, 65%), 70%);
 }
