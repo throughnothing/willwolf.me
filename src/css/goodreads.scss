@@ -6,7 +6,7 @@
     a { @include hover_transition; color: $color2 }
     a:hover { @include hover_transition; color: $color4 }
     padding-bottom: 12px;
-    border-bottom: 3px solid lighten($color2, 60%);
+    border-bottom: 3px solid desaturate(lighten($color2, 70%), 45%);
   }
 }
 
