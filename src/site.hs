@@ -39,7 +39,7 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    match "posts/*" $ do
+    match "posts/**" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
@@ -78,5 +78,8 @@ main = hakyllWith configuration $ do
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    dateField "date" "%d %b %Y" `mappend`
+    -- dateField "date" "%b %d, %Y" `mappend`
+    -- dateField "date" "%d/%m/%Y" `mappend`
+    dateField "year" "%Y" `mappend`
     defaultContext
