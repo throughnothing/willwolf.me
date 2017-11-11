@@ -5,25 +5,28 @@ import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
 --------------------------------------------------------------------------------
 
-configuration :: Configuration
-configuration = defaultConfiguration
-    { destinationDirectory = "../output/"
-    , storeDirectory = "../.hakyll-cache"
-    }
-
 main :: IO ()
 main = hakyllWith configuration $ do
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "assets/*/*" $ do
+    match "assets/*" $ do
         route   idRoute
         compile copyFileCompiler
 
     match (fromList ["keybase.txt", "williamwolf.asc"]) $ do
         route   idRoute
         compile copyFileCompiler
+
+    create ["rss.xml"] $ do
+        route idRoute
+        compile $ do
+            let feedCtx = postCtx `mappend` bodyField "description"
+
+            posts <- fmap (take 10) . recentFirst =<<
+                loadAllSnapshots "posts/*" "content"
+            renderRss feedConfiguration feedCtx posts
 
     -- Compile SASS
     match "css/*" $ do
@@ -47,6 +50,7 @@ main = hakyllWith configuration $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
+            >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
@@ -83,7 +87,20 @@ main = hakyllWith configuration $ do
 postCtx :: Context String
 postCtx =
     dateField "date" "%d %b %Y" `mappend`
-    -- dateField "date" "%b %d, %Y" `mappend`
-    -- dateField "date" "%d/%m/%Y" `mappend`
     dateField "year" "%Y" `mappend`
     defaultContext
+
+configuration :: Configuration
+configuration = defaultConfiguration
+    { destinationDirectory = "../output/"
+    , storeDirectory = "../.hakyll-cache"
+    }
+
+feedConfiguration :: FeedConfiguration
+feedConfiguration = FeedConfiguration
+    { feedTitle = "willwolf.me"
+    , feedDescription = "My little home on the web."
+    , feedAuthorName = "William Wolf"
+    , feedAuthorEmail = "will r wolf at gmail dot com"
+    , feedRoot = "http://willwolf.me"
+    }
