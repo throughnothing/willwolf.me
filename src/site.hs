@@ -17,6 +17,10 @@ main = hakyllWith configuration $ do
         route   idRoute
         compile copyFileCompiler
 
+    match "assets/*/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match (fromList ["keybase.txt", "williamwolf.asc"]) $ do
         route   idRoute
         compile copyFileCompiler
@@ -39,7 +43,7 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    match "posts/**" $ do
+    match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
