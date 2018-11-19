@@ -119,6 +119,7 @@ ul.posts {
         justify-content: space-around;
         margin: 10px 0 !important;
     }
+    div.copyright { display: none; }
 }
 
 // Large Screens
@@ -149,6 +150,7 @@ div.copyright {
     margin-bottom: 10px;
     font-size: 0.7em;
     position: fixed;
+    
     bottom: 0;
     color: rgba(desaturate(darken($color1, 0%), 0%), 0.35);
 
