@@ -47,13 +47,10 @@
         </div>
 
         <div class="content">
-            
-<div class="post">
-
+            <div class="post">
   <h1>Git Processes, Scripts and Ideas</h1>
   <span class="post-date">16 Mar 2012</span>
   <hr />
-
   <p>Lately I’ve been refining some of my git processes (as well as learning a lot about git along the way). I thought I’d write up a post to share some of the ways i’ve been using git.</p>
 <h2 id="workflow">Workflow</h2>
 <p>Our typical workflow at <a href="https://www.crowdtilt.com">crowdtilt</a> is pretty standard. We have a <code>dev</code> branch, a <code>master</code> branch, and various feature/topic branches. We also make heavy use of github for pull requests/code reviews.</p>
@@ -80,14 +77,14 @@ s 3f21ade Commit #3</code></pre>
 <p>This is closer to what we need, but by default what this will do is setup a pull request on github from <code>throughnothing:feature-branch</code> to <code>crowdtilt:dev</code>. It does this because it assumes that I want to do a pull request from my users fork to the original users repository. We don’t really have each developer fork our repos, we just all work on the same repo in our own branches, so we really want it to do a pull-request from <code>crowdtilt:feature-branch</code> to <code>crowdtilt:dev</code>. This means we need:</p>
 <pre><code>$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch</code></pre>
 <p>It seemed really simple at first, but now it’s a lot to type. Time for some <code>~/.bashrc</code> magic. To make things as simple as possible for our development process, I’ve written this little bash function to put in our <code>~/.bashrc</code> files to smooth things out:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">pullreq()</span> <span class="kw">{</span>
-    [ <span class="ex">-z</span> <span class="va">$BRANCH</span> ] <span class="kw">&amp;&amp;</span> <span class="va">BRANCH=</span><span class="st">&quot;dev&quot;</span>
-    <span class="va">HEAD=$(</span><span class="fu">git</span> symbolic-ref HEAD <span class="op">2&gt;</span> /dev/null<span class="va">)</span>
-    [ <span class="ex">-z</span> <span class="va">$HEAD</span> ] <span class="kw">&amp;&amp;</span> <span class="bu">return</span> <span class="co"># Return if no head</span>
-    <span class="va">REMOTE=</span><span class="kw">`</span><span class="fu">cat</span> .git/config <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;remote </span><span class="dt">\&quot;</span><span class="st">origin</span><span class="dt">\&quot;</span><span class="st">&quot;</span> -A 2 <span class="kw">|</span> <span class="fu">tail</span> -n1 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/.*:\([^\/]*\).*/\1/'</span><span class="kw">`</span>
-
-    <span class="ex">hub</span> pull-request -b <span class="va">$BRANCH</span> -h <span class="va">$REMOTE</span>:<span class="va">${HEAD#</span>refs/heads/<span class="va">}</span> <span class="va">$1</span>
-<span class="kw">}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">pullreq()</span> <span class="kw">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    [ <span class="ex">-z</span> <span class="va">$BRANCH</span> ] <span class="kw">&amp;&amp;</span> <span class="va">BRANCH=</span><span class="st">&quot;dev&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="va">HEAD=$(</span><span class="fu">git</span> symbolic-ref HEAD <span class="op">2&gt;</span> /dev/null<span class="va">)</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    [ <span class="ex">-z</span> <span class="va">$HEAD</span> ] <span class="kw">&amp;&amp;</span> <span class="bu">return</span> <span class="co"># Return if no head</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="va">REMOTE=</span><span class="kw">`</span><span class="fu">cat</span> .git/config <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;remote </span><span class="dt">\&quot;</span><span class="st">origin</span><span class="dt">\&quot;</span><span class="st">&quot;</span> -A 2 <span class="kw">|</span> <span class="fu">tail</span> -n1 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/.*:\([^\/]*\).*/\1/'</span><span class="kw">`</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="ex">hub</span> pull-request -b <span class="va">$BRANCH</span> -h <span class="va">$REMOTE</span>:<span class="va">${HEAD#</span>refs/heads/<span class="va">}</span> <span class="va">$1</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">}</span></span></code></pre></div>
 <p>This accepts a <code>BRANCH</code> environment variable that can be set, but will default to <code>dev</code> (which is pretty much 90+% of our use cases). It also parses the github user that the origin of the repository</p>
 <p>Not only has <code>hub</code> greatly streamlined our pull request process, but when combined with the bash function, it eliminates errors of pull requesting feature branches to be merged into <code>master</code> (and even having them <em>accidentally</em> merged into master directly – that never happens, right?) instead of <code>dev</code>.</p>
 <p>Using this script, when we’re ready to do a deploy and merge <code>dev</code> into <code>master</code> we simply can run (from the <code>dev</code> branch):</p>
@@ -132,7 +129,6 @@ $ git_purge_remote_branches dev</code></pre>
 <h2 id="final-thoughts">Final Thoughts</h2>
 <p>That pretty much sums up my current git processes. I really enjoy how streamlined things have become, how well our processes work, and how easy it is to keep our branches clean and clutter-free while at the same time encouraging us to branch, branch, branch!</p>
 <p>How are you using git? Tell me how I can make my workflow even better and more kick-ass :)</p>
-
 </div>
 
         </div>

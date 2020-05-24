@@ -11,13 +11,10 @@
         <item>
     <title>Java 8 Coding Guide</title>
     <link>http://willwolf.me/posts/2017-11-08-java-8-coding-guid.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>Java 8 Coding Guide</h1>
   <span class="post-date">08 Nov 2017</span>
   <hr/>
-
   <p>I’m getting into Java services at work, and I put together a guide with some principles / best practices to follow for Java 8.  A lot of these things become much more possible with Java 8 than they would have been in earlier versions of Java, but they can also be applied to other programming languages and technologies.</p>
 <p>I wrote this guide based on a desire to have code that is easy to reason about and understand, which means it will be easy for new folks to jump into the codebase over time, and also with a desire to quickly produce high quality code.  Performance is not the major concern of this guide.</p>
 <p>Many of the principles and ideas come from my foray into functional programming with both <a href="https://www.haskell.org">Haskell</a> and <a href="http://www.purescript.org">Purescript</a>, and I just find that these concepts are the way I prefer to program now.  Following these principles gives me much more confidence in the correctness of my code, and gives me peace of mind knowing that I’m giving myself the best chance of understanding the code when I come back to it months or years later.</p>
@@ -31,9 +28,9 @@
 <p><code>Null</code> is famously the <a href="https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/">“billion dollar mistake”</a> (and that’s probably an under-estimation!). Don’t use <code>null</code> as a way of representing error or failure, and also don’t use <code>null</code> as a way to avoid passing a certain argument to a function. Essentially you should never explicitly use a <code>null</code> value unless you are checking that something is not <code>null</code>. Even in those cases, it should probably be handled better by an <code>Option&lt;T&gt;</code>.</p>
 <h3 id="resources">Resources</h3>
 <ul>
-<li><a href="https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained" class="uri">https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained</a></li>
-<li><a href="http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html" class="uri">http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html</a></li>
-<li><a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare" class="uri">https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare</a></li>
+<li><a href="https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained">https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained</a></li>
+<li><a href="http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html">http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html</a></li>
+<li><a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare</a></li>
 </ul>
 <h2 id="expressions-over-statements">Expressions over statements</h2>
 <p>Expressions are declarative and evaluate to (and return) a value, while statements are imperative bits of code that perform actions. Because of this, expressions are easier to reason about, debug, and verify correctness for.</p>
@@ -41,7 +38,7 @@
 <p>In a language like Java, statements will be required, but we should isolate those to their own, small, methods, and keep their surface area as small as possible to reduce risk and complexity from these parts of the code.</p>
 <h3 id="resources-1">Resources</h3>
 <ul>
-<li><a href="https://fsharpforfunandprofit.com/posts/expressions-vs-statements/" class="uri">https://fsharpforfunandprofit.com/posts/expressions-vs-statements/</a></li>
+<li><a href="https://fsharpforfunandprofit.com/posts/expressions-vs-statements/">https://fsharpforfunandprofit.com/posts/expressions-vs-statements/</a></li>
 <li><a href="https://www.cs.ucf.edu/~dcm/Teaching/COT4810-Fall%202012/Literature/Backus.pdf">https://www.cs.ucf.edu/~dcm/Teaching/COT4810-Fall%202012/Literature/Backus.pdf</a></li>
 </ul>
 <h2 id="avoid-explicit-loops">Avoid explicit loops</h2>
@@ -49,26 +46,26 @@
 <p>There may be some cases where loops are more desirable (possibly for performance), but they should be avoided until it is clear they are actually needed.</p>
 <h3 id="resources-2">Resources</h3>
 <ul>
-<li><a href="http://www.deadcoderising.com/java-8-no-more-loops/" class="uri">http://www.deadcoderising.com/java-8-no-more-loops/</a></li>
-<li><a href="https://martinfowler.com/articles/refactoring-pipelines.html" class="uri">https://martinfowler.com/articles/refactoring-pipelines.html</a></li>
+<li><a href="http://www.deadcoderising.com/java-8-no-more-loops/">http://www.deadcoderising.com/java-8-no-more-loops/</a></li>
+<li><a href="https://martinfowler.com/articles/refactoring-pipelines.html">https://martinfowler.com/articles/refactoring-pipelines.html</a></li>
 </ul>
 <h2 id="use-immutable-data-structures">Use immutable data structures</h2>
 <p>We should leverage <code>guava</code>’s immutable data structures as much as possible to avoid complicated bugs related to mutating state.</p>
 <p>Additionally, we should leverage Lombok’s <code>@Value</code> objects as much as possible to make our own data objects immutable.</p>
 <h3 id="resources-3">Resources</h3>
 <ul>
-<li><a href="https://github.com/google/guava/wiki/ImmutableCollectionsExplained" class="uri">https://github.com/google/guava/wiki/ImmutableCollectionsExplained</a></li>
-<li><a href="https://projectlombok.org/features/Value" class="uri">https://projectlombok.org/features/Value</a></li>
+<li><a href="https://github.com/google/guava/wiki/ImmutableCollectionsExplained">https://github.com/google/guava/wiki/ImmutableCollectionsExplained</a></li>
+<li><a href="https://projectlombok.org/features/Value">https://projectlombok.org/features/Value</a></li>
 </ul>
 <h2 id="dont-throw-exceptions---use-values">Don’t throw exceptions - use values!</h2>
 <p>In general, we should never throw an exception of our own. Obviously we will use libraries that throw exceptions. These exceptions should be caught directly in the function/method using the library, and turned into values (to be returned) as much as possible.</p>
 <p>This is because exceptions are like <code>goto</code> statements, which make the flow of your program much more difficult to reason about. Every function that throws an exception can return a value in 2 ways, through the “normal” return flow, or through an exception, and every user of that function has to think about both cases. It is generally easier to reason about functions that only return values (something like vavr’s <a href="http://www.baeldung.com/vavr-either">Either</a> or <a href="http://www.baeldung.com/vavr-try">Try</a> types work very well for this). This also makes it much easier to leverage Java 8’s lambda-using utilities, as they don’t like accepting <code>Function</code>s that throw exceptions.</p>
 <h3 id="resources-4">Resources</h3>
 <ul>
-<li><a href="https://www.joelonsoftware.com/2003/10/13/13/" class="uri">https://www.joelonsoftware.com/2003/10/13/13/</a></li>
-<li><a href="http://www.baeldung.com/vavr-try" class="uri">http://www.baeldung.com/vavr-try</a></li>
-<li><a href="http://www.baeldung.com/vavr-either" class="uri">http://www.baeldung.com/vavr-either</a></li>
-<li><a href="https://fsharpforfunandprofit.com/rop/" class="uri">https://fsharpforfunandprofit.com/rop/</a></li>
+<li><a href="https://www.joelonsoftware.com/2003/10/13/13/">https://www.joelonsoftware.com/2003/10/13/13/</a></li>
+<li><a href="http://www.baeldung.com/vavr-try">http://www.baeldung.com/vavr-try</a></li>
+<li><a href="http://www.baeldung.com/vavr-either">http://www.baeldung.com/vavr-either</a></li>
+<li><a href="https://fsharpforfunandprofit.com/rop/">https://fsharpforfunandprofit.com/rop/</a></li>
 </ul>
 <h2 id="fail-early-enforce-invariants">Fail early, enforce invariants</h2>
 <p>It is always best to fail as early as possible, at the soonest point that you find something is wrong. This often means that we should validate all of our data up front, to decouple validation from the business logic that needs to use the values in question.</p>
@@ -76,8 +73,8 @@
 <p>For our own data objects, we should have strong validation of each object, so that once we’ve constructed one, we know it will have good data in the rest of our program. Failed construction (on validation errors) should also be expressed by returning values, rather than exceptions. Something like vavr’s <a href="">Validation</a> type is useful for this purpose. Make it impossible to construct a “bad”/invalid data object!</p>
 <h3 id="resources-5">Resources</h3>
 <ul>
-<li><a href="https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html" class="uri">https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html</a></li>
-<li><a href="https://softwaremill.com/javaslang-data-validation/" class="uri">https://softwaremill.com/javaslang-data-validation/</a></li>
+<li><a href="https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html">https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html</a></li>
+<li><a href="https://softwaremill.com/javaslang-data-validation/">https://softwaremill.com/javaslang-data-validation/</a></li>
 </ul>
 <h2 id="composition-over-inheritance">Composition over Inheritance</h2>
 <p>Inheritance can be very fragile, and make refactoring of complex code involving inheritance hierarchies very difficult to do safely and confidently. Composition (and in java, Interfaces) should be favored over inheritence where possible.</p>
@@ -85,11 +82,10 @@
 <p>Composition, via composing interfaces or composable types, allows for more design flexibility, and easier, more confident refactoring.</p>
 <h3 id="resources-6">Resources</h3>
 <ul>
-<li><a href="https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose" class="uri">https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Composition_over_inheritance" class="uri">https://en.wikipedia.org/wiki/Composition_over_inheritance</a></li>
-<li><a href="https://variadic.me/posts/2014-03-28-composition-over-inheritance.html" class="uri">https://variadic.me/posts/2014-03-28-composition-over-inheritance.html</a></li>
+<li><a href="https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose">https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Composition_over_inheritance">https://en.wikipedia.org/wiki/Composition_over_inheritance</a></li>
+<li><a href="https://variadic.me/posts/2014-03-28-composition-over-inheritance.html">https://variadic.me/posts/2014-03-28-composition-over-inheritance.html</a></li>
 </ul>
-
 </div>
 ]]></description>
     <pubDate>Wed, 08 Nov 2017 00:00:00 UT</pubDate>
@@ -99,19 +95,15 @@
 <item>
     <title>Us and Them</title>
     <link>http://willwolf.me/posts/2016-07-05-us-and-them.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>Us and Them</h1>
   <span class="post-date">06 Jul 2016</span>
   <hr/>
-
   <p>The <a href="http://www.breitbart.com/2016-presidential-race/2016/07/05/fbi-director-james-comey-we-will-not-indict-hillary-clinton-even-though-there-is-evidence-of-violations/">recent news</a> around Hilary Clinton and her lack of prosecution for clearly violating many laws (even in the opinion of would-be prosecutors) just perpetuates the growing global sentiment of “Us” vs “Them”. This is a growing divide, and more people are becoming disgruntled, disenfranchised, and disconnected from the system every day.</p>
 <p>There’s a political class that is clearly treated differently, and beholden to a different set of rules, and people the world over are getting fed up with it. The people of the United Kingdom were fed up with the far off “them” in the EU, and the people in France, Italy, Spain, and Greece are pretty fed up too.</p>
 <p>Where will this lead? Ultimately it’ll land us in a better place. People will demand more fairness, and a closing of the gap between “Us” and “Them”, but it may get pretty nasty in the interim.</p>
 <iframe width="540" height="404" src="https://www.youtube.com/embed/s_Yayz5o-l0" frameborder="0" gesture="media" allowfullscreen>
 </iframe>
-
 </div>
 ]]></description>
     <pubDate>Wed, 06 Jul 2016 04:55:06 UT</pubDate>
@@ -121,16 +113,12 @@
 <item>
     <title>Ask Questions!</title>
     <link>http://willwolf.me/posts/2016-03-04-ask-questions.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>Ask Questions!</h1>
   <span class="post-date">04 Mar 2016</span>
   <hr/>
-
   <p>Don’t tell people things.  That is arrogant.  Ask questions and let them discover their passions, their conflicts, their misunderstandings, and who they are through their own answers and internal discoveries.</p>
 <p>In doing so, you may even end up learning more about yourself.</p>
-
 </div>
 ]]></description>
     <pubDate>Fri, 04 Mar 2016 08:05:12 UT</pubDate>
@@ -140,19 +128,15 @@
 <item>
     <title>Bitcoin in the event of a Government crackdown</title>
     <link>http://willwolf.me/posts/2016-01-09-bitcoin-in-the-event-of-a-government-crackdown.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>Bitcoin in the event of a Government crackdown</h1>
   <span class="post-date">10 Jan 2016</span>
   <hr/>
-
   <p>I was re-reading an old <a href="http://globaleconomicanalysis.blogspot.com/2013/04/mish-interview-with-bitcoin-jesus.html">Mish article</a> on Bitcoin, and read this phrase from Mish:</p>
 <blockquote>
 <p>Yet, should that happen or even be suspected, how long will it take before there is a government crackdown on bitcoin? Should such a thing happen, the value of bitcoin can plunge to next to nothing if confidence is lost.</p>
 </blockquote>
 <p>But hasn’t gold been cracked down by many governments in the past, including the US?  What happened to its value on the black market in these cases?  Certainly, over the long term, we can see that it hasn’t had much impact on the price of gold, other than maybe in the upwards direction.</p>
-
 </div>
 ]]></description>
     <pubDate>Sun, 10 Jan 2016 02:13:44 UT</pubDate>
@@ -162,13 +146,10 @@
 <item>
     <title>When You Look Back On This Moment In History</title>
     <link>http://willwolf.me/posts/2015-06-14-when-you-look-back-on-this-moment-in-history.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>When You Look Back On This Moment In History</h1>
   <span class="post-date">14 Jun 2015</span>
   <hr/>
-
   <p><a href="http://www.hussmanfunds.com/wmc/wmc150615.htm">When You Look Back On This Moment In History</a></p>
 <p>A great read from John Hussman this weekend, as always! What will you think when you look back on this moment in history? A few select quotes below:</p>
 <blockquote>
@@ -186,7 +167,6 @@
 <blockquote>
 <p>Risk preferences aren’t measured by what the Fed does, but by what investors do.</p>
 </blockquote>
-
 </div>
 ]]></description>
     <pubDate>Sun, 14 Jun 2015 18:22:53 UT</pubDate>
@@ -196,13 +176,10 @@
 <item>
     <title>Making Education “Free”!</title>
     <link>http://willwolf.me/posts/2015-06-03-making-education-free.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>Making Education “Free”!</h1>
   <span class="post-date">03 Jun 2015</span>
   <hr/>
-
   <p>I recently came across <a href="https://www.telesurtv.net/english/news/Chile-to-Have-Free-Higher-Education-by-2016-20141204-0049.html">this article</a> discussing Chile’s move to make higher education “free”. From the article:</p>
 <blockquote>
 <p>“In March 2016 we will start with free higher education now that we have the resources,” <a href="https://www.telesurtv.net/english/news/Chile-to-Have-Free-Higher-Education-by-2016-20141204-0049.html">said Rodrigo Peñailillo, Chile’s Minister of Interior</a> in early December following approval of a corporate tax hike that will generate $8.2 billion in new revenue.</p>
@@ -234,7 +211,6 @@
 <h2 id="making-education-better-and-more-available">Making education better and more available</h2>
 <p>Ultimately, I’d love to see education get better and more available to as many people as possible. This is precisely why I don’t support tax schemes to disconnect consumers and producers from the price mechanism of the education market. Doing this may be a temporary boon (as it was for the grass-fed producers), but is clearly worse for the long run.</p>
 <p>We already have lots of problems with the current price mechanism in education due to student loan schemes and subsidies, but I will leave that for another post. Anything that makes the costs more, rather than less, transparent will, I think, strengthen the pricing mechanism, and the long term out look for quality education for everyone.</p>
-
 </div>
 ]]></description>
     <pubDate>Wed, 03 Jun 2015 21:21:14 UT</pubDate>
@@ -244,13 +220,10 @@
 <item>
     <title>How the Government (and the Fed) are expediting the Robot Jobpocalypse</title>
     <link>http://willwolf.me/posts/2015-03-17-how-the-government-and-the-fed-are-expediting.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>How the Government (and the Fed) are expediting the Robot Jobpocalypse</h1>
   <span class="post-date">17 Mar 2015</span>
   <hr/>
-
   <p>Many people today seem to be lamenting the coming “Jobpocalypse” – that time where robots, technology, and automation more generally, replace all of our jobs, leaving us unemployed and impoverished. Nevermind that we’ve never seen technology eliminate jobs in net, as Paul Graham <a href="https://twitter.com/paulg/status/577239973650399232">mentioned yesterday</a>, let’s just look at what might be expediting the current trend of robots and job automation, at the expense of jobs in certain sectors.</p>
 <p>What is the main factor that would drive a business to look for robots to replace jobs that humans currently do? It’s pretty simple: <strong>Are the robots cheaper than humans at the given task?</strong></p>
 <p>Next we should ask what factors determine whether robots can do a given job cheaper than humans? I think this simply boils down to:</p>
@@ -261,7 +234,6 @@
 <p>When the cost of labor rises, and the cost of capital decreases, you would expect to see a surge in investments to automate tasks away from humans.</p>
 <p>I would argue that the government (in the US, anyway) is, and has been, making the cost of human labor more expensive through minimum wage increases, healthcare costs, and rising taxes (payroll, etc.) in general. On the capital cost side, the government, in cooperation with the Fed, has been on a 45-year tear of falling interest rates, which makes money cheaper, decreases the cost of debt, and ultimately decreases the cost of capital.</p>
 <p>It’s pretty clear that we’re going to see more and more automation, and the government seems to be doing what it can to expedite the process as much as possible. While I’m not a fan of government intervention, I think the coming automation will be great for society, as I’ve written about before. As with past advancements, we’ll look back, glad we no longer have to till the fields, or drive ourselves around. We’ll be solving bigger and better problems, and that’s exciting.</p>
-
 </div>
 ]]></description>
     <pubDate>Tue, 17 Mar 2015 15:32:17 UT</pubDate>
@@ -271,19 +243,15 @@
 <item>
     <title>Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</title>
     <link>http://willwolf.me/posts/2015-03-02-failing-wars-of-dollars-the-bitcoin-price-to-come.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</h1>
   <span class="post-date">02 Mar 2015</span>
   <hr/>
-
   <p><a href="https://www.cryptocoinsnews.com/failing-wars-dollars-bitcoin-price-come/">Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</a></p>
 <blockquote>
 <p>The price of Bitcoin to Come is 1 XBT to 1 XBT. Deflationary cryptocurrency is an option, and it peacefully coexists with its inflationary counterpart. With Bitcoin, no central authority can inflate the supply and force the holders to fund a war. One bitcoin will be the same amount of the total supply of bitcoins today as it will be in 100 years. If not Bitcoin, then something else – perhaps whatever the AI robot overlords decide.Fiat currency is a spectacular tool for elites to steer the economy and fund war. Bitcoin allows you to withdraw from imperialism without moving across political borders.</p>
 </blockquote>
 <p>Really well-written piece on the history of Fiat currency in the United States, and its continual use as a means to fund war and violence.</p>
-
 </div>
 ]]></description>
     <pubDate>Mon, 02 Mar 2015 16:37:03 UT</pubDate>
@@ -293,19 +261,15 @@
 <item>
     <title>There's always a reason why "This time is different"</title>
     <link>http://willwolf.me/posts/2015-02-24-theres-always-a-reason-why-this-time-is.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>There's always a reason why "This time is different"</h1>
   <span class="post-date">25 Feb 2015</span>
   <hr/>
-
   <p>And, I think it’s usually wrong. I was thinking about my previous post on productivity increases, and realizing a lot of people would probably argue that “this time is different.”</p>
 <p>Essentially the argument would be that, because technology is moving so much faster now, and we’re automating things at a pace never before seen, that the “harm” done from these productivity increases will be more dramatic than ever before.</p>
 <p>I tend to agree with the fact that we are moving faster now, we’re automating faster, and we’re increasing productivity faster, but I don’t agree that this is harmful. Nor do I agree that the outcome of these productivity improvements will be any different from the millions of improvements of the past 10,000 to 1 million years of human advancement. Of course every moment in time is different from any other historical example, but to think the outcomes will be drastically different seems naive.</p>
 <p>To me, its actually exciting that productivity is increasing that quickly. Imagine what we’ll be doing when nobody has to drive cars anymore, or possibly even own them. When businesses can order something online and have it there by drone in less than 30 minutes (when they can’t print what they need on their 3-d printer). Conversely, imagine if you still had to pay a human being to be your alarm clock, or if a person had to hand-deliver your email communications.</p>
 <p>This time likely won’t be different. People will find ways to adapt, and society won’t be worse off for the productivity gains, but will be in awe of how we used to do things before them.</p>
-
 </div>
 ]]></description>
     <pubDate>Wed, 25 Feb 2015 05:57:25 UT</pubDate>
@@ -315,16 +279,12 @@
 <item>
     <title>Bitcoin and Cash-only Businesses</title>
     <link>http://willwolf.me/posts/2015-02-10-bitcoin-and-cash-only-businesses.html</link>
-    <description><![CDATA[
-<div class="post">
-
+    <description><![CDATA[<div class="post">
   <h1>Bitcoin and Cash-only Businesses</h1>
   <span class="post-date">10 Feb 2015</span>
   <hr/>
-
   <p>I came across this pretty interesting <a href="http://www.nytimes.com/video/business/100000003491301/in-colorado-marijuana-pot-industrys-banking-problem.html">documentary</a> on the cannabis industry from thy New York Times. I have thought about this problem before as a huge opportunity for bitcoin.  Businesses like these can’t get access to the banking system, even though they are legitimate businesses.  Thus, they are forced to deal in, and pay to secure, large quantities of cash.  The video even mentions that particular business paying over $400,000 in cash to the Federal Government in taxes!</p>
 <p>Think of how much they must pay for security, storage, and security for their storage because of all the cash they are forced to deal with. This seems like a huge opportunity for cryptocurrencies like bitcoin.  Bitcoin can be secured virtually for free (or with a $119 trezor), and has no transport costs.  A business could even do business without keeping any private keys on premises, which means even on a break in, they lose no money.  The iPad/Tablet accepting payments would only need the hierarchical deterministic (HD) public key to be able to generate new addresses, but would not be able to spend from them. The HD private key could be kept on a <a href="https://trezor.io">trezor</a>, or on paper, off premises in a secure location.The costs for securing cash are probably high enough that these businesses could offer significant discounts to users willing to pay in bitcoin.  Thus, users would have an incentive to find ways to get bitcoin and a motivation to spend them.This seems like one of the many opportunities that bitcoin creates.</p>
-
 </div>
 ]]></description>
     <pubDate>Tue, 10 Feb 2015 18:03:39 UT</pubDate>

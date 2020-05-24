@@ -47,13 +47,10 @@
         </div>
 
         <div class="content">
-            
-<div class="post">
-
+            <div class="post">
   <h1>Jekyll-Mapping and Octopress</h1>
   <span class="post-date">26 Jul 2012</span>
   <hr />
-
   <p>For a while now, I’ve been wanting to add some sort of maps support to <a href="http://octopress.org/">octopress</a>/<a href="https://github.com/mojombo/jekyll">jekyll</a>, and I finally recently had some time to look into it a little bit more. It seems some others out there have had the same idea, because I stumbled across two plugins that did something close (but not exactly) to what I wanted: <a href="https://github.com/mguentner/octolayer">octolayer</a> and <a href="https://github.com/matthewowen/jekyll-mapping">jekyll-mapping</a>.</p>
 <p>The reason I’m interested in this is that when I travel, I like to log <code>gpx</code> tracks of the places we go, and geotag my photos, etc. It’s nice to be able to display a map of where I went each day, and I can always go back and find exactly where that awesome restaurant was (in case I go back, or to tell friends).</p>
 <p>I wasn’t really sure how/if jekyll plugins would map to octopress (since octopress does use jekyll, but its plugin structure still seems to be slightly different), so I started off looking into octolayer.</p>
@@ -73,7 +70,6 @@
 <p>After a bit of tinkering, I ended up with <a href="https://github.com/throughnothing/jekyll-mapping/compare/refactor">this changeset</a> that gave me pretty much everything I wanted (for now):</p>
 <script src="https://gist.github.com/throughnothing/3183238.js"></script>
 <p>With this, I can put multiple layers on a map (I usually put a <code>.gpx</code> layer for the day, as well as a layer from flickr with my geotagged photoset for that day in each relevant post), and display multiple posts, each with a map, per page.</p>
-
 </div>
 
         </div>
