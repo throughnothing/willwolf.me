@@ -4,13 +4,29 @@
     <channel>
         <title>willwolf.me</title>
         <link>http://willwolf.me</link>
-        <description><![CDATA[My little home on the web.]]></description>
+        <description><![CDATA[William Wolf's home on the web.]]></description>
         <atom:link href="http://willwolf.me/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Wed, 08 Nov 2017 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Sun, 24 May 2020 00:00:00 UT</lastBuildDate>
         <item>
+    <title>Where We Are</title>
+    <link>http://willwolf.me/2020/05/24/Where-We-Are</link>
+    <description><![CDATA[<div class="post">
+  <h1>Where We Are</h1>
+  <span class="post-date">24 May 2020</span>
+  <hr/>
+  <figure>
+<img src="ss.png" alt="" /><figcaption>alt text</figcaption>
+</figure>
+</div>
+]]></description>
+    <pubDate>Sun, 24 May 2020 00:00:00 UT</pubDate>
+    <guid>http://willwolf.me/2020/05/24/Where-We-Are</guid>
+    <dc:creator>William Wolf</dc:creator>
+</item>
+<item>
     <title>Java 8 Coding Guide</title>
-    <link>http://willwolf.me/posts/2017-11-08-java-8-coding-guid.html</link>
+    <link>http://willwolf.me/2017/11/08/java-8-coding-guide</link>
     <description><![CDATA[<div class="post">
   <h1>Java 8 Coding Guide</h1>
   <span class="post-date">08 Nov 2017</span>
@@ -89,12 +105,12 @@
 </div>
 ]]></description>
     <pubDate>Wed, 08 Nov 2017 00:00:00 UT</pubDate>
-    <guid>http://willwolf.me/posts/2017-11-08-java-8-coding-guid.html</guid>
+    <guid>http://willwolf.me/2017/11/08/java-8-coding-guide</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>Us and Them</title>
-    <link>http://willwolf.me/posts/2016-07-05-us-and-them.html</link>
+    <link>http://willwolf.me/2016/07/05/us-and-them</link>
     <description><![CDATA[<div class="post">
   <h1>Us and Them</h1>
   <span class="post-date">06 Jul 2016</span>
@@ -107,12 +123,12 @@
 </div>
 ]]></description>
     <pubDate>Wed, 06 Jul 2016 04:55:06 UT</pubDate>
-    <guid>http://willwolf.me/posts/2016-07-05-us-and-them.html</guid>
+    <guid>http://willwolf.me/2016/07/05/us-and-them</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>Ask Questions!</title>
-    <link>http://willwolf.me/posts/2016-03-04-ask-questions.html</link>
+    <link>http://willwolf.me/2016/03/04/ask-questions</link>
     <description><![CDATA[<div class="post">
   <h1>Ask Questions!</h1>
   <span class="post-date">04 Mar 2016</span>
@@ -122,12 +138,12 @@
 </div>
 ]]></description>
     <pubDate>Fri, 04 Mar 2016 08:05:12 UT</pubDate>
-    <guid>http://willwolf.me/posts/2016-03-04-ask-questions.html</guid>
+    <guid>http://willwolf.me/2016/03/04/ask-questions</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>Bitcoin in the event of a Government crackdown</title>
-    <link>http://willwolf.me/posts/2016-01-09-bitcoin-in-the-event-of-a-government-crackdown.html</link>
+    <link>http://willwolf.me/2016/01/09/bitcoin-in-the-event-of-a-government-crackdown</link>
     <description><![CDATA[<div class="post">
   <h1>Bitcoin in the event of a Government crackdown</h1>
   <span class="post-date">10 Jan 2016</span>
@@ -140,12 +156,12 @@
 </div>
 ]]></description>
     <pubDate>Sun, 10 Jan 2016 02:13:44 UT</pubDate>
-    <guid>http://willwolf.me/posts/2016-01-09-bitcoin-in-the-event-of-a-government-crackdown.html</guid>
+    <guid>http://willwolf.me/2016/01/09/bitcoin-in-the-event-of-a-government-crackdown</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>When You Look Back On This Moment In History</title>
-    <link>http://willwolf.me/posts/2015-06-14-when-you-look-back-on-this-moment-in-history.html</link>
+    <link>http://willwolf.me/2015/06/14/when-you-look-back-on-this-moment-in-history</link>
     <description><![CDATA[<div class="post">
   <h1>When You Look Back On This Moment In History</h1>
   <span class="post-date">14 Jun 2015</span>
@@ -170,12 +186,12 @@
 </div>
 ]]></description>
     <pubDate>Sun, 14 Jun 2015 18:22:53 UT</pubDate>
-    <guid>http://willwolf.me/posts/2015-06-14-when-you-look-back-on-this-moment-in-history.html</guid>
+    <guid>http://willwolf.me/2015/06/14/when-you-look-back-on-this-moment-in-history</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>Making Education “Free”!</title>
-    <link>http://willwolf.me/posts/2015-06-03-making-education-free.html</link>
+    <link>http://willwolf.me/2015/06/03/making-education-free</link>
     <description><![CDATA[<div class="post">
   <h1>Making Education “Free”!</h1>
   <span class="post-date">03 Jun 2015</span>
@@ -214,12 +230,12 @@
 </div>
 ]]></description>
     <pubDate>Wed, 03 Jun 2015 21:21:14 UT</pubDate>
-    <guid>http://willwolf.me/posts/2015-06-03-making-education-free.html</guid>
+    <guid>http://willwolf.me/2015/06/03/making-education-free</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>How the Government (and the Fed) are expediting the Robot Jobpocalypse</title>
-    <link>http://willwolf.me/posts/2015-03-17-how-the-government-and-the-fed-are-expediting.html</link>
+    <link>http://willwolf.me/2015/03/17/how-the-government-and-the-fed-are-expediting</link>
     <description><![CDATA[<div class="post">
   <h1>How the Government (and the Fed) are expediting the Robot Jobpocalypse</h1>
   <span class="post-date">17 Mar 2015</span>
@@ -237,12 +253,12 @@
 </div>
 ]]></description>
     <pubDate>Tue, 17 Mar 2015 15:32:17 UT</pubDate>
-    <guid>http://willwolf.me/posts/2015-03-17-how-the-government-and-the-fed-are-expediting.html</guid>
+    <guid>http://willwolf.me/2015/03/17/how-the-government-and-the-fed-are-expediting</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</title>
-    <link>http://willwolf.me/posts/2015-03-02-failing-wars-of-dollars-the-bitcoin-price-to-come.html</link>
+    <link>http://willwolf.me/2015/03/02/failing-wars-of-dollars-the-bitcoin-price-to-come</link>
     <description><![CDATA[<div class="post">
   <h1>Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</h1>
   <span class="post-date">02 Mar 2015</span>
@@ -255,12 +271,12 @@
 </div>
 ]]></description>
     <pubDate>Mon, 02 Mar 2015 16:37:03 UT</pubDate>
-    <guid>http://willwolf.me/posts/2015-03-02-failing-wars-of-dollars-the-bitcoin-price-to-come.html</guid>
+    <guid>http://willwolf.me/2015/03/02/failing-wars-of-dollars-the-bitcoin-price-to-come</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 <item>
     <title>There's always a reason why "This time is different"</title>
-    <link>http://willwolf.me/posts/2015-02-24-theres-always-a-reason-why-this-time-is.html</link>
+    <link>http://willwolf.me/2015/02/24/theres-always-a-reason-why-this-time-is</link>
     <description><![CDATA[<div class="post">
   <h1>There's always a reason why "This time is different"</h1>
   <span class="post-date">25 Feb 2015</span>
@@ -273,22 +289,7 @@
 </div>
 ]]></description>
     <pubDate>Wed, 25 Feb 2015 05:57:25 UT</pubDate>
-    <guid>http://willwolf.me/posts/2015-02-24-theres-always-a-reason-why-this-time-is.html</guid>
-    <dc:creator>William Wolf</dc:creator>
-</item>
-<item>
-    <title>Bitcoin and Cash-only Businesses</title>
-    <link>http://willwolf.me/posts/2015-02-10-bitcoin-and-cash-only-businesses.html</link>
-    <description><![CDATA[<div class="post">
-  <h1>Bitcoin and Cash-only Businesses</h1>
-  <span class="post-date">10 Feb 2015</span>
-  <hr/>
-  <p>I came across this pretty interesting <a href="http://www.nytimes.com/video/business/100000003491301/in-colorado-marijuana-pot-industrys-banking-problem.html">documentary</a> on the cannabis industry from thy New York Times. I have thought about this problem before as a huge opportunity for bitcoin.  Businesses like these can’t get access to the banking system, even though they are legitimate businesses.  Thus, they are forced to deal in, and pay to secure, large quantities of cash.  The video even mentions that particular business paying over $400,000 in cash to the Federal Government in taxes!</p>
-<p>Think of how much they must pay for security, storage, and security for their storage because of all the cash they are forced to deal with. This seems like a huge opportunity for cryptocurrencies like bitcoin.  Bitcoin can be secured virtually for free (or with a $119 trezor), and has no transport costs.  A business could even do business without keeping any private keys on premises, which means even on a break in, they lose no money.  The iPad/Tablet accepting payments would only need the hierarchical deterministic (HD) public key to be able to generate new addresses, but would not be able to spend from them. The HD private key could be kept on a <a href="https://trezor.io">trezor</a>, or on paper, off premises in a secure location.The costs for securing cash are probably high enough that these businesses could offer significant discounts to users willing to pay in bitcoin.  Thus, users would have an incentive to find ways to get bitcoin and a motivation to spend them.This seems like one of the many opportunities that bitcoin creates.</p>
-</div>
-]]></description>
-    <pubDate>Tue, 10 Feb 2015 18:03:39 UT</pubDate>
-    <guid>http://willwolf.me/posts/2015-02-10-bitcoin-and-cash-only-businesses.html</guid>
+    <guid>http://willwolf.me/2015/02/24/theres-always-a-reason-why-this-time-is</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 
