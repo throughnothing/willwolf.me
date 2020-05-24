@@ -7,24 +7,8 @@
         <description><![CDATA[William Wolf's home on the web.]]></description>
         <atom:link href="http://willwolf.me/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Sun, 24 May 2020 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Wed, 08 Nov 2017 00:00:00 UT</lastBuildDate>
         <item>
-    <title>Where We Are</title>
-    <link>http://willwolf.me/2020/05/24/Where-We-Are</link>
-    <description><![CDATA[<div class="post">
-  <h1>Where We Are</h1>
-  <span class="post-date">24 May 2020</span>
-  <hr/>
-  <figure>
-<img src="ss.png" alt="" /><figcaption>alt text</figcaption>
-</figure>
-</div>
-]]></description>
-    <pubDate>Sun, 24 May 2020 00:00:00 UT</pubDate>
-    <guid>http://willwolf.me/2020/05/24/Where-We-Are</guid>
-    <dc:creator>William Wolf</dc:creator>
-</item>
-<item>
     <title>Java 8 Coding Guide</title>
     <link>http://willwolf.me/2017/11/08/java-8-coding-guide</link>
     <description><![CDATA[<div class="post">
@@ -290,6 +274,21 @@
 ]]></description>
     <pubDate>Wed, 25 Feb 2015 05:57:25 UT</pubDate>
     <guid>http://willwolf.me/2015/02/24/theres-always-a-reason-why-this-time-is</guid>
+    <dc:creator>William Wolf</dc:creator>
+</item>
+<item>
+    <title>Bitcoin and Cash-only Businesses</title>
+    <link>http://willwolf.me/2015/02/10/bitcoin-and-cash-only-businesses</link>
+    <description><![CDATA[<div class="post">
+  <h1>Bitcoin and Cash-only Businesses</h1>
+  <span class="post-date">10 Feb 2015</span>
+  <hr/>
+  <p>I came across this pretty interesting <a href="http://www.nytimes.com/video/business/100000003491301/in-colorado-marijuana-pot-industrys-banking-problem.html">documentary</a> on the cannabis industry from thy New York Times. I have thought about this problem before as a huge opportunity for bitcoin.  Businesses like these can’t get access to the banking system, even though they are legitimate businesses.  Thus, they are forced to deal in, and pay to secure, large quantities of cash.  The video even mentions that particular business paying over $400,000 in cash to the Federal Government in taxes!</p>
+<p>Think of how much they must pay for security, storage, and security for their storage because of all the cash they are forced to deal with. This seems like a huge opportunity for cryptocurrencies like bitcoin.  Bitcoin can be secured virtually for free (or with a $119 trezor), and has no transport costs.  A business could even do business without keeping any private keys on premises, which means even on a break in, they lose no money.  The iPad/Tablet accepting payments would only need the hierarchical deterministic (HD) public key to be able to generate new addresses, but would not be able to spend from them. The HD private key could be kept on a <a href="https://trezor.io">trezor</a>, or on paper, off premises in a secure location.The costs for securing cash are probably high enough that these businesses could offer significant discounts to users willing to pay in bitcoin.  Thus, users would have an incentive to find ways to get bitcoin and a motivation to spend them.This seems like one of the many opportunities that bitcoin creates.</p>
+</div>
+]]></description>
+    <pubDate>Tue, 10 Feb 2015 18:03:39 UT</pubDate>
+    <guid>http://willwolf.me/2015/02/10/bitcoin-and-cash-only-businesses</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 
