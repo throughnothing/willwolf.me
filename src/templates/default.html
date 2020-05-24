@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>$title$ - willwolf.com</title>
+        <title>willwolf.me - $title$</title>
         <link rel="stylesheet" href="/all.css" />
+        $if(scripts)$ $scripts$ $endif$
     </head>
     <body>
 
@@ -14,11 +15,8 @@
             </a>
 
             <div class="side-nav">
-                <!-- <a href="/">About</a> -->
-                <a href="/writing.html">Writing</a>
-                <!--<a href="/projects.html">Projects</a>-->
-                <a href="/reading.html">Reading</a>
-                <!--<a href="/archive.html">Archive</a>-->
+                <a href="/writing">Writing</a>
+                <a href="/reading">Reading</a>
             </div>
 
             <div class="side-footer">
@@ -50,6 +48,6 @@
             $body$
         </div>
 
-        $if(scripts)$ $scripts$ $endif$
+        $if(tail_scripts)$ $tail_scripts$ $endif$
     </body>
 </html>
