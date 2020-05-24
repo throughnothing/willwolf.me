@@ -1,3 +1,5 @@
 output/
 .hakyll-cache
 src/.stack-work
+
+*.DS_Store
