@@ -7,11 +7,15 @@ MYTITLE=$(echo ${TITLE} | sed 's/ /-/g')
 echo ${MYTITLE}
 NEWFILE=./src/posts/${DATE}-${MYTITLE}.md
 
+# Make Asset directory for post
+mkdir -p ./src/posts/${DATE}-${MYTITLE}/
+open ./src/posts/${DATE}-${MYTITLE}
+
 # Write header section
-echo "--" >> ${NEWFILE}
+echo "---" >> ${NEWFILE}
 echo "title: ${TITLE}" >> ${NEWFILE}
 echo "date: ${DATE}" >> ${NEWFILE}
-echo "--" >> ${NEWFILE}
+echo "---" >> ${NEWFILE}
 
 ${EDITOR} ${NEWFILE}
 
