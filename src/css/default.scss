@@ -8,8 +8,9 @@ body {
     font-size: 18px;
     line-height: 1.4em;
     /* From Bootstrap: https://v4-alpha.getbootstrap.com/content/reboot/#native-font-stack */
-    // font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
-    font-family: Calluna Sans, sans-serif;
+    // // font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    // font-family: Calluna Sans, sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
 }
 
@@ -77,6 +78,7 @@ p.caption {
 }
 
 ul.posts {
+    display: block;
     margin: 0;
     padding: 0;
     li {
@@ -84,21 +86,20 @@ ul.posts {
         flex-direction: row;
         line-height: 1.4em;
         a {
-            display: block;
+            font-size: 0.85em;
+            margin-left: 0.4rem;
         }
         .postDate {
-            min-width: 80px;
             font-family: Monaco, "Courier New", monospace;
             font-size: 0.65em;
-            margin-right: 15px;
             text-align: right;
-            color: desaturate(lighten($color_font, 65%), 80%);
+            color: desaturate(lighten($color_font, 45%), 70%);
         }
-        // .postDate::after {
-        //     color: desaturate(lighten($color_font, 45%), 80%);
-        //     margin-left: 8px;
-        //     content: "\00BB"
-        // }
+         .postDate::after {
+            color: desaturate(lighten($color_font, 45%), 80%);
+            margin-left: 8px;
+            content: "\00BB"
+        }
     }
 }
 
