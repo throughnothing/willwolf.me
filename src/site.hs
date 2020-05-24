@@ -22,7 +22,7 @@ main = hakyllWith configuration $ do
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend` bodyField "description"
+            let feedCtx = postCtx <> bodyField "description"
 
             posts <- fmap (take 10) . recentFirst =<<
                 loadAllSnapshots "posts/*" "content"
@@ -40,7 +40,7 @@ main = hakyllWith configuration $ do
             items <- loadAll "css/*" :: Compiler [Item String]
             makeItem $ concatMap itemBody items
 
-    match (fromList ["about.markdown", "reading.html"]) $ do
+    match (fromList ["index.md", "reading.html"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -54,30 +54,21 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
-    create ["writing.html"] $ do
+    match "posts/*/*" $ do
+        route idRoute
+        compile copyFileCompiler
+
+    match "writing.html" $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    defaultContext
-
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/writing.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-                >>= relativizeUrls
-
-    match "index.html" $ do
-        route   $ setExtension "html"
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
-                    listField "posts" postCtx (return $ take 5 posts) `mappend`
-                    defaultContext
+            let archiveCtx
+                    = listField "posts" postCtx (return posts)
+                    <> defaultContext
 
             getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= applyAsTemplate archiveCtx
+                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateBodyCompiler
@@ -85,10 +76,10 @@ main = hakyllWith configuration $ do
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
-postCtx =
-    dateField "date" "%d %b %Y" `mappend`
-    dateField "year" "%Y" `mappend`
-    defaultContext
+postCtx
+    = dateField "date" "%d %b %Y"
+    <> dateField "year" "%Y"
+    <> defaultContext
 
 configuration :: Configuration
 configuration = defaultConfiguration
