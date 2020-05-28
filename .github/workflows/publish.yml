@@ -33,4 +33,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: master
+          cname: willwolf.me
           publish_dir: ./output
