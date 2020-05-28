@@ -7,7 +7,7 @@ on:
 jobs:
   build-deploy:
     name: Build and deploy
-    runs-on: 
+    runs-on: ubuntu-latest
     env:
       GHC_VERSION: '8.8.2'
     steps:
