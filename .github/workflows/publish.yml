@@ -20,9 +20,9 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@v2
         with:
-          path:
-            - ~/.stack/
-            - src/.stack-work
+          path: |
+            ~/.stack/
+            src/.stack-work
           key: stack-work-${{ runner.OS }}-${{ env.GHC_VERSION }}-${{ hashFiles('src/stack.yaml.lock') }}
 
       - name: Build Site
