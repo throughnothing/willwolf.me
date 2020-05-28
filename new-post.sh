@@ -1,5 +1,5 @@
 #!/bin/bash
-EDITOR=code
+EDITOR="${EDITOR:-code}"
 
 DATE=$(date +"%Y-%m-%d")
 TITLE=$1
@@ -15,6 +15,8 @@ open ./src/posts/${DATE}-${MYTITLE}
 echo "---" >> ${NEWFILE}
 echo "title: ${TITLE}" >> ${NEWFILE}
 echo "date: ${DATE}" >> ${NEWFILE}
+echo "draft: true" >> ${NEWFILE}
+echo "tags: ${DATE}" >> ${NEWFILE}
 echo "---" >> ${NEWFILE}
 
 ${EDITOR} ${NEWFILE}

@@ -49,16 +49,9 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" dropIndexHtmlUrlContext
             >>= relativizeAllUrls
 
-    match "posts/*.md" $ do
-        route $ setExtension "html"
-            `composeRoutes` dateFolders
-            `composeRoutes` dropPostsPrefix
-            `composeRoutes` appendIndex
-        compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/post.html" postCtx
-            >>= saveSnapshot "content"
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeAllUrls
+    matchMetadata "posts/*.md" (not . isDraft) $ do
+        route $ postsRoutes
+        postsCompiler
 
     match "posts/*/*" $ do
         route $ idRoute
@@ -80,6 +73,19 @@ main = hakyllWith configuration $ do
                 >>= relativizeAllUrls
 
 
+    where
+
+    postsRoutes = setExtension "html"
+        `composeRoutes` dateFolders
+        `composeRoutes` dropPostsPrefix
+        `composeRoutes` appendIndex
+
+    postsCompiler = 
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/post.html" postCtx
+            >>= saveSnapshot "content"
+            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= relativizeAllUrls
 --------------------------------------------------------------------------------
 
 postCtx :: Context String
@@ -128,6 +134,8 @@ handlePostFileUrls item = do
 relativizeAllUrls :: Item String -> Compiler (Item String)
 relativizeAllUrls item = relativizeUrls =<< handlePostFileUrls item
 
+isDraft :: Metadata -> Bool
+isDraft = maybe False (== "true") . lookupString "draft"
 
 
 -- All the below was taken from:
@@ -140,6 +148,9 @@ dateFolders =
 
 dropPostsPrefix :: Routes
 dropPostsPrefix = gsubRoute "posts/" $ const ""
+
+addDraftsPrefix :: Routes
+addDraftsPrefix = gsubRoute "posts/" $ const "drafts/"
 
 dropIndexHtml :: String -> Context a
 dropIndexHtml key = mapContext transform (urlField key) where
