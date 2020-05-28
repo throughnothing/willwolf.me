@@ -18,9 +18,10 @@ jobs:
         uses: matsubara0507/setup-stack@master
 
       - name: Setup Cache
-        users: actions/cache@v2
+        uses: actions/cache@v2
         with:
           path: ~/.stack/store
           key: stack-work-${{ runner.OS }}-${{ env.GHC_VERSION }}-${{ hashFiles('src/stack.yaml.lock') }}
 
-      - run: make build
+      - name: Build Site
+        run: make build
