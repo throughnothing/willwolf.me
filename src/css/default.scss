@@ -92,14 +92,15 @@ ul.posts {
         .postDate {
             font-family: Monaco, "Courier New", monospace;
             font-size: 0.65em;
+            min-width: 95px;
             text-align: right;
             color: desaturate(lighten($color_font, 45%), 70%);
         }
-         .postDate::after {
-            color: desaturate(lighten($color_font, 45%), 80%);
-            margin-left: 8px;
-            content: "\00BB"
-        }
+        //  .postDate::after {
+        //     color: desaturate(lighten($color_font, 45%), 80%);
+        //     margin-left: 8px;
+        //     content: "\00BB"
+        // }
     }
 }
 
