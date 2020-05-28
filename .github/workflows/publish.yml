@@ -1,0 +1,26 @@
+name: Build and deploy to github pages
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-deploy:
+    name: Build and deploy
+    runs-on: 
+    env:
+      GHC_VERSION: '8.8.2'
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v2
+
+      - name: Setup Haskell Stack
+        uses: matsubara0507/setup-stack@master
+
+      - name: Setup Cache
+        users: actions/cache@v2
+        with:
+          path: ~/.stack/store
+          key: stack-work-${{ runner.OS }}-${{ env.GHC_VERSION }}-${{ hashFiles('src/stack.yaml.lock') }}
+
+      - run: make build
