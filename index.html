@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home | willwolf.me</title>
+        <title>index | willwolf.me</title>
         <link rel="stylesheet" href="./all.css" />
         
     </head>
@@ -15,8 +15,10 @@
             </a>
 
             <div class="side-nav">
-                <a href="./writing">Writing</a>
+                <a href="./about">About</a>
+                <a href="./archives">Archives</a>
                 <a href="./reading">Reading</a>
+                <a href="./tweets">Tweets</a>
             </div>
 
             <div class="side-footer">
@@ -45,12 +47,116 @@
         </div>
 
         <div class="content">
-            <h1 id="william-wolf">William Wolf</h1>
+            
+  <div class="post">
+  <h1><a href="./2017/11/08/java-8-coding-guide">Java 8 Coding Guide</a></h1>
+  <span class="post-date">08 Nov 2017</span>
+  <hr />
+  <p>I’m getting into Java services at work, and I put together a guide with some principles / best practices to follow for Java 8.  A lot of these things become much more possible with Java 8 than they would have been in earlier versions of Java, but they can also be applied to other programming languages and technologies.</p>
+<p>I wrote this guide based on a desire to have code that is easy to reason about and understand, which means it will be easy for new folks to jump into the codebase over time, and also with a desire to quickly produce high quality code.  Performance is not the major concern of this guide.</p>
+<p>Many of the principles and ideas come from my foray into functional programming with both <a href="https://www.haskell.org">Haskell</a> and <a href="http://www.purescript.org">Purescript</a>, and I just find that these concepts are the way I prefer to program now.  Following these principles gives me much more confidence in the correctness of my code, and gives me peace of mind knowing that I’m giving myself the best chance of understanding the code when I come back to it months or years later.</p>
+<p>Without further ado, you can check out the guide <a href="https://gist.github.com/throughnothing/4a14dd3e4ab5e68eb154123ad11dae79">here</a> (inlined below).</p>
+<p></p>
 <hr />
-<p>I’m an engineer, builder, and investor living in New York City. I spend most of my time in the cryptocurrency world on the investment team at <a href="https://polychain.capital">Polychain Capital</a>.</p>
-<p>I’m originally from New Orleans. I studied Computer Engineering, Music, and Math at Virginia Tech, and have since worked on various software startups in the Virginia, Washington D.C., and San Francisco areas. I’ve grown, mangaged, and led engeering teams from 1 to 20+ and been through 2 successfull acquisitions.</p>
-<p>I like to <a href="./reading.html">read</a>, make music (mostly guitar), travel, <a href="https://twitter.com/throughnothing">tweet</a>, excercise, <a href="https://github.com/throughnothing">build</a>, invest, <a href="././writing.html">write</a>, and keep things <a href="https://www.goodreads.com/quotes/897002-our-life-is-frittered-away-by-detail-simplicity-simplicity-simplicity-i">simple</a>.</p>
-<p>I’m always interested to meet other likeminded folks, so don’t hesitate to reach out on any of the platforms in the sidebar – I look forward to hearing from you.</p>
+<p></p>
+<h1 id="java-8-coding-guide">Java 8 Coding Guide</h1>
+<p>This coding guide was written for a Java 8 project, but contains principles that are valid in many languages. It is aimed at producing code that is easy to reason about, easy to validate and test, easy to maintain, and easy to avoid common bugs and pitfalls.</p>
+<h2 id="avoid-explicit-null-or-dont-use-null">Avoid explicit <code>null</code> (or, Don’t use <code>null</code>)</h2>
+<p><code>Null</code> is famously the <a href="https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/">“billion dollar mistake”</a> (and that’s probably an under-estimation!). Don’t use <code>null</code> as a way of representing error or failure, and also don’t use <code>null</code> as a way to avoid passing a certain argument to a function. Essentially you should never explicitly use a <code>null</code> value unless you are checking that something is not <code>null</code>. Even in those cases, it should probably be handled better by an <code>Option&lt;T&gt;</code>.</p>
+<h3 id="resources">Resources</h3>
+<ul>
+<li><a href="https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained">https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained</a></li>
+<li><a href="http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html">http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html</a></li>
+<li><a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare</a></li>
+</ul>
+<h2 id="expressions-over-statements">Expressions over statements</h2>
+<p>Expressions are declarative and evaluate to (and return) a value, while statements are imperative bits of code that perform actions. Because of this, expressions are easier to reason about, debug, and verify correctness for.</p>
+<p>A simple example is an <code>if</code> statement, vs an <code>if</code> expression. <code>If</code> in java does not return a value, nor does java enforce that an <code>if</code> have an <code>else</code> branch. Additionally, if there is an <code>else</code> branch, it does not have to result in the same type of value as the <code>if</code> branch. This makes if statements hard to reason about and understand. The ternary form <code>predicate ? value : value</code> is preferable to <code>if</code>/<code>then</code> statements.</p>
+<p>In a language like Java, statements will be required, but we should isolate those to their own, small, methods, and keep their surface area as small as possible to reduce risk and complexity from these parts of the code.</p>
+<h3 id="resources-1">Resources</h3>
+<ul>
+<li><a href="https://fsharpforfunandprofit.com/posts/expressions-vs-statements/">https://fsharpforfunandprofit.com/posts/expressions-vs-statements/</a></li>
+<li><a href="https://www.cs.ucf.edu/~dcm/Teaching/COT4810-Fall%202012/Literature/Backus.pdf">https://www.cs.ucf.edu/~dcm/Teaching/COT4810-Fall%202012/Literature/Backus.pdf</a></li>
+</ul>
+<h2 id="avoid-explicit-loops">Avoid explicit loops</h2>
+<p>With Java 8, we have streams, and should no longer need explicit loops. Loops are very repetetive, and error prone, so we should leverage abstractions that handle looping for us to avoid bugs, verbosity, and complexity in our code.</p>
+<p>There may be some cases where loops are more desirable (possibly for performance), but they should be avoided until it is clear they are actually needed.</p>
+<h3 id="resources-2">Resources</h3>
+<ul>
+<li><a href="http://www.deadcoderising.com/java-8-no-more-loops/">http://www.deadcoderising.com/java-8-no-more-loops/</a></li>
+<li><a href="https://martinfowler.com/articles/refactoring-pipelines.html">https://martinfowler.com/articles/refactoring-pipelines.html</a></li>
+</ul>
+<h2 id="use-immutable-data-structures">Use immutable data structures</h2>
+<p>We should leverage <code>guava</code>’s immutable data structures as much as possible to avoid complicated bugs related to mutating state.</p>
+<p>Additionally, we should leverage Lombok’s <code>@Value</code> objects as much as possible to make our own data objects immutable.</p>
+<h3 id="resources-3">Resources</h3>
+<ul>
+<li><a href="https://github.com/google/guava/wiki/ImmutableCollectionsExplained">https://github.com/google/guava/wiki/ImmutableCollectionsExplained</a></li>
+<li><a href="https://projectlombok.org/features/Value">https://projectlombok.org/features/Value</a></li>
+</ul>
+<h2 id="dont-throw-exceptions---use-values">Don’t throw exceptions - use values!</h2>
+<p>In general, we should never throw an exception of our own. Obviously we will use libraries that throw exceptions. These exceptions should be caught directly in the function/method using the library, and turned into values (to be returned) as much as possible.</p>
+<p>This is because exceptions are like <code>goto</code> statements, which make the flow of your program much more difficult to reason about. Every function that throws an exception can return a value in 2 ways, through the “normal” return flow, or through an exception, and every user of that function has to think about both cases. It is generally easier to reason about functions that only return values (something like vavr’s <a href="http://www.baeldung.com/vavr-either">Either</a> or <a href="http://www.baeldung.com/vavr-try">Try</a> types work very well for this). This also makes it much easier to leverage Java 8’s lambda-using utilities, as they don’t like accepting <code>Function</code>s that throw exceptions.</p>
+<h3 id="resources-4">Resources</h3>
+<ul>
+<li><a href="https://www.joelonsoftware.com/2003/10/13/13/">https://www.joelonsoftware.com/2003/10/13/13/</a></li>
+<li><a href="http://www.baeldung.com/vavr-try">http://www.baeldung.com/vavr-try</a></li>
+<li><a href="http://www.baeldung.com/vavr-either">http://www.baeldung.com/vavr-either</a></li>
+<li><a href="https://fsharpforfunandprofit.com/rop/">https://fsharpforfunandprofit.com/rop/</a></li>
+</ul>
+<h2 id="fail-early-enforce-invariants">Fail early, enforce invariants</h2>
+<p>It is always best to fail as early as possible, at the soonest point that you find something is wrong. This often means that we should validate all of our data up front, to decouple validation from the business logic that needs to use the values in question.</p>
+<p>Additionally, the more we can make fail at compile time, rather than run time, the better off we will be at finding bugs earlie. Use Java’s typesystem as much as you can to enforce invariants statically!</p>
+<p>For our own data objects, we should have strong validation of each object, so that once we’ve constructed one, we know it will have good data in the rest of our program. Failed construction (on validation errors) should also be expressed by returning values, rather than exceptions. Something like vavr’s <a href="././">Validation</a> type is useful for this purpose. Make it impossible to construct a “bad”/invalid data object!</p>
+<h3 id="resources-5">Resources</h3>
+<ul>
+<li><a href="https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html">https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html</a></li>
+<li><a href="https://softwaremill.com/javaslang-data-validation/">https://softwaremill.com/javaslang-data-validation/</a></li>
+</ul>
+<h2 id="composition-over-inheritance">Composition over Inheritance</h2>
+<p>Inheritance can be very fragile, and make refactoring of complex code involving inheritance hierarchies very difficult to do safely and confidently. Composition (and in java, Interfaces) should be favored over inheritence where possible.</p>
+<p>Often inheritance is required by certain frameworks / libraries, but we should limit the depth of inheritance hierarchies that we use as much as possible.</p>
+<p>Composition, via composing interfaces or composable types, allows for more design flexibility, and easier, more confident refactoring.</p>
+<h3 id="resources-6">Resources</h3>
+<ul>
+<li><a href="https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose">https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Composition_over_inheritance">https://en.wikipedia.org/wiki/Composition_over_inheritance</a></li>
+<li><a href="https://variadic.me/posts/2014-03-28-composition-over-inheritance.html">https://variadic.me/posts/2014-03-28-composition-over-inheritance.html</a></li>
+</ul>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="./2016/07/05/us-and-them">Us and Them</a></h1>
+  <span class="post-date">06 Jul 2016</span>
+  <hr />
+  <p>The <a href="http://www.breitbart.com/2016-presidential-race/2016/07/05/fbi-director-james-comey-we-will-not-indict-hillary-clinton-even-though-there-is-evidence-of-violations/">recent news</a> around Hilary Clinton and her lack of prosecution for clearly violating many laws (even in the opinion of would-be prosecutors) just perpetuates the growing global sentiment of “Us” vs “Them”. This is a growing divide, and more people are becoming disgruntled, disenfranchised, and disconnected from the system every day.</p>
+<p>There’s a political class that is clearly treated differently, and beholden to a different set of rules, and people the world over are getting fed up with it. The people of the United Kingdom were fed up with the far off “them” in the EU, and the people in France, Italy, Spain, and Greece are pretty fed up too.</p>
+<p>Where will this lead? Ultimately it’ll land us in a better place. People will demand more fairness, and a closing of the gap between “Us” and “Them”, but it may get pretty nasty in the interim.</p>
+<iframe width="540" height="404" src="https://www.youtube.com/embed/s_Yayz5o-l0" frameborder="0" gesture="media" allowfullscreen>
+</iframe>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="./2016/03/04/ask-questions">Ask Questions!</a></h1>
+  <span class="post-date">04 Mar 2016</span>
+  <hr />
+  <p>Don’t tell people things.  That is arrogant.  Ask questions and let them discover their passions, their conflicts, their misunderstandings, and who they are through their own answers and internal discoveries.</p>
+<p>In doing so, you may even end up learning more about yourself.</p>
+</div>
+
+  <hr class="post-separator" />
+
+
+
+<a href="./Page/2/index.html">Older Posts</a>
+
+
+
+
         </div>
 
         
