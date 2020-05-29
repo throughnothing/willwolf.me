@@ -17,6 +17,9 @@ body {
 h1 {
     color: darken($color_font, 10%);
     line-height: 1.2em;
+    a {
+        color: inherit;
+    }
 }
 
 hr {
@@ -61,6 +64,10 @@ p.caption {
     color: darken($color1, 40%);
     font-style: italic;
     text-align: center;
+}
+
+hr.post-separator {
+    margin: 0 0 50px 0;
 }
 
 .post {
@@ -115,10 +122,10 @@ ul.posts {
     }
 
     .side-nav {
-        max-width: 220px;
+        max-width: 100%;
         flex-direction: row;
         align-content: space-around;
-        justify-content: space-around;
+        justify-content: space-between;
         margin: 10px 0 !important;
     }
     div.copyright { display: none; }

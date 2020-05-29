@@ -1,5 +1,5 @@
 ---
-title: Home
+title: About
 ---
 
 # William Wolf
@@ -26,5 +26,5 @@ invest,
 [write](writing.html),
 and keep things [simple](https://www.goodreads.com/quotes/897002-our-life-is-frittered-away-by-detail-simplicity-simplicity-simplicity-i).
 
-I'm always interested to meet other likeminded folks, so don't hesitate to reach out on any of the platforms in the sidebar -- I look forward to hearing from you.
+I'm always interested to meet other likeminded folks, so don't hesitate to reach out -- I look forward to hearing from you.
 

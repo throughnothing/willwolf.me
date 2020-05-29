@@ -1,0 +1,12 @@
+$for(posts)$
+  $content$
+  <hr class="post-separator"/>
+$endfor$
+
+$if(nextPageUrl)$
+<a href="$nextPageUrl$">Older Posts</a>
+$endif$
+
+$if(previousPageUrl)$
+<a href="$previousPageUrl$">Newer Posts</a>
+$endif$

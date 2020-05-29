@@ -1,15 +1,19 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+import           Control.Monad (liftM)
 import           Data.Monoid (mappend)
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
 import           System.FilePath ( (</>), (<.>)
                                  , splitExtension, splitFileName
                                  , takeDirectory )
+import Control.Applicative (Alternative (..))
 --------------------------------------------------------------------------------
 
 main :: IO ()
 main = hakyllWith configuration $ do
+    let postsPattern = "posts/*.md"
+
     match "images/*" $ route idRoute *> compile copyFileCompiler
     match "assets/*" $ route idRoute *> compile copyFileCompiler
     match "keybase.txt" $ route idRoute *> compile copyFileCompiler
@@ -35,8 +39,15 @@ main = hakyllWith configuration $ do
             items <- loadAll "css/*" :: Compiler [Item String]
             makeItem $ concatMap itemBody items
 
-    match "index.md" $ do
+    match "about.md" $ do
         route $ setExtension "html"
+            `composeRoutes` appendIndex
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/default.html" dropIndexHtmlUrlContext
+            >>= relativizeAllUrls
+
+    match "tweets.html" $ do
+        route $ idRoute `composeRoutes` appendIndex
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" dropIndexHtmlUrlContext
             >>= relativizeAllUrls
@@ -49,20 +60,38 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" dropIndexHtmlUrlContext
             >>= relativizeAllUrls
 
-    matchMetadata "posts/*.md" (not . isDraft) $ do
+    paginate <- (buildPaginateWith postsGrouper postsPattern postsPageId)
+
+    paginateRules paginate $ \page pattern -> do
+        route $ idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAllSnapshots pattern "content" :: Compiler [Item String]
+
+            let ctx = (paginateContext paginate page)
+                    <> defaultContext
+                    <> listField "posts" (field "content" (return . itemBody)) (return posts)
+                    <> constField "title" (if page == 1 then "Home" else "Page " ++ show page)
+
+            makeItem ""
+                >>= applyAsTemplate ctx
+                >>= loadAndApplyTemplate "templates/page.html" ctx
+                >>= loadAndApplyTemplate "templates/default.html" ctx
+                >>= relativizeAllUrls
+
+    matchMetadata postsPattern (not . isDraft) $ do
         route $ postsRoutes
         postsCompiler
-
-    match "posts/*/*" $ do
+                
+    match (postsPattern <> "/*") $ do
         route $ idRoute
             `composeRoutes` dateFolders
             `composeRoutes` dropPostsPrefix
         compile copyFileCompiler
 
-    match "writing.html" $ do
+    match "archives.html" $ do
         route $ idRoute `composeRoutes` appendIndex
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*.md"
+            posts <- recentFirst =<< loadAll (postsPattern)
             let archiveCtx
                     = listField "posts" postCtx (return posts)
                     <> dropIndexHtmlUrlContext
@@ -81,11 +110,21 @@ main = hakyllWith configuration $ do
         `composeRoutes` appendIndex
 
     postsCompiler = 
-        compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/post.html" postCtx
-            >>= saveSnapshot "content"
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeAllUrls
+        compile $ do
+            pandocCompiler
+                >>= loadAndApplyTemplate "templates/post.html" postCtx
+                >>= saveSnapshot "content"
+                >>= loadAndApplyTemplate "templates/default.html" postCtx
+                >>= relativizeAllUrls
+
+
+
+postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier]]
+postsGrouper = liftM (paginateEvery 3) . sortRecentFirst
+
+postsPageId :: PageNumber -> Identifier
+postsPageId n = fromFilePath $ if (n == 1) then "index.html" else "Page/" ++ show n ++ "/index.html"
+
 --------------------------------------------------------------------------------
 
 postCtx :: Context String
