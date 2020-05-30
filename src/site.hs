@@ -99,7 +99,7 @@ main = hakyllWith configuration $ do
         -- route $ constRoute "/archive/tags/index.html" 
         route $ idRoute `composeRoutes` appendIndex
         compile $ do
-            let ctx = tagCloudField "tagCloud" 60 400 tags
+            let ctx = tagCloudField "tagCloud" 100 400 tags
                     <> defaultContext
 
             getResourceBody

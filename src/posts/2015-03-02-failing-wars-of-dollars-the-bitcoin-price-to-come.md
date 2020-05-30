@@ -3,6 +3,7 @@ title: Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews
 date: '2015-03-02T08:37:03-08:00'
 tags:
 - bitcoin
+- crypto
 - money
 - history
 ---

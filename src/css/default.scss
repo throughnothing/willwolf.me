@@ -48,11 +48,15 @@ li {
 }
 
 p.tag-cloud {
-    max-width: 400px;
+    // max-width: 400px;
     margin: 100px auto;
     text-align: center;
     a {
-        margin: 10px 0px 10px 0px;
+        // margin: 10px 0px 10px 0px;
+        // display: block;
+        // margin: 40px;
+        line-height: 100%;
+        padding: 0 20px;
     }
 }
 

@@ -3,8 +3,8 @@ layout: post
 title: Bitcoin and Cash-only Businesses
 date: '2015-02-10T10:03:39-08:00'
 tags:
-- text
 - bitcoin
+- crypto
 - cannabis
 - cash
 tumblr_url: http://blog.throughnothing.com/post/110645707807/bitcoin-and-cash-only-businesses
