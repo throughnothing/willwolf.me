@@ -4,7 +4,6 @@ date: 2020-05-30
 # draft: true
 tags: fitness, health
 image: https://willwolf.me/2020/05/30/staying-healthy-during-coronavirus/IMG_2262.jpeg
-description: What I've done to stay healthy and fit during the Coronavirus pandemic
 ---
 
 My wife and I have now been locked down and working from home for 83 days since

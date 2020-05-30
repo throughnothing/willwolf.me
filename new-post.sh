@@ -1,10 +1,14 @@
 #!/bin/bash
 EDITOR="${EDITOR:-code}"
+WEBSITE=https://willwolf.me
 
 DATE=$(date +"%Y-%m-%d")
 TITLE=$1
 MYTITLE=$(echo ${TITLE} | sed 's/ /-/g' | tr [:upper:] [:lower:])
+DATEURL=$(echo ${DATE} | sed 's/-/\//g')
+MYURL="$WEBSITE/$DATEURL/$MYTITLE/"
 echo ${MYTITLE}
+echo ${MYURL}
 NEWFILE=./src/posts/${DATE}-${MYTITLE}.md
 
 # Make Asset directory for post
@@ -16,6 +20,8 @@ echo "---" >> ${NEWFILE}
 echo "title: ${TITLE}" >> ${NEWFILE}
 echo "date: ${DATE}" >> ${NEWFILE}
 echo "draft: true" >> ${NEWFILE}
+echo "# image: $MYURL" >> ${NEWFILE}
+echo "# description: " >> ${NEWFILE}
 echo "tags:" >> ${NEWFILE}
 echo "---" >> ${NEWFILE}
 
