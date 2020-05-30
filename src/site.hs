@@ -71,10 +71,9 @@ main = hakyllWith configuration $ do
         compile $ do
             posts <- recentFirst =<< loadAllSnapshots pattern "raw"
             let ctx = (paginateContext paginate page)
-                    <> defaultContext
-                    -- <> listField "posts" (field "content" (return . itemBody)) (return posts)
                     <> listField "posts" (postCtxWithTags tags) (return posts)
                     <> constField "title" (if page == 1 then "Home" else "Page " ++ show page)
+                    <> defaultContext
 
             makeItem ""
                 >>= applyAsTemplate ctx
@@ -208,12 +207,19 @@ handlePostFileUrls item = do
         >>= getRoute
         >>= maybe
             (return item)
-            (\path -> return $ fmap (withUrls $ absolutize path) item)
+            (\path -> return $ fmap (withUrls $ (absolutize path) . removeIndexHtml) item)
     where 
         absolutize :: String -> String -> String 
         absolutize path url = case takeDirectory url of 
             "." -> "/" <> takeDirectory path <> "/" <> url
             _  -> url 
+        
+        removeIndexHtml :: String -> String 
+        removeIndexHtml url = case splitFileName url of
+            (dir, "index.html") -> dir
+            _ -> url
+
+
 
 relativizeAllUrls :: Item String -> Compiler (Item String)
 relativizeAllUrls item = relativizeUrls =<< handlePostFileUrls item
