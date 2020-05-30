@@ -28,3 +28,5 @@ and keep things [simple](https://www.goodreads.com/quotes/897002-our-life-is-fri
 
 I'm always interested to meet other likeminded folks, so don't hesitate to reach out -- I look forward to hearing from you.
 
+
+![View of Manhattan Skyline](/images/nyc.jpeg)
