@@ -19,15 +19,13 @@
     <a title="All pages tagged &#39;fitness&#39;." href="/archive/fitness/index.html">fitness</a>, <a title="All pages tagged &#39;health&#39;." href="/archive/health/index.html">health</a>
   </div>
   <p>My wife and I have now been locked down and working from home for 83 days since March 8th. One things I noticed after just a few days of was that I was feeling sluggish, lethargic, and mentally foggy. I started to add some walks into my daily routine whenever the weather was nice enough, and that definitely helped, but I knew I needed to find a way to get more substantive workouts in during quarantine. With gyms closed, and not knowing how long this situation would last, I decided to start doing bodyweight strength training at home.</p>
-<img src="/2020/05/30/staying-healthy-during-coronavirus/IMG_2196.jpeg" title="fig:" alt="View of Manhattan" />
-<p class="caption">
-View of Manhattan on one of my walks
-</p>
+<figure>
+<img src="/2020/05/30/staying-healthy-during-coronavirus/IMG_2196.jpeg" alt="" /><figcaption>View of Manhattan</figcaption>
+</figure>
 <p>After some googling and help from <a href="https://reddit.com/r/bodyweightfitess">r/bodyweightfitness</a> I decided to get a doorway pull-up bar, and some gymnastic rings. Of course, as you probably know, all fitness equipment has been sold out everywhere online for a while, but I did manage to find them in-stock after a bit of searching.</p>
-<img src="/2020/05/30/staying-healthy-during-coronavirus/IMG_1969.jpeg" title="fig:" alt="Pull-up Bar Gymnastic Rings Setup" />
-<p class="caption">
-My rings setup on my Pull-up bar
-</p>
+<figure>
+<img src="/2020/05/30/staying-healthy-during-coronavirus/IMG_1969.jpeg" alt="" /><figcaption>Pull-up Bar Gymnastic Rings Setup</figcaption>
+</figure>
 <p>Since getting them, I’ve been getting in some pretty amazing workouts, and have <em>really</em> been enjoying the rings a lot more than I thought I would – they make workouts fun. The workouts can be way more intense, and fun, than I expected, and many of the movevments are way harder than you’d imagine on the rings because of the lack of stability they provide. Dips and push-ups on the rings, for example, are much harder than their usual variants.</p>
 <p>I also picked up a copy of <a href="https://www.amazon.com/Overcoming-Gravity-Systematic-Gymnastics-Bodyweight/dp/0990873854/ref=sr_1_1?dchild=1&amp;keywords=overcoming+gravity&amp;qid=1590815855&amp;sr=8-1">Overcoming Gravity</a>, which I think is <em>the bible</em> for calisthenics and bodyweight training. I would highly recommend this book if you’re interested in this.</p>
 <p>You can work your entire upper body with the gymnastic rings, and increase the intensity (read: difficulty) of the excercises to almost any strength level. Here are just some of the excercises and progressions I’ve been working on:</p>
@@ -73,10 +71,9 @@ My rings setup on my Pull-up bar
 </ul>
 <p>I’ll report back as I hit these goals, but I know these will keep me busy for a while.</p>
 <p>If you’ve been looking for a cheap, effective, space-efficient way to workout at home, or in your local park, I <em>highly</em> recommend trying out a pair of gymnastic rings – it’s possibly the best $30 piece of fitness equipment you can buy (coupled with a pull-up bar or something to hang the rings on at home, if needed).</p>
-<img src="/2020/05/30/staying-healthy-during-coronavirus/IMG_2262.jpeg" title="fig:" alt="Bike and Gymnastic Rings in Prospect Park" />
-<p class="caption">
-My rings setup in Prospect Park
-</p>
+<figure>
+<img src="/2020/05/30/staying-healthy-during-coronavirus/IMG_2262.jpeg" alt="" /><figcaption>Bike and Gymnastic Rings in Prospect Park</figcaption>
+</figure>
 </div>
 ]]></description>
     <pubDate>Sat, 30 May 2020 00:00:00 UT</pubDate>
@@ -97,23 +94,20 @@ My rings setup in Prospect Park
 <p>This analysis is done only looking at the S&amp;P500 Index, as a proxy for “markets”. Today the S&amp;P500 closed at: 2529.19</p>
 <h2 id="cape-shiller-pe">CAPE (Shiller P/E)</h2>
 <p>CAPE is a crude metric that just tracks the price vs the 10 year trailing earnings. This smooths out business cycles, and has proven to be a pretty good, but fuzzy, indicator of where business valuations stand relative to their long term, durable, earnings power. As you can see below, we’ve seen a significant improvement in this metric over recent weeks, but still remain in overvalued territory.</p>
-<img src="/2020/03/17/Market-Valuations/shillerpe.png" title="fig:" alt="Shiller PE" />
-<p class="caption">
-source: https://www.gurufocus.com/shiller-PE.php
-</p>
+<figure>
+<img src="/2020/03/17/Market-Valuations/shillerpe.png" alt="" /><figcaption>source: https://www.gurufocus.com/shiller-PE.php</figcaption>
+</figure>
 <p>The historical mean for CAPE going back more than 100 years has been 17. Today we stand at 24.2, which is 42.6% higher than the mean. A reversion to the historical mean would require a further 29.8% (42.6/142.6) decline from today’s (3/17) close. This would take the S&amp;P 500 to $1775.49.</p>
 <p>At the 2007 market peak, the CAPE was 27.4 – not much higher than where we still stand today. At the market’s bottom in 2009, the CAPE touched 13.30 (but not for long!), which was below the long term mean of 17, and considered undervalued. If todays S&amp;P500 were to reach to a 13.3 CAPE, with present 10-year earnings, the S&amp;P500 would need to fall to $1390.00, or another 45% from todays prices.</p>
 <h2 id="market-cap-gdp">Market Cap / GDP</h2>
 <p>Another indicator, made famous by Warren Buffett, is the proportion of the total Market Cap of all stocks relative to the US GDP. This is also a very crude metric, which can be impacted over time by things like private companies staying private longer (and being bigger), and public companies doing more and more business internationally, but I think it is still a useful heuristic to look at and consider. There are also counter-effects, such as government spending becoming a larger and larger portion of GDP, which would have the effect of moving this average down (businesses make up a smaller portion of GDP). Below you can see the historical total market cap in blue, and US GDP in green.</p>
-<img src="/2020/03/17/Market-Valuations/tmtgdp.png" title="fig:" alt="Total Market Cap to GDP" />
-<p class="caption">
-source: https://www.gurufocus.com/stock-market-valuations.php
-</p>
+<figure>
+<img src="/2020/03/17/Market-Valuations/tmtgdp.png" alt="" /><figcaption>source: https://www.gurufocus.com/stock-market-valuations.php</figcaption>
+</figure>
 <p>Another way to look at this is by plotting the ratio between the two. The historical average ratio is around 0.8 – that is, where the total market cap of public stocks is around 80% of US GDP.</p>
-<img src="/2020/03/17/Market-Valuations/tmtgdpratio.png" title="fig:" alt="Total Market Cap to GDP ratio" />
-<p class="caption">
-source: https://www.gurufocus.com/stock-market-valuations.php
-</p>
+<figure>
+<img src="/2020/03/17/Market-Valuations/tmtgdpratio.png" alt="" /><figcaption>source: https://www.gurufocus.com/stock-market-valuations.php</figcaption>
+</figure>
 <p>At present, the total market cap is 115.9% of GDP, which is 30.9% ((115.9-80)/115.9) above the historical average of 80%. If we use the S&amp;P500 as a proxy for total markets, it would need to fall to $1745.77 to be valued at the historical average levels using this metric. The present valuations, using this metric, are still higher than they were at the peak of the market in late 2007 (the total market cap was 110.10% of GDP then)!</p>
 <p>At the market’s bottom in 2009, the market was valued at 57% of US GDP (and GDP had contracted, as I’m sure you’re aware). To get to an undervaluation of 57% of current GDP, with no contraction in GDP, the S&amp;P500 would need to fall another 50.82% to $1243.86.</p>
 <h3 id="summary">Summary</h3>
