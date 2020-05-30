@@ -10,11 +10,12 @@
         $if(scripts)$ $scripts$ $endif$
 
         <!-- Social Meta Tags -->
-        <meta name=”og:title” content="$title$" /> 
+        <meta property=”og:title” content="$title$" /> 
         $if(description)$
-        <meta name=”og:description” content="$description$" /> 
+        <meta property=”og:description” content="$description$" /> 
         $endif$
-        <meta name=”og:image” content="$if(image)$$image$$else$https://willwolf.me/images/nyc.jpeg$endif$" /> 
+        <meta property=”og:image” content="$if(image)$$image$$else$https://willwolf.me/images/nyc.jpeg$endif$" /> 
+        <meta property=”og:url” content="https://willwolf.me$url$" /> 
         <meta name=”twitter:site” content="@throughnothing" /> 
         <meta name=”twitter:creator” content="@throughnothing" /> 
         <meta name=”twitter:card” content="summary" /> 
