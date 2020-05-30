@@ -6,7 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>$if(title)$ $title$ | willwolf.me $else$ willwolf.me $endif$</title>
         <link rel="stylesheet" href="/all.css" />
+
         $if(scripts)$ $scripts$ $endif$
+
+        <!-- Social Meta Tags -->
+        <meta name=”og:title” content="$title$" /> 
+        $if(description)$
+        <meta name=”og:description” content="$description$" /> 
+        $endif$
+        <meta name=”og:image” content="$if(image)$ $image$ $else$ https://willwolf.me/images/nyc.jpeg $endif$" /> 
+        <meta name=”twitter:site” content="@throughnothing" /> 
+        <meta name=”twitter:card” content="summary" /> 
+
     </head>
     <body>
 
