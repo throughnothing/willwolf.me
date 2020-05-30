@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Control.Monad (liftM)
 import           Data.Monoid (mappend)
+import           Data.Text (replace, unpack, pack)
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
 import           System.FilePath ( (</>), (<.>)
@@ -13,6 +14,7 @@ import Control.Applicative (Alternative (..))
 main :: IO ()
 main = hakyllWith configuration $ do
     let postsPattern = "posts/*.md"
+        postsFilesPattern = "posts/*/*"
 
     match "images/*" $ route idRoute *> compile copyFileCompiler
     match "assets/*" $ route idRoute *> compile copyFileCompiler
@@ -65,11 +67,11 @@ main = hakyllWith configuration $ do
     paginateRules paginate $ \page pattern -> do
         route $ idRoute
         compile $ do
-            posts <- recentFirst =<< loadAllSnapshots pattern "content" :: Compiler [Item String]
-
+            posts <- recentFirst =<< loadAllSnapshots pattern "raw"
             let ctx = (paginateContext paginate page)
                     <> defaultContext
-                    <> listField "posts" (field "content" (return . itemBody)) (return posts)
+                    -- <> listField "posts" (field "content" (return . itemBody)) (return posts)
+                    <> listField "posts" (postCtx) (return posts)
                     <> constField "title" (if page == 1 then "Home" else "Page " ++ show page)
 
             makeItem ""
@@ -79,10 +81,30 @@ main = hakyllWith configuration $ do
                 >>= relativizeAllUrls
 
     matchMetadata postsPattern (not . isDraft) $ do
-        route $ postsRoutes
-        postsCompiler
+        route $ setExtension "html"
+            `composeRoutes` dateFolders
+            `composeRoutes` dropPostsPrefix
+            `composeRoutes` appendIndex
+
+
+        compile $ do
+            getResourceBody
+                -- | Convert $ -> $$ and %%% -> $ in raw Markdown Body
+                >>= preparePostTemplateStrings
+                -- | Apply as template so template vars go to Markdown
+                >>= applyAsTemplate postCtx
+                -- | Then render the Pandoc
+                >>= renderPandoc
+                -- | Save a raw snapshot before goin through the template
+                >>= saveSnapshot "raw"
+                >>= loadAndApplyTemplate "templates/post.html" postCtx
+                >>= saveSnapshot "content"
+                >>= loadAndApplyTemplate "templates/default.html" postCtx
+                >>= relativizeAllUrls
+
+
                 
-    match (postsPattern <> "/*") $ do
+    match postsFilesPattern $ do
         route $ idRoute
             `composeRoutes` dateFolders
             `composeRoutes` dropPostsPrefix
@@ -101,24 +123,6 @@ main = hakyllWith configuration $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeAllUrls
 
-
-    where
-
-    postsRoutes = setExtension "html"
-        `composeRoutes` dateFolders
-        `composeRoutes` dropPostsPrefix
-        `composeRoutes` appendIndex
-
-    postsCompiler = 
-        compile $ do
-            pandocCompiler
-                >>= loadAndApplyTemplate "templates/post.html" postCtx
-                >>= saveSnapshot "content"
-                >>= loadAndApplyTemplate "templates/default.html" postCtx
-                >>= relativizeAllUrls
-
-
-
 postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier]]
 postsGrouper = liftM (paginateEvery 3) . sortRecentFirst
 
@@ -126,6 +130,16 @@ postsPageId :: PageNumber -> Identifier
 postsPageId n = fromFilePath $ if (n == 1) then "index.html" else "Page/" ++ show n ++ "/index.html"
 
 --------------------------------------------------------------------------------
+
+-- | Replaces "$" with "$$" to avoid templating, and uses "%%%VAR%%%" as template
+-- | replacing the "%%%" with a "$"
+preparePostTemplateStrings :: Item String -> Compiler (Item String)
+preparePostTemplateStrings = makeItem . unpack . replaceAll . pack . itemBody
+    where
+        replaceDollar = replace "$" "$$" 
+        replaceCustomTemplateVar = replace "%%%" "$"
+        replaceAll = replaceCustomTemplateVar . replaceDollar
+
 
 postCtx :: Context String
 postCtx

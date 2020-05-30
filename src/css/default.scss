@@ -82,6 +82,7 @@ hr.post-separator {
 .post img {
     display: block;
     margin: 30px auto;
+    max-width: 100%;
 }
 
 ul.posts {
@@ -103,11 +104,6 @@ ul.posts {
             text-align: right;
             color: desaturate(lighten($color_font, 45%), 70%);
         }
-        //  .postDate::after {
-        //     color: desaturate(lighten($color_font, 45%), 80%);
-        //     margin-left: 8px;
-        //     content: "\00BB"
-        // }
     }
 }
 

@@ -16,7 +16,7 @@ echo "---" >> ${NEWFILE}
 echo "title: ${TITLE}" >> ${NEWFILE}
 echo "date: ${DATE}" >> ${NEWFILE}
 echo "draft: true" >> ${NEWFILE}
-echo "tags: ${DATE}" >> ${NEWFILE}
+echo "tags:"
 echo "---" >> ${NEWFILE}
 
 ${EDITOR} ${NEWFILE}
