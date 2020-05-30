@@ -49,83 +49,124 @@
         <div class="content">
             
   <div class="post">
-  <h1><a href="../../2017/11/08/java-8-coding-guide">Java 8 Coding Guide</a></h1>
-  <span class="post-date">08 Nov 2017</span>
+  <h1><a href="../../2015/06/14/when-you-look-back-on-this-moment-in-history">When You Look Back On This Moment In History</a></h1>
+  <span class="post-date">14 Jun 2015</span>
   <hr />
   <div class="tags">
-    <a title="All pages tagged 'programming'." href="../../archive/programming/">programming</a>, <a title="All pages tagged 'java'." href="../../archive/java/">java</a>
+    <a title="All pages tagged 'economics'." href="../../archive/economics/">economics</a>
   </div>
-  <p>I’m getting into Java services at work, and I put together a guide with some principles / best practices to follow for Java 8.  A lot of these things become much more possible with Java 8 than they would have been in earlier versions of Java, but they can also be applied to other programming languages and technologies.</p>
-<p>I wrote this guide based on a desire to have code that is easy to reason about and understand, which means it will be easy for new folks to jump into the codebase over time, and also with a desire to quickly produce high quality code.  Performance is not the major concern of this guide.</p>
-<p>Many of the principles and ideas come from my foray into functional programming with both <a href="https://www.haskell.org">Haskell</a> and <a href="http://www.purescript.org">Purescript</a>, and I just find that these concepts are the way I prefer to program now.  Following these principles gives me much more confidence in the correctness of my code, and gives me peace of mind knowing that I’m giving myself the best chance of understanding the code when I come back to it months or years later.</p>
-<p>Without further ado, you can check out the guide <a href="https://gist.github.com/throughnothing/4a14dd3e4ab5e68eb154123ad11dae79">here</a> (inlined below).</p>
-<p></p>
-<hr />
-<p></p>
-<h1 id="java-8-coding-guide">Java 8 Coding Guide</h1>
-<p>This coding guide was written for a Java 8 project, but contains principles that are valid in many languages. It is aimed at producing code that is easy to reason about, easy to validate and test, easy to maintain, and easy to avoid common bugs and pitfalls.</p>
-<h2 id="avoid-explicit-null-or-dont-use-null">Avoid explicit <code>null</code> (or, Don’t use <code>null</code>)</h2>
-<p><code>Null</code> is famously the <a href="https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/">“billion dollar mistake”</a> (and that’s probably an under-estimation!). Don’t use <code>null</code> as a way of representing error or failure, and also don’t use <code>null</code> as a way to avoid passing a certain argument to a function. Essentially you should never explicitly use a <code>null</code> value unless you are checking that something is not <code>null</code>. Even in those cases, it should probably be handled better by an <code>Option&lt;T&gt;</code>.</p>
-<h3 id="resources">Resources</h3>
+  <p><a href="http://www.hussmanfunds.com/wmc/wmc150615.htm">When You Look Back On This Moment In History</a></p>
+<p>A great read from John Hussman this weekend, as always! What will you think when you look back on this moment in history? A few select quotes below:</p>
+<blockquote>
+<p>Among the measures best correlated with actual subsequent S&amp;P 500 total returns, capitalization-weighted market indices such as the S&amp;P 500 were more richly valued in only 54 weeks of history, 21 of which represented the final advance to the 2000 market peak, with the remaining 33 representing the retreat from that high to present valuation levels, on the way to a 50% loss in the S&amp;P 500 Index and an 83% loss in the Nasdaq 100 Index.</p>
+</blockquote>
+<blockquote>
+<p>When you look back on this moment in history, remember that the valuation of the median stock was never higher. Ever. Even at the 2000 peak.</p>
+</blockquote>
+<blockquote>
+<p>Forget, for a moment, about the next 5 years, 10 years, or even 15 years. Suppose that the market was to experience a secular low no sooner than 20 years from today. What would the total return of the S&amp;P 500 be in the interim? Well, we know that earnings, revenues, and nominal GDP have historically proceeded at a peak-to-peak growth rate of 6% annually across economic cycles. That growth rate has been gradually slowing in recent decades, and there are strong reasons beyond inflation – rooted in labor force growth and real productivity growth – to be more conservative. But suppose, as optimists, we assume the same 6% nominal growth rate in the future. In that case, the percentage change in the S&amp;P 500 over the 20 year period to that secular low would be (1.06)*(¼)^(1/20)-1 = a loss of -1.1% annually. Fortunately, one would expect dividend yields to contribute enough to bring the total return of the S&amp;P 500 just above zero.</p>
+</blockquote>
+<blockquote>
+<p>When you look back on this moment in history, remember that S&amp;P 500 returns had never materially exceeded zero over the decade following similar valuations.</p>
+</blockquote>
+<blockquote>
+<p>Risk preferences aren’t measured by what the Fed does, but by what investors do.</p>
+</blockquote>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2015/06/03/making-education-free">Making Education “Free”!</a></h1>
+  <span class="post-date">03 Jun 2015</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'economics'." href="../../archive/economics/">economics</a>, <a title="All pages tagged 'education'." href="../../archive/education/">education</a>
+  </div>
+  <p>I recently came across <a href="https://www.telesurtv.net/english/news/Chile-to-Have-Free-Higher-Education-by-2016-20141204-0049.html">this article</a> discussing Chile’s move to make higher education “free”. From the article:</p>
+<blockquote>
+<p>“In March 2016 we will start with free higher education now that we have the resources,” <a href="https://www.telesurtv.net/english/news/Chile-to-Have-Free-Higher-Education-by-2016-20141204-0049.html">said Rodrigo Peñailillo, Chile’s Minister of Interior</a> in early December following approval of a corporate tax hike that will generate $8.2 billion in new revenue.</p>
+</blockquote>
+<p>What I find interesting about these types of discussions is that they only seem to focus on the cost of the service in question. In reality, when a consumer is making a decision about a product or service she generally has to weigh two things: cost and quality.</p>
+<p>The hidden assumption in these discussions is that no matter what we do to the cost side of the equation, the quality side of the equation will remain the same, or at least stay on its current course. In our day-to-day lives, however, we instinctively know this to not be true. We weigh cost against quality every day when we decide what to eat, which mode of transportation to use, which phone to buy, etc., and yet our public discourses on changing the cost of certain services through government intervention largely ignores the potential impact on quality. I think its worth investigating this hidden assumption on quality a little further.</p>
+<h2 id="quality">Quality</h2>
+<p>I know that I can spend more money to get higher quality, grass-fed beef, but I don’t always do it. Sometimes the cost is just not worth it to me. Other times it may be. Some people think I’ll be healthier if I eat only grass-fed beef, and others think its a waste of money and doesn’t make a difference.</p>
+<p>But what would happen if we all decided that grass-fed beef was healthier for us, and that getting more people to eat grass-fed beef would increase our vitality, and longevity. In order to help increase our health and quality of life, we decide that our government should tax corporations to make grass-fed beef “free” for everyone, so that we can all enjoy the wonderful health benefits and live happier lives.</p>
+<p>Of course, we all know that nothing is really free, and that under this scheme, the beef will just be paid for by corporations instead of directly by the consumers. Fundamentally, this is a massive change in the pricing mechanism of the grass-fed beef market. What would the effects of such a drastic shift in the pricing mechanism be, not just on the grass-fed beef market, but on the economy as a whole?</p>
+<p>First off, it’s highly likely that demand for grass-fed beef would skyrocket. Who would buy grain-fed beef, when the grass-fed variety is free? This would be a boon for grass-fed beef producers, and a depression for grain-fed beef producers (who would likely begin restructuring their business to provide grass-fed beef). One issue, however, is that the grass-fed producers could not immediately meet the surge in demand, so there would be shortages in grass-fed beef. Previously, anyone who wanted to pay for the luxury of grass-fed beef could get it it, but now almost no one can. This would, of course, lead to a black-market, where those with money could buy grass-fed beef, since the store shelves would be empty of it. It would also incent people to pick up as much grass-fed beef as they can when its available so they can sell it on the black market to those who really want it.</p>
+<p>So far, the quality of the beef hasn’t really been affected, but the availability has been greatly affected. For those buying on the black-market, the price has also increased compared to what they used to pay. Next, let’s think about how the grass-fed beef producers are getting paid.</p>
+<p>Since grass-fed beef can’t be produced for free, the producers still need to at least have their costs met for raising cows and producing grass-fed beef, or they will stop making it and go out of business. As we said earlier, they will be paid by a tax on corporations. As the demand surges for the “free” grass-fed product, however, do the corporate tax revenues surge in lock-step? Obviously not.</p>
+<p>Not only that, but corporations will have all sorts of new and different incentives to avoid this new tax. Corporations have a knack for getting pretty creative when it comes to limiting their costs, and taxes are one of their bigger costs. They may decide to invest more in marketing and R&amp;D to reduce their bottom line (on paper, at least), so that their tax burden doesn’t really change at all. Corporations may also decide that they need to lay people off in an effort to reduce costs to keep their post-tax profits and margins at similar levels as before. This will likely reduce the quality of their products or services, which may put downward price pressure on their goods.</p>
+<p>So we see that the demand for the grass-fed product goes up since the price is now $0, and we see that the tax income to pay for the product is completely disconnected from this demand surge. So how can we actually pay for the production needed to meet the new demand?</p>
+<p>We might now need to tell the grass-fed beef producers that we only have $X amount of money coming in as tax revenue for this program, so they will be paid accordingly, based on our ability to pay. As we said before, however, the tax revenue from a different sector of the economy is in no way linked to the demand for grass-fed beef, so the $X amount of money collected will not be sufficient to pay the producers for their actual costs of producing the beef.</p>
+<p>This means the grass-feed beef producers will have to either go out of business and shut down, lower their costs, or convince us that we need to pay them more.</p>
+<p>None of these solutions are good. If they shut down, nobody gets any grass-fed beef, and we’ve failed at our goal to make us all healthier and live longer. Now, in fact, if the original hypothesis for this program is correct, we’ll all be forced to live less healthy lives, as nobody can get grass-fed beef! This is the worst case outcome for the the quality of grass-fed beef…it’s now completely non-available. (In reality, however, this scenario would lead to a black-market for grass-fed beef that ‘illegal’ producers would sell goods on to those who still want grass-fed beef anyway, and the prices would, ironically, be higher).</p>
+<p>If the producers decide to lower their costs, this directly impacts the quality of the end product. They will need to find creative ways to cheapen the cost of producing “grass-fed” beef, which will ultimately alter the definition of what “grass-fed” beef really means. Do they add in some grain-feeding to lower their costs? Do they find cheaper ways to grow and fertilize their grass? Do they buy lower quality soil? They probably do some combination of all of these things, because somehow, they have to lower their costs to stay in business!</p>
+<p>Maybe the producers convince us that we really just have to find a way to pay them more, or else the quality of our grass-fed beef will suffer, and so will our health. We decide that we just have to raise taxes somewhere else in the economy to pay for the beef quality that we know we deserve. Now this vicious cycle happens all over again, because the revenue from this newly taxed sector will also not change in lock-step with the (virtually unlimited) demand for “free” grass-fed beef. In addition to this problem, we’re now deciding to make more and more sectors of the of the economy less healthy to provide us with our coveted grass-fed beef. Is this worth it?</p>
+<h2 id="is-this-what-we-want">Is this what we want?</h2>
+<p>I’ve focused above on a simple analogy with grass-fed beef, but I think its easy to see how this same logic would apply to anything else, be it education, health care, or internet service. When we play with the nobs of the cost structure for a good or service, the quality will necessarily be affected, very likely in a negative manner.</p>
+<p>We’ve seen this very clearly over the last 40+ years with healthcare in America. Ironically, our policies that focused on keeping costs low have not only had a negative impact on quality, but they’ve simultaneously caused costs to soar! While an argument can be made that the quality of healthcare has gone up over this time, I think this is largely due to the amazing march of technological innovation. Clearly, the increase in quality is not commensurate to the increase in cost! (For more on this topic with regards to healthcare, check out <a href="https://www.amazon.com/Catastrophic-Care-Everything-Think-Health/dp/034580273X/ref=sr_1_1?ie=UTF8&amp;qid=1431201173&amp;sr=8-1&amp;keywords=catastrophic+care">Catastrophic Care</a>)</p>
+<p>I argue that by shifting the cost of a good or service away from the consumers of that good or service, we create a malfunctioning price system that necessarily raises costs and lowers quality. Is that really what we want to see in the long term for our education system?</p>
+<h2 id="what-do-we-really-want">What do we really want?</h2>
+<p>I think what we all really want is a decreasing cost of education coupled with a rising quality of that education. A properly function price system provides exactly this over the long term. On the other hand, I believe I’ve outline why government schemes to provide ‘free’ education (or any other service) will actually have the exact opposite effect in the long run.</p>
+<p>In marketplaces with function price systems we tend to see aggressive and competitive battles to raise the quality of goods while simultaneously decreasing the costs of those goods. By far the best example of this process is in the technology sector. Looking at the cost of smartphones, or computers over time, we see incredible decreases in cost and simultaneous increases in quality. This has the effect of bringing higher quality products and services to more and more people over time in an incredible march towards a higher standard of living for all.</p>
+<p>We see exactly this with the explosion of smartphone adoption in the third world and emerging markets. Smartphones were initially toys for the rich in the first world, but will soon be within reach of almost everyone. This wonderful fact will rapidly increase the standard of living for billions around the world, and is not the result of a tax scheme to provide free pocket computers to everyone. It is the result of a long, steady, and continuous march of a market with a functioning price system that has driven down costs while driving up quality over several decades.</p>
+<h2 id="making-education-better-and-more-available">Making education better and more available</h2>
+<p>Ultimately, I’d love to see education get better and more available to as many people as possible. This is precisely why I don’t support tax schemes to disconnect consumers and producers from the price mechanism of the education market. Doing this may be a temporary boon (as it was for the grass-fed producers), but is clearly worse for the long run.</p>
+<p>We already have lots of problems with the current price mechanism in education due to student loan schemes and subsidies, but I will leave that for another post. Anything that makes the costs more, rather than less, transparent will, I think, strengthen the pricing mechanism, and the long term out look for quality education for everyone.</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2015/03/17/how-the-government-and-the-fed-are-expediting">How the Government (and the Fed) are expediting the Robot Jobpocalypse</a></h1>
+  <span class="post-date">17 Mar 2015</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'robots'." href="../../archive/robots/">robots</a>, <a title="All pages tagged 'jobs'." href="../../archive/jobs/">jobs</a>, <a title="All pages tagged 'fed'." href="../../archive/fed/">fed</a>, <a title="All pages tagged 'government'." href="../../archive/government/">government</a>, <a title="All pages tagged 'automation'." href="../../archive/automation/">automation</a>
+  </div>
+  <p>Many people today seem to be lamenting the coming “Jobpocalypse” – that time where robots, technology, and automation more generally, replace all of our jobs, leaving us unemployed and impoverished. Nevermind that we’ve never seen technology eliminate jobs in net, as Paul Graham <a href="https://twitter.com/paulg/status/577239973650399232">mentioned yesterday</a>, let’s just look at what might be expediting the current trend of robots and job automation, at the expense of jobs in certain sectors.</p>
+<p>What is the main factor that would drive a business to look for robots to replace jobs that humans currently do? It’s pretty simple: <strong>Are the robots cheaper than humans at the given task?</strong></p>
+<p>Next we should ask what factors determine whether robots can do a given job cheaper than humans? I think this simply boils down to:</p>
 <ul>
-<li><a href="https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained">https://github.com/google/guava/wiki/UsingAndAvoidingNullExplained</a></li>
-<li><a href="http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html">http://www.oracle.com/technetwork/articles/java/java8-optional-2175753.html</a></li>
-<li><a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare</a></li>
+<li>The cost of human labor</li>
+<li>The cost of capital (robots, hardware, software, etc.)</li>
 </ul>
-<h2 id="expressions-over-statements">Expressions over statements</h2>
-<p>Expressions are declarative and evaluate to (and return) a value, while statements are imperative bits of code that perform actions. Because of this, expressions are easier to reason about, debug, and verify correctness for.</p>
-<p>A simple example is an <code>if</code> statement, vs an <code>if</code> expression. <code>If</code> in java does not return a value, nor does java enforce that an <code>if</code> have an <code>else</code> branch. Additionally, if there is an <code>else</code> branch, it does not have to result in the same type of value as the <code>if</code> branch. This makes if statements hard to reason about and understand. The ternary form <code>predicate ? value : value</code> is preferable to <code>if</code>/<code>then</code> statements.</p>
-<p>In a language like Java, statements will be required, but we should isolate those to their own, small, methods, and keep their surface area as small as possible to reduce risk and complexity from these parts of the code.</p>
-<h3 id="resources-1">Resources</h3>
-<ul>
-<li><a href="https://fsharpforfunandprofit.com/posts/expressions-vs-statements/">https://fsharpforfunandprofit.com/posts/expressions-vs-statements/</a></li>
-<li><a href="https://www.cs.ucf.edu/~dcm/Teaching/COT4810-Fall%202012/Literature/Backus.pdf">https://www.cs.ucf.edu/~dcm/Teaching/COT4810-Fall%202012/Literature/Backus.pdf</a></li>
-</ul>
-<h2 id="avoid-explicit-loops">Avoid explicit loops</h2>
-<p>With Java 8, we have streams, and should no longer need explicit loops. Loops are very repetetive, and error prone, so we should leverage abstractions that handle looping for us to avoid bugs, verbosity, and complexity in our code.</p>
-<p>There may be some cases where loops are more desirable (possibly for performance), but they should be avoided until it is clear they are actually needed.</p>
-<h3 id="resources-2">Resources</h3>
-<ul>
-<li><a href="http://www.deadcoderising.com/java-8-no-more-loops/">http://www.deadcoderising.com/java-8-no-more-loops/</a></li>
-<li><a href="https://martinfowler.com/articles/refactoring-pipelines.html">https://martinfowler.com/articles/refactoring-pipelines.html</a></li>
-</ul>
-<h2 id="use-immutable-data-structures">Use immutable data structures</h2>
-<p>We should leverage <code>guava</code>’s immutable data structures as much as possible to avoid complicated bugs related to mutating state.</p>
-<p>Additionally, we should leverage Lombok’s <code>@Value</code> objects as much as possible to make our own data objects immutable.</p>
-<h3 id="resources-3">Resources</h3>
-<ul>
-<li><a href="https://github.com/google/guava/wiki/ImmutableCollectionsExplained">https://github.com/google/guava/wiki/ImmutableCollectionsExplained</a></li>
-<li><a href="https://projectlombok.org/features/Value">https://projectlombok.org/features/Value</a></li>
-</ul>
-<h2 id="dont-throw-exceptions---use-values">Don’t throw exceptions - use values!</h2>
-<p>In general, we should never throw an exception of our own. Obviously we will use libraries that throw exceptions. These exceptions should be caught directly in the function/method using the library, and turned into values (to be returned) as much as possible.</p>
-<p>This is because exceptions are like <code>goto</code> statements, which make the flow of your program much more difficult to reason about. Every function that throws an exception can return a value in 2 ways, through the “normal” return flow, or through an exception, and every user of that function has to think about both cases. It is generally easier to reason about functions that only return values (something like vavr’s <a href="http://www.baeldung.com/vavr-either">Either</a> or <a href="http://www.baeldung.com/vavr-try">Try</a> types work very well for this). This also makes it much easier to leverage Java 8’s lambda-using utilities, as they don’t like accepting <code>Function</code>s that throw exceptions.</p>
-<h3 id="resources-4">Resources</h3>
-<ul>
-<li><a href="https://www.joelonsoftware.com/2003/10/13/13/">https://www.joelonsoftware.com/2003/10/13/13/</a></li>
-<li><a href="http://www.baeldung.com/vavr-try">http://www.baeldung.com/vavr-try</a></li>
-<li><a href="http://www.baeldung.com/vavr-either">http://www.baeldung.com/vavr-either</a></li>
-<li><a href="https://fsharpforfunandprofit.com/rop/">https://fsharpforfunandprofit.com/rop/</a></li>
-</ul>
-<h2 id="fail-early-enforce-invariants">Fail early, enforce invariants</h2>
-<p>It is always best to fail as early as possible, at the soonest point that you find something is wrong. This often means that we should validate all of our data up front, to decouple validation from the business logic that needs to use the values in question.</p>
-<p>Additionally, the more we can make fail at compile time, rather than run time, the better off we will be at finding bugs earlie. Use Java’s typesystem as much as you can to enforce invariants statically!</p>
-<p>For our own data objects, we should have strong validation of each object, so that once we’ve constructed one, we know it will have good data in the rest of our program. Failed construction (on validation errors) should also be expressed by returning values, rather than exceptions. Something like vavr’s <a href="../../page/2/">Validation</a> type is useful for this purpose. Make it impossible to construct a “bad”/invalid data object!</p>
-<h3 id="resources-5">Resources</h3>
-<ul>
-<li><a href="https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html">https://www.leepoint.net/principles_and_practices/40fail-early-fail-often.html</a></li>
-<li><a href="https://softwaremill.com/javaslang-data-validation/">https://softwaremill.com/javaslang-data-validation/</a></li>
-</ul>
-<h2 id="composition-over-inheritance">Composition over Inheritance</h2>
-<p>Inheritance can be very fragile, and make refactoring of complex code involving inheritance hierarchies very difficult to do safely and confidently. Composition (and in java, Interfaces) should be favored over inheritence where possible.</p>
-<p>Often inheritance is required by certain frameworks / libraries, but we should limit the depth of inheritance hierarchies that we use as much as possible.</p>
-<p>Composition, via composing interfaces or composable types, allows for more design flexibility, and easier, more confident refactoring.</p>
-<h3 id="resources-6">Resources</h3>
-<ul>
-<li><a href="https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose">https://www.thoughtworks.com/insights/blog/composition-vs-inheritance-how-choose</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Composition_over_inheritance">https://en.wikipedia.org/wiki/Composition_over_inheritance</a></li>
-<li><a href="https://variadic.me/posts/2014-03-28-composition-over-inheritance.html">https://variadic.me/posts/2014-03-28-composition-over-inheritance.html</a></li>
-</ul>
+<p>When the cost of labor rises, and the cost of capital decreases, you would expect to see a surge in investments to automate tasks away from humans.</p>
+<p>I would argue that the government (in the US, anyway) is, and has been, making the cost of human labor more expensive through minimum wage increases, healthcare costs, and rising taxes (payroll, etc.) in general. On the capital cost side, the government, in cooperation with the Fed, has been on a 45-year tear of falling interest rates, which makes money cheaper, decreases the cost of debt, and ultimately decreases the cost of capital.</p>
+<p>It’s pretty clear that we’re going to see more and more automation, and the government seems to be doing what it can to expedite the process as much as possible. While I’m not a fan of government intervention, I think the coming automation will be great for society, as I’ve written about before. As with past advancements, we’ll look back, glad we no longer have to till the fields, or drive ourselves around. We’ll be solving bigger and better problems, and that’s exciting.</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2015/03/02/failing-wars-of-dollars-the-bitcoin-price-to-come">Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</a></h1>
+  <span class="post-date">02 Mar 2015</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'bitcoin'." href="../../archive/bitcoin/">bitcoin</a>, <a title="All pages tagged 'crypto'." href="../../archive/crypto/">crypto</a>, <a title="All pages tagged 'money'." href="../../archive/money/">money</a>, <a title="All pages tagged 'history'." href="../../archive/history/">history</a>
+  </div>
+  <p><a href="https://www.cryptocoinsnews.com/failing-wars-dollars-bitcoin-price-come/">Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</a></p>
+<blockquote>
+<p>The price of Bitcoin to Come is 1 XBT to 1 XBT. Deflationary cryptocurrency is an option, and it peacefully coexists with its inflationary counterpart. With Bitcoin, no central authority can inflate the supply and force the holders to fund a war. One bitcoin will be the same amount of the total supply of bitcoins today as it will be in 100 years. If not Bitcoin, then something else – perhaps whatever the AI robot overlords decide.Fiat currency is a spectacular tool for elites to steer the economy and fund war. Bitcoin allows you to withdraw from imperialism without moving across political borders.</p>
+</blockquote>
+<p>Really well-written piece on the history of Fiat currency in the United States, and its continual use as a means to fund war and violence.</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2015/02/24/theres-always-a-reason-why-this-time-is">There's always a reason why "This time is different"</a></h1>
+  <span class="post-date">25 Feb 2015</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'economics'." href="../../archive/economics/">economics</a>
+  </div>
+  <p>And, I think it’s usually wrong. I was thinking about my previous post on productivity increases, and realizing a lot of people would probably argue that “this time is different.”</p>
+<p>Essentially the argument would be that, because technology is moving so much faster now, and we’re automating things at a pace never before seen, that the “harm” done from these productivity increases will be more dramatic than ever before.</p>
+<p>I tend to agree with the fact that we are moving faster now, we’re automating faster, and we’re increasing productivity faster, but I don’t agree that this is harmful. Nor do I agree that the outcome of these productivity improvements will be any different from the millions of improvements of the past 10,000 to 1 million years of human advancement. Of course every moment in time is different from any other historical example, but to think the outcomes will be drastically different seems naive.</p>
+<p>To me, its actually exciting that productivity is increasing that quickly. Imagine what we’ll be doing when nobody has to drive cars anymore, or possibly even own them. When businesses can order something online and have it there by drone in less than 30 minutes (when they can’t print what they need on their 3-d printer). Conversely, imagine if you still had to pay a human being to be your alarm clock, or if a person had to hand-deliver your email communications.</p>
+<p>This time likely won’t be different. People will find ways to adapt, and society won’t be worse off for the productivity gains, but will be in awe of how we used to do things before them.</p>
 </div>
 
   <hr class="post-separator" />

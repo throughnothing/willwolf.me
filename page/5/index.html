@@ -49,17 +49,184 @@
         <div class="content">
             
   <div class="post">
-  <h1><a href="../../2016/01/09/bitcoin-in-the-event-of-a-government-crackdown">Bitcoin in the event of a Government crackdown</a></h1>
-  <span class="post-date">10 Jan 2016</span>
+  <h1><a href="../../2012/03/16/git-processes-scripts-and-ideas">Git Processes, Scripts and Ideas</a></h1>
+  <span class="post-date">16 Mar 2012</span>
   <hr />
   <div class="tags">
-    <a title="All pages tagged 'bitcoin'." href="../../archive/bitcoin/">bitcoin</a>, <a title="All pages tagged 'crypto'." href="../../archive/crypto/">crypto</a>, <a title="All pages tagged 'government'." href="../../archive/government/">government</a>
+    <a title="All pages tagged 'git'." href="../../archive/git/">git</a>, <a title="All pages tagged 'programming'." href="../../archive/programming/">programming</a>
   </div>
-  <p>I was re-reading an old <a href="http://globaleconomicanalysis.blogspot.com/2013/04/mish-interview-with-bitcoin-jesus.html">Mish article</a> on Bitcoin, and read this phrase from Mish:</p>
-<blockquote>
-<p>Yet, should that happen or even be suspected, how long will it take before there is a government crackdown on bitcoin? Should such a thing happen, the value of bitcoin can plunge to next to nothing if confidence is lost.</p>
+  <p>Lately I’ve been refining some of my git processes (as well as learning a lot about git along the way). I thought I’d write up a post to share some of the ways i’ve been using git.</p>
+<h2 id="workflow">Workflow</h2>
+<p>Our typical workflow at <a href="https://www.crowdtilt.com">crowdtilt</a> is pretty standard. We have a <code>dev</code> branch, a <code>master</code> branch, and various feature/topic branches. We also make heavy use of github for pull requests/code reviews.</p>
+<p>When I go to develop a new feature/bugfix, I start by creating a new branch off of the latest <code>dev</code>, and start coding. I often make many small commits along the way because I’m a strong believer in commit early, commit often. I also push my branch to github pretty frequently just to be on the safe side.</p>
+<p>Once my feature branch has been tested, and is ready to be merged into <code>dev</code>, I rebase all of my small commits into 1. We try to keep all of our PR’s to 1 commit just to keep our git history clean, useful, and readable as a history of concise and (hopefully) small changes. To do this, I have been simply using:</p>
+<pre><code>$ git rebase -i dev</code></pre>
+<p>This will drop me into vim with a lits of all the commits between <code>dev</code>’s <code>HEAD</code> and my current branch’s <code>HEAD</code>. It will look something like this:</p>
+<pre><code>pick 1dea3ff Commit #1
+pick 57a5a28 Commit #2
+pick 3f21ade Commit #3</code></pre>
+<p>I simply squash all the commits into one by replacing <code>pick</code> with <code>s</code> on all but the first line. This gives me something like this:</p>
+<pre><code>pick 1dea3ff Commit #1
+s 57a5a28 Commit #2
+s 3f21ade Commit #3</code></pre>
+<p>This tells git that I want to squash all of these commits into one. Once I quit and save it’ll then let me give a new commit message for my new mega-commit.</p>
+<p>Here I try to follow convention with a short summary on the first line, and then a lengthier description describing my feature/bugfix/whatever in a paragraph below that.</p>
+<p>Once I have my branch neatly tidied up with one descriptive commit, it’s time to pull request.</p>
+<h2 id="pull-requests-and-hub">Pull Requests and hub</h2>
+<p>I love the github web interface for reviewing code and checking out diffs, but it is very tedious to go to the website, find your branch, and make the pull request through the web interface. Enter <a href="https://github.com/defunkt/hub">hub</a> – a wonderful command-line tool that lets you create pull requests (amongst lots of other cool things) right from the command line.</p>
+<p>To do a pull request right from my coding directory, I can simply run:</p>
+<pre><code>$ hub pull-request &quot;Pull Request Title&quot;</code></pre>
+<p>The caveat here is that hub (and github, too) default all pull requests to merge into the <code>master</code> branch. We always merge into <code>dev</code>, and then merge <code>dev</code> into <code>master</code> when we are ready to deploy changes to production (I’ll talk more about our deploy processes in another article). So to get it to merge into <code>dev</code>, we must run the following:</p>
+<pre><code>$ hub pull-request &quot;Pull Request Title&quot; -b dev</code></pre>
+<p>This is closer to what we need, but by default what this will do is setup a pull request on github from <code>throughnothing:feature-branch</code> to <code>crowdtilt:dev</code>. It does this because it assumes that I want to do a pull request from my users fork to the original users repository. We don’t really have each developer fork our repos, we just all work on the same repo in our own branches, so we really want it to do a pull-request from <code>crowdtilt:feature-branch</code> to <code>crowdtilt:dev</code>. This means we need:</p>
+<pre><code>$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch</code></pre>
+<p>It seemed really simple at first, but now it’s a lot to type. Time for some <code>~/.bashrc</code> magic. To make things as simple as possible for our development process, I’ve written this little bash function to put in our <code>~/.bashrc</code> files to smooth things out:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="../../page/5/#cb7-1"></a><span class="fu">pullreq()</span> <span class="kw">{</span></span>
+<span id="cb7-2"><a href="../../page/5/#cb7-2"></a>    [ <span class="ex">-z</span> <span class="va">$BRANCH</span> ] <span class="kw">&amp;&amp;</span> <span class="va">BRANCH=</span><span class="st">&quot;dev&quot;</span></span>
+<span id="cb7-3"><a href="../../page/5/#cb7-3"></a>    <span class="va">HEAD=$(</span><span class="fu">git</span> symbolic-ref HEAD <span class="op">2&gt;</span> /dev/null<span class="va">)</span></span>
+<span id="cb7-4"><a href="../../page/5/#cb7-4"></a>    [ <span class="ex">-z</span> <span class="va">$HEAD</span> ] <span class="kw">&amp;&amp;</span> <span class="bu">return</span> <span class="co"># Return if no head</span></span>
+<span id="cb7-5"><a href="../../page/5/#cb7-5"></a>    <span class="va">REMOTE=</span><span class="kw">`</span><span class="fu">cat</span> .git/config <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;remote </span><span class="dt">\&quot;</span><span class="st">origin</span><span class="dt">\&quot;</span><span class="st">&quot;</span> -A 2 <span class="kw">|</span> <span class="fu">tail</span> -n1 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/.*:\([^\/]*\).*/\1/'</span><span class="kw">`</span></span>
+<span id="cb7-6"><a href="../../page/5/#cb7-6"></a></span>
+<span id="cb7-7"><a href="../../page/5/#cb7-7"></a>    <span class="ex">hub</span> pull-request -b <span class="va">$BRANCH</span> -h <span class="va">$REMOTE</span>:<span class="va">${HEAD#</span>refs/heads/<span class="va">}</span> <span class="va">$1</span></span>
+<span id="cb7-8"><a href="../../page/5/#cb7-8"></a><span class="kw">}</span></span></code></pre></div>
+<p>This accepts a <code>BRANCH</code> environment variable that can be set, but will default to <code>dev</code> (which is pretty much 90+% of our use cases). It also parses the github user that the origin of the repository</p>
+<p>Not only has <code>hub</code> greatly streamlined our pull request process, but when combined with the bash function, it eliminates errors of pull requesting feature branches to be merged into <code>master</code> (and even having them <em>accidentally</em> merged into master directly – that never happens, right?) instead of <code>dev</code>.</p>
+<p>Using this script, when we’re ready to do a deploy and merge <code>dev</code> into <code>master</code> we simply can run (from the <code>dev</code> branch):</p>
+<pre><code>$ BRANCH=master pullreq</code></pre>
+<p>And the pull request will be created to merge dev into master so we can review it on github.</p>
+<h2 id="managing-branch-chaos">Managing Branch Chaos</h2>
+<p>I said earlier that I was a believer in commit early, commit often. Well, I’m also a believer in small branches. We pretty much make branches for everything. Even if it’s just a simple css change, or a one-line bug-fix, I like to quarantine changesets into a branch of their own. So many times i’ll be caught in the middle of a simple change and have to go tend to something else. Having branches lets me quickly commit “saving my place”, or “WIP” in my branch, and get to work looking at something in another branch. My feature branch will be there waiting for me when I’m ready to go back to it.</p>
+<p>Additionally, smaller branches make for smaller merges, which are easier to review, and less prone to introducing glaring errors that could have been caught.</p>
+<p>A side-effect of all this branching and pushing and merging is that you can quickly get confused about which branches have been merged and which haven’t. The list of branches shown on github and on the command line grows to make it harder for you to find the branches you still care about. So of course, we can delete the branches as we go, but this is very tedious to do so frequently as you have to delete the branch locally, and on github:</p>
+<pre><code>$ pullreq
+# Review code on github
+$ git checkout dev &amp;&amp; git merge feature-branch &amp;&amp; git push origin dev
+$ gut branch -D feature-branch  # delete feature-branch locally
+$ git push origin :feature-branch # delete feature-branch on github</code></pre>
+<p>Enter more <code>~/.bashrc</code> goodness. I wanted a way to streamline this process as well because i was typing the above waaay too frequently, so I came up with two handy bash functions:</p>
+<pre><code>git_purge_local_branches() {
+  [ -z $1 ] &amp;&amp; return
+  BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
+  echo &quot;Running: git branch -d $BRANCHES&quot;
+  git branch -d $BRANCHES
+}
+
+git_purge_remote_branches() {
+  [ -z $1 ] &amp;&amp; return
+  git remote prune origin
+
+  BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
+  echo &quot;Running: git push origin $BRANCHES&quot;
+  git push origin $BRANCHES
+}</code></pre>
+<p><code>git_purge_local_branches()</code> will – as the name implies – purge local branches that have been merged into the branch you give it. And <code>git_purge_remote_branches()</code> will do the same but it will remove the branches from the <code>origin</code> remote. So every now and then, when we get a lot of branches hanging around getting in our way, we can clean them up with:</p>
+<pre><code>$ git_purge_local_branches dev
+$ git_purge_remote_branches dev</code></pre>
+<p>And of course, because running 2 commands just became too much, I created <code>git_purge</code>…one purge to rule them all:</p>
+<pre><code>git_purge() {
+  branch=$1
+  [ -z $branch ] &amp;&amp; branch=&quot;dev&quot;
+  git_purge_local_branches $branch
+  git_purge_remote_branches $branch
+}</code></pre>
+<p>So now its super easy to manage our branch chaos. When I start to see too many branches building up, I can simply <code>git_purge</code> and it’ll wipe out any branches locally and on the origin that have already been merged into dev. Then we’re back to a blissful state of branch zen.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>That pretty much sums up my current git processes. I really enjoy how streamlined things have become, how well our processes work, and how easy it is to keep our branches clean and clutter-free while at the same time encouraging us to branch, branch, branch!</p>
+<p>How are you using git? Tell me how I can make my workflow even better and more kick-ass :)</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2011/07/15/city-life-dc">City Life - DC</a></h1>
+  <span class="post-date">15 Jul 2011</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'life'." href="../../archive/life/">life</a>
+  </div>
+  <p>We’ve moved.</p>
+<p>For the first time in my life I now live in a big city. It’s only been a week, but so far I’m loving it. We moved into the Dupont area of DC last Saturday, and have been getting settled in all week. I most enjoy taking Belle (our white Maltise) on multiple walks during the day throughout the city. Night-time cruises on my bike have also been great as the weather has been perfect all week.Our living space is a little bit smaller than before, but I consider that a bonus. It forces us to re-evaluate our possessions, and find what is necessary. We got rid of a bed, a dresser, and downsized our wardrobes and kitchen things. It actually feels like we have more space, and getting rid of old junk is very freeing.</p>
+<p>As for the city life, there are so many people out and about all the time, and so much going on, it can sometimes seem like overload. Lucky for us, Rock Creek Park provides a quiet getaway from the hustle and bustle of the city when needed. We have been enjoying night time strolls along the Dupont area, and just wandering aimlessly to get to know the area. I’m excited for what the future holds here.</p>
+<p>It took Zeus and Belle a few days to get adjusted to the new place, but I think they are both getting pretty situated now. Zeus no longer hides in the kitchen cabinets all day, and Belle already knows how to find her way back home after a good walk.</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2011/04/08/single-speed">Single Speed</a></h1>
+  <span class="post-date">08 Apr 2011</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'simplicity'." href="../../archive/simplicity/">simplicity</a>, <a title="All pages tagged 'biking'." href="../../archive/biking/">biking</a>
+  </div>
+  <p>I like Biking. I’m drawn to the simplicity and elegance of the bicycle. I’ve been biking to work pretty regularly (read: whenever its above 35 degrees), for a while now, and I love it.One way to make biking even simpler is to get rid of the gears. I’ve been looking for a decent bike to turn into a single speed for a while, and finally a deal came up on craigslist that I couldn’t pass up…and it was already a single speed.I rode it to work and back twice this week (12 miles each way), and I’m loving it. It is definitely a little more strenuous at times, but its so simple, and you never have to think about changing gears. When you’re on a single speed, the only thing you can do is pedal, and maybe that’s the way it should be.</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2010/12/08/the-best-christmas-gift-you-can-give">The Best Christmas Gift You Can Give</a></h1>
+  <span class="post-date">08 Dec 2010</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'christmas'." href="../../archive/christmas/">christmas</a>, <a title="All pages tagged 'simplicity'." href="../../archive/simplicity/">simplicity</a>
+  </div>
+  <blockquote>
+<p>Remember, if Christmas isn’t found in your heart, you won’t find it under a tree. – Charlotte Carpenter</p>
 </blockquote>
-<p>But hasn’t gold been cracked down by many governments in the past, including the US?  What happened to its value on the black market in these cases?  Certainly, over the long term, we can see that it hasn’t had much impact on the price of gold, other than maybe in the upwards direction.</p>
+<p><strong>The best Christmas gift you can give is your time.</strong> Your friends and family more than likely have everything they really need, but what they often may not get enough of is your time. Spend time with them. Quality time. Listen to them. Laugh with them. Let them know you are there for them.</p>
+<h2 id="gifts-are-just-more-stuff">Gifts are just more stuff</h2>
+<p>Stuff that most of us don’t need. If you have money you’d like to get rid of during the Christmas season, give it to a charity, or someone genuinely in need. Explain to others what you are doing, and even link back to this post if you think it will help them see why quality time and good company are better than any gift.</p>
+<h2 id="time-is-the-most-valuable-commodity-in-the-world">Time is the most valuable commodity in the world</h2>
+<p>Sharing some of yours with others means more than that iPad, golf club, or purse you could buy them (and its better for the planet as well). Stop reading blogs and go share your time with someone special. You won’t regret it. Go. Now.</p>
+<h2 id="other-great-christmas-posts">Other Great Christmas Posts</h2>
+<ul>
+<li><a href="http://zenhabits.net/bah/">The Case Against Buying Christmas Presents</a></li>
+<li><a href="http://www.becomingminimalist.com/2010/11/26/35-gifts-your-children-will-never-forget/">35 Gifts Your Children Will Never Forget</a></li>
+<li><a href="http://www.farbeyondthestars.com/1-simple-strategy-to-save-2000-this-holiday-and-make-everyone-love-you-forever/">1 Simple Strategy To Save $2000 this Holiday and Make Everyone Love You Forever</a></li>
+<li><a href="http://guynameddave.com/2010/12/christmas-and-kids-no-guilty-gifts/">Christmas And Kids - No Guilty Gifts</a></li>
+</ul>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
+  <h1><a href="../../2010/12/06/running-barefoot">Running Barefoot</a></h1>
+  <span class="post-date">06 Dec 2010</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'running'." href="../../archive/running/">running</a>, <a title="All pages tagged 'barefoot'." href="../../archive/barefoot/">barefoot</a>, <a title="All pages tagged 'health'." href="../../archive/health/">health</a>, <a title="All pages tagged 'fitness'." href="../../archive/fitness/">fitness</a>
+  </div>
+  <blockquote>
+<p>Running should be free, man. – Christopher McDougall</p>
+</blockquote>
+<p>Barefoot running (and running with minimalist footwear) is a rapidly growing trend today. Encouraged by Christopher Mcdougall’s Born to Run, and activists such as Barefoot Ken Bob and Barefoot Ted, the movement really seems to be taking off. When I first heard about barefoot running earlier this year, I was very skeptical. People don’t REALLY run barefoot, do they?!</p>
+<p>Yes, they do, and I now count myself amongst their growing ranks. I can tell you from personal experience that running barefoot has changed my life. I truly believe that it can change yours too.</p>
+<p>You see, before March of this year I was not a runner. I couldn’t tell you the last time I had run (for fun anyway), and I certainly didn’t enjoy running. If you had told me then that I would be in love with running in just a few short months, I certainly would have laughed.</p>
+<h2 id="how-fast-things-change">How Fast Things Change</h2>
+<p>As I write this today, not only am I in love with running, but in October I finished my first marathon (which I will write more about shortly) – and I’m looking forward to running more!</p>
+<p>How did I go from docile couch potato to a running addict? The real secret for me was barefoot running.</p>
+<h2 id="why-barefoot-running">Why Barefoot Running?</h2>
+<p>Simply put, barefoot running is wonderful. It releases your inner child and makes you feel like a kid again. Barefoot running allows your body to teach you how to run the way you are designed to.</p>
+<p>I’m convinced that the main thing preventing most people from running is that they don’t enjoy it. This was certainly true for me. I had tried running in the past but just never found it fun. Barefoot running changed this for me completely.</p>
+<h2 id="steps-to-running-barefoot">Steps to Running Barefoot</h2>
+<p>If you’re interested in barefoot running, you’ve already got everything you need to get started (great news for all you minimalists!). I will just provide some simple steps that I’ve learned from my own experiences running barefoot.</p>
+<ol type="1">
+<li><p>Start Slowly. Very slowly. Seriously, you can’t go too slowly. Your feet have likely been in shoe-casts for many many years, and your muscles and bones have probably atrophied to an extent. It will take some time to get them strengthened to where they need to be before you begin putting a lot of raw mileage on your feet. Too much too soon and you pulling muscles, tearing up your soles, and even stress fractures in your feet. I can’t stress this point enough.</p></li>
+<li><p>Love it. This should come pretty easily, but if it doesn’t, stop and figure out why. If you aren’t enjoying it, really don’t continue until you find the joy in it. You don’t want to run miserably anyway, right?</p></li>
+<li><p>Don’t Push Yourself. When you or your feet feel tired, stop. You don’t want to overwork your feet, and once you start pushing yourself, you may lose the enjoyment. If you resolve to call it a day once your body tells you to, you’ll be able to continue to get in good runs day after day and enjoy every minute of them.</p></li>
+<li><p>Don’t measure your progress. Counterintuitive, I know, but people often get too obsessed with their mileage and their times. Just focus on your body and learn to understand what it is telling you. This will improve your form and help increase your distance naturally over time at a pace that your body can handle. Measuring how far you run may cause you to become frustrated, or to try to push yourself to do too much too soon. Avoid this by not using a gps, stopwatch, or other measuring device. This will also help keep your mind clear and enable you to achieve flow in your running.</p></li>
+<li><p>The rest will come naturally. If you follow the 4 steps above, the rest will fall into place. Your mileage will increase, your form will improve, and you will be loving it.</p></li>
+</ol>
+<p>Hopefully this short introduction to barefoot running will motivate you to get out there and start enjoying running. Remember to take it slow and make sure you are having fun.</p>
+<h2 id="links">Links</h2>
+<p>Here are some additional links about barefoot running that you may find useful:</p>
+<ul>
+<li><a href="http://www.barefootted.com/">Barefoot Ted</a> - One of the leaders of the barefoot movement thanks to “Born To Run” and Christopher McDougal. He is starting his own running sandal company (Luna Sandals), and has a very useful discussion group on his site.</li>
+<li><a href="http://therunningbarefoot.com/">Running Barefoot</a> - Barefoot Ken Bob’s (the original barefoot runner) site is a wealth of information on barefoot running!</li>
+<li><a href="http://birthdayshoes.com/">Birthday Shoes</a> - The unofficial fan site of vibram five fingers and other minimalist shoes. Full of great reviews, tips, and user stories.</li>
+<li><a href="http://chrismcdougall.com/blog/">Chris McDougall</a> - Author of the great book, “Born to Run.” He found barefoot running by accident (just like many of us, I believe) and tells the thrilling story of his experiences in Mexico with the Tarahumara Indians.</li>
+</ul>
 </div>
 
   <hr class="post-separator" />
