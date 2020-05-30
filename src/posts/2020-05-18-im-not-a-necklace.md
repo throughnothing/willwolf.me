@@ -1,10 +1,9 @@
 ---
 title: I'm not a necklace
-date: 2020-05-30
-draft: true
+date: 2020-05-18
 image: https://willwolf.me/2020/05/30/im-not-a-necklace/IMG_2383.jpeg
 description: Masks aren't necklaces...wear them properly when you're around others.
-tags: life
+tags: life, coronavirus
 ---
 
 ![I'm not a necklace](%%%url%%%/IMG_2383.jpeg)

@@ -1,7 +1,7 @@
 ---
 title: Staying Healthy During Coronavirus
 date: 2020-05-30
-tags: fitness, health
+tags: fitness, health, coronavirus
 image: https://willwolf.me/2020/05/30/staying-healthy-during-coronavirus/IMG_2262.jpeg
 ---
 
