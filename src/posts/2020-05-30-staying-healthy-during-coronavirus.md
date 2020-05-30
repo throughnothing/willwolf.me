@@ -14,7 +14,6 @@ quarantine. With gyms closed, and not knowing how long this situation would
 last, I decided to start doing bodyweight strength training at home.
 
 ![View of Manhattan](%%%url%%%/IMG_2196.jpeg)
-<p class="caption">View of Manhattan on one of my walks</p>
 
 After some googling and help from
 [r/bodyweightfitness](https://reddit.com/r/bodyweightfitess) I decided to get a
@@ -23,7 +22,6 @@ all fitness equipment has been sold out everywhere online for a while, but I did
 manage to find them in-stock after a bit of searching.
 
 ![Pull-up Bar Gymnastic Rings Setup](%%%url%%%/IMG_1969.jpeg)
-<p class="caption">My rings setup on my Pull-up bar</p>
 
 Since getting them, I've been getting in some pretty amazing workouts, and have
 _really_ been enjoying the rings a lot more than I thought I would -- they make
@@ -92,4 +90,3 @@ rings -- it's possibly the best $30 piece of fitness equipment you can buy
 needed).
 
 ![Bike and Gymnastic Rings in Prospect Park](%%%url%%%/IMG_2262.jpeg)
-<p class="caption">My rings setup in Prospect Park</p>
