@@ -151,7 +151,7 @@ main = hakyllWith configuration $ do
                 >>= relativizeAllUrls
 
 postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier]]
-postsGrouper = liftM (paginateEvery 1) . sortRecentFirst
+postsGrouper = liftM (paginateEvery 5) . sortRecentFirst
 
 postsPageId :: PageNumber -> Identifier
 postsPageId n = fromFilePath $ if (n == 1) then "index.html" else "page/" ++ show n ++ "/index.html"
