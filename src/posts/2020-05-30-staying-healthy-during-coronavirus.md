@@ -1,7 +1,6 @@
 ---
 title: Staying Healthy During Coronavirus
 date: 2020-05-30
-# draft: true
 tags: fitness, health
 image: https://willwolf.me/2020/05/30/staying-healthy-during-coronavirus/IMG_2262.jpeg
 ---
@@ -14,7 +13,7 @@ but I knew I needed to find a way to get more substantive workouts in during
 quarantine. With gyms closed, and not knowing how long this situation would
 last, I decided to start doing bodyweight strength training at home.
 
-<!-- more -->
+<!--more-->
 
 ![View of Manhattan](%%%url%%%/IMG_2196.jpeg)
 

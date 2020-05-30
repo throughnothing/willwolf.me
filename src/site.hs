@@ -69,7 +69,7 @@ main = hakyllWith configuration $ do
     paginateRules paginate $ \page pattern -> do
         route $ idRoute
         compile $ do
-            posts <- recentFirst =<< loadAllSnapshots pattern "raw"
+            posts <- recentFirst =<< loadAllSnapshots pattern "rawHtml"
             let ctx = (paginateContext paginate page)
                     <> listField "posts" (postCtxWithTags tags) (return posts)
                     <> constField "title" (if page == 1 then "Home" else "Page " ++ show page)
@@ -84,7 +84,7 @@ main = hakyllWith configuration $ do
     tagsRules tags $ \tagStr tagsPattern -> do
         route $ idRoute
         compile $ do
-            posts       <- recentFirst =<< loadAllSnapshots tagsPattern "raw" :: Compiler [Item String]
+            posts       <- recentFirst =<< loadAllSnapshots tagsPattern "rawHtml" :: Compiler [Item String]
             let tagCtx = constField "title" tagStr
                         `mappend` constField "tag" tagStr    
                         `mappend` listField "posts" postCtx (return posts)
@@ -121,12 +121,14 @@ main = hakyllWith configuration $ do
                 -- | Apply as template so template vars go to Markdown
                 >>= applyAsTemplate postCtx
                 -- | Then render the Pandoc
+                >>= saveSnapshot "raw"
                 >>= renderPandoc
                 -- | Save a raw snapshot before goin through the template
-                >>= saveSnapshot "raw"
+                >>= saveSnapshot "rawHtml"
                 >>= loadAndApplyTemplate "templates/post.html" (postCtxWithTags tags)
                 >>= saveSnapshot "content"
-                >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
+                >>= loadAndApplyTemplate "templates/default.html"
+                        (teaserField "teaserRaw" "raw" <> postCtxWithTags tags)
                 >>= relativizeAllUrls
 
 

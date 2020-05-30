@@ -12,7 +12,11 @@
         <!-- Social Meta Tags -->
         <meta property="og:title" content="$title$" /> 
         $if(description)$
-        <meta property="og:description" content="$description$" /> 
+            <meta property="og:description" content="$description$" /> 
+        $else$
+            $if(teaserRaw)$
+                <meta property="og:description" content="$teaserRaw$" /> 
+            $endif$
         $endif$
         <meta property="og:type" content="website" /> 
         <meta property="og:image" content="$if(image)$$image$$else$https://willwolf.me/images/nyc.jpeg$endif$" /> 
