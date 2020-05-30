@@ -154,7 +154,7 @@ postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier
 postsGrouper = liftM (paginateEvery 1) . sortRecentFirst
 
 postsPageId :: PageNumber -> Identifier
-postsPageId n = fromFilePath $ if (n == 1) then "index.html" else "Page/" ++ show n ++ "/index.html"
+postsPageId n = fromFilePath $ if (n == 1) then "index.html" else "page/" ++ show n ++ "/index.html"
 
 --------------------------------------------------------------------------------
 
