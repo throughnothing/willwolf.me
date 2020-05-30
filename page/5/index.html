@@ -49,6 +49,36 @@
         <div class="content">
             
   <div class="post">
+  <h1><a href="../../2012/07/26/jekyll-mapping-and-octopress">Jekyll-Mapping and Octopress</a></h1>
+  <span class="post-date">26 Jul 2012</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'programming'." href="../../archive/programming/">programming</a>, <a title="All pages tagged 'octopress'." href="../../archive/octopress/">octopress</a>
+  </div>
+  <p>For a while now, I’ve been wanting to add some sort of maps support to <a href="http://octopress.org/">octopress</a>/<a href="https://github.com/mojombo/jekyll">jekyll</a>, and I finally recently had some time to look into it a little bit more. It seems some others out there have had the same idea, because I stumbled across two plugins that did something close (but not exactly) to what I wanted: <a href="https://github.com/mguentner/octolayer">octolayer</a> and <a href="https://github.com/matthewowen/jekyll-mapping">jekyll-mapping</a>.</p>
+<p>The reason I’m interested in this is that when I travel, I like to log <code>gpx</code> tracks of the places we go, and geotag my photos, etc. It’s nice to be able to display a map of where I went each day, and I can always go back and find exactly where that awesome restaurant was (in case I go back, or to tell friends).</p>
+<p>I wasn’t really sure how/if jekyll plugins would map to octopress (since octopress does use jekyll, but its plugin structure still seems to be slightly different), so I started off looking into octolayer.</p>
+<h2 id="octolayer">Octolayer</h2>
+<p>Octolayer was only setup to use <a href="http://openlayers.org/">openlayers</a>, and it could only do specific long/lat co-ordinates. I really wanted to be able to use google maps, but I figured i’d give this a try and see how things went.</p>
+<p>I liked the way that octolayer was set up, and the ease of installing it, but the openlayers API looked really messy to me, and I didn’t feel like spending a bunch of time learning it when I really wanted google maps anyway, so I opened up an <a href="https://github.com/matthewowen/jekyll-mapping/issues/1">issue</a> with <a href="https://github.com/matthewowen/">matthewowen</a> to see what his thoughts were about adding the functionality I wanted to <code>jekyll-mapping</code>.</p>
+<h2 id="jekyll-mapping">Jekyll-Mapping</h2>
+<p>Matthew responded pretty quickly, and showed me that he really already had basic support for what I wanted. Fantastic. All you had to do was put this in your config section of your posts:</p>
+<pre><code>mapping:
+    layers:
+        - http://path/to/kml_file.kml
+        - http://path/to/gpx_file.gpx</code></pre>
+<p>Then put this in your post body wherever you want the map to render:</p>
+<pre><code>{% raw %}{% render_map %}{% endraw %}</code></pre>
+<p>That’s it! It seemed to work pretty well at first, but then I quickly realized that the way the code was set up, it would only work on the post page, and would not be able to display multiple maps on a page that lists several posts (or even one post with multiple maps). The javascript used an id to find the <code>jekyll-mapping</code> element, and it was tightly bound to a single-post page.</p>
+<p>I decided to head into <code>#octopress</code> and ask around (I’ve never mucked with octopress source or plugins before), and got some really useful tips and help from <a href="https://github.com/imathis">Brandon Mathis</a>, Octopress’ creator.</p>
+<p>After a bit of tinkering, I ended up with <a href="https://github.com/throughnothing/jekyll-mapping/compare/refactor">this changeset</a> that gave me pretty much everything I wanted (for now):</p>
+<script src="https://gist.github.com/throughnothing/3183238.js"></script>
+<p>With this, I can put multiple layers on a map (I usually put a <code>.gpx</code> layer for the day, as well as a layer from flickr with my geotagged photoset for that day in each relevant post), and display multiple posts, each with a map, per page.</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
   <h1><a href="../../2012/03/16/git-processes-scripts-and-ideas">Git Processes, Scripts and Ideas</a></h1>
   <span class="post-date">16 Mar 2012</span>
   <hr />
@@ -185,47 +215,6 @@ $ git_purge_remote_branches dev</code></pre>
 <li><a href="http://www.becomingminimalist.com/2010/11/26/35-gifts-your-children-will-never-forget/">35 Gifts Your Children Will Never Forget</a></li>
 <li><a href="http://www.farbeyondthestars.com/1-simple-strategy-to-save-2000-this-holiday-and-make-everyone-love-you-forever/">1 Simple Strategy To Save $2000 this Holiday and Make Everyone Love You Forever</a></li>
 <li><a href="http://guynameddave.com/2010/12/christmas-and-kids-no-guilty-gifts/">Christmas And Kids - No Guilty Gifts</a></li>
-</ul>
-</div>
-
-  <hr class="post-separator" />
-
-  <div class="post">
-  <h1><a href="../../2010/12/06/running-barefoot">Running Barefoot</a></h1>
-  <span class="post-date">06 Dec 2010</span>
-  <hr />
-  <div class="tags">
-    <a title="All pages tagged 'running'." href="../../archive/running/">running</a>, <a title="All pages tagged 'barefoot'." href="../../archive/barefoot/">barefoot</a>, <a title="All pages tagged 'health'." href="../../archive/health/">health</a>, <a title="All pages tagged 'fitness'." href="../../archive/fitness/">fitness</a>
-  </div>
-  <blockquote>
-<p>Running should be free, man. – Christopher McDougall</p>
-</blockquote>
-<p>Barefoot running (and running with minimalist footwear) is a rapidly growing trend today. Encouraged by Christopher Mcdougall’s Born to Run, and activists such as Barefoot Ken Bob and Barefoot Ted, the movement really seems to be taking off. When I first heard about barefoot running earlier this year, I was very skeptical. People don’t REALLY run barefoot, do they?!</p>
-<p>Yes, they do, and I now count myself amongst their growing ranks. I can tell you from personal experience that running barefoot has changed my life. I truly believe that it can change yours too.</p>
-<p>You see, before March of this year I was not a runner. I couldn’t tell you the last time I had run (for fun anyway), and I certainly didn’t enjoy running. If you had told me then that I would be in love with running in just a few short months, I certainly would have laughed.</p>
-<h2 id="how-fast-things-change">How Fast Things Change</h2>
-<p>As I write this today, not only am I in love with running, but in October I finished my first marathon (which I will write more about shortly) – and I’m looking forward to running more!</p>
-<p>How did I go from docile couch potato to a running addict? The real secret for me was barefoot running.</p>
-<h2 id="why-barefoot-running">Why Barefoot Running?</h2>
-<p>Simply put, barefoot running is wonderful. It releases your inner child and makes you feel like a kid again. Barefoot running allows your body to teach you how to run the way you are designed to.</p>
-<p>I’m convinced that the main thing preventing most people from running is that they don’t enjoy it. This was certainly true for me. I had tried running in the past but just never found it fun. Barefoot running changed this for me completely.</p>
-<h2 id="steps-to-running-barefoot">Steps to Running Barefoot</h2>
-<p>If you’re interested in barefoot running, you’ve already got everything you need to get started (great news for all you minimalists!). I will just provide some simple steps that I’ve learned from my own experiences running barefoot.</p>
-<ol type="1">
-<li><p>Start Slowly. Very slowly. Seriously, you can’t go too slowly. Your feet have likely been in shoe-casts for many many years, and your muscles and bones have probably atrophied to an extent. It will take some time to get them strengthened to where they need to be before you begin putting a lot of raw mileage on your feet. Too much too soon and you pulling muscles, tearing up your soles, and even stress fractures in your feet. I can’t stress this point enough.</p></li>
-<li><p>Love it. This should come pretty easily, but if it doesn’t, stop and figure out why. If you aren’t enjoying it, really don’t continue until you find the joy in it. You don’t want to run miserably anyway, right?</p></li>
-<li><p>Don’t Push Yourself. When you or your feet feel tired, stop. You don’t want to overwork your feet, and once you start pushing yourself, you may lose the enjoyment. If you resolve to call it a day once your body tells you to, you’ll be able to continue to get in good runs day after day and enjoy every minute of them.</p></li>
-<li><p>Don’t measure your progress. Counterintuitive, I know, but people often get too obsessed with their mileage and their times. Just focus on your body and learn to understand what it is telling you. This will improve your form and help increase your distance naturally over time at a pace that your body can handle. Measuring how far you run may cause you to become frustrated, or to try to push yourself to do too much too soon. Avoid this by not using a gps, stopwatch, or other measuring device. This will also help keep your mind clear and enable you to achieve flow in your running.</p></li>
-<li><p>The rest will come naturally. If you follow the 4 steps above, the rest will fall into place. Your mileage will increase, your form will improve, and you will be loving it.</p></li>
-</ol>
-<p>Hopefully this short introduction to barefoot running will motivate you to get out there and start enjoying running. Remember to take it slow and make sure you are having fun.</p>
-<h2 id="links">Links</h2>
-<p>Here are some additional links about barefoot running that you may find useful:</p>
-<ul>
-<li><a href="http://www.barefootted.com/">Barefoot Ted</a> - One of the leaders of the barefoot movement thanks to “Born To Run” and Christopher McDougal. He is starting his own running sandal company (Luna Sandals), and has a very useful discussion group on his site.</li>
-<li><a href="http://therunningbarefoot.com/">Running Barefoot</a> - Barefoot Ken Bob’s (the original barefoot runner) site is a wealth of information on barefoot running!</li>
-<li><a href="http://birthdayshoes.com/">Birthday Shoes</a> - The unofficial fan site of vibram five fingers and other minimalist shoes. Full of great reviews, tips, and user stories.</li>
-<li><a href="http://chrismcdougall.com/blog/">Chris McDougall</a> - Author of the great book, “Born to Run.” He found barefoot running by accident (just like many of us, I believe) and tells the thrilling story of his experiences in Mexico with the Tarahumara Indians.</li>
 </ul>
 </div>
 
