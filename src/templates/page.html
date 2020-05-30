@@ -3,10 +3,16 @@ $for(posts)$
   <hr class="post-separator"/>
 $endfor$
 
-$if(nextPageUrl)$
-<a href="$nextPageUrl$">Older Posts</a>
-$endif$
+<div class="pagination">
+  <div class="left">
+  $if(previousPageUrl)$
+    <a href="$previousPageUrl$">&laquo; Newer Posts</a>
+  $endif$
+  </div>
 
-$if(previousPageUrl)$
-<a href="$previousPageUrl$">Newer Posts</a>
-$endif$
+  <div class="right">
+  $if(nextPageUrl)$
+    <a href="$nextPageUrl$">Older Posts &raquo;</a>
+  $endif$
+  </div>
+</div>

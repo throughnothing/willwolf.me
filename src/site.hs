@@ -62,7 +62,9 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" dropIndexHtmlUrlContext
             >>= relativizeAllUrls
 
-    paginate <- (buildPaginateWith postsGrouper postsPattern postsPageId)
+    paginate <- buildPaginateWith postsGrouper postsPattern postsPageId
+    tags <- buildTags postsPattern (fromCapture "archive/*/index.html")
+
 
     paginateRules paginate $ \page pattern -> do
         route $ idRoute
@@ -71,7 +73,7 @@ main = hakyllWith configuration $ do
             let ctx = (paginateContext paginate page)
                     <> defaultContext
                     -- <> listField "posts" (field "content" (return . itemBody)) (return posts)
-                    <> listField "posts" (postCtx) (return posts)
+                    <> listField "posts" (postCtxWithTags tags) (return posts)
                     <> constField "title" (if page == 1 then "Home" else "Page " ++ show page)
 
             makeItem ""
@@ -80,12 +82,38 @@ main = hakyllWith configuration $ do
                 >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeAllUrls
 
+    tagsRules tags $ \tagStr tagsPattern -> do
+        route $ idRoute
+        compile $ do
+            posts       <- recentFirst =<< loadAllSnapshots tagsPattern "raw" :: Compiler [Item String]
+            let tagCtx = constField "title" tagStr
+                        `mappend` constField "tag" tagStr    
+                        `mappend` listField "posts" postCtx (return posts)
+                        `mappend` defaultContext
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/tag.html" tagCtx
+                >>= loadAndApplyTemplate "templates/default.html" tagCtx
+                >>= relativizeAllUrls
+
+    match "tags.html" $ do
+        -- route $ constRoute "/archive/tags/index.html" 
+        route $ idRoute `composeRoutes` appendIndex
+        compile $ do
+            let ctx = tagCloudField "tagCloud" 60 400 tags
+                    <> defaultContext
+
+            getResourceBody
+                >>= applyAsTemplate ctx
+                >>= loadAndApplyTemplate "templates/default.html" ctx
+                >>= relativizeAllUrls
+
+
+
     matchMetadata postsPattern (not . isDraft) $ do
         route $ setExtension "html"
             `composeRoutes` dateFolders
             `composeRoutes` dropPostsPrefix
             `composeRoutes` appendIndex
-
 
         compile $ do
             getResourceBody
@@ -97,9 +125,9 @@ main = hakyllWith configuration $ do
                 >>= renderPandoc
                 -- | Save a raw snapshot before goin through the template
                 >>= saveSnapshot "raw"
-                >>= loadAndApplyTemplate "templates/post.html" postCtx
+                >>= loadAndApplyTemplate "templates/post.html" (postCtxWithTags tags)
                 >>= saveSnapshot "content"
-                >>= loadAndApplyTemplate "templates/default.html" postCtx
+                >>= loadAndApplyTemplate "templates/default.html" (postCtxWithTags tags)
                 >>= relativizeAllUrls
 
 
@@ -110,7 +138,7 @@ main = hakyllWith configuration $ do
             `composeRoutes` dropPostsPrefix
         compile copyFileCompiler
 
-    match "archives.html" $ do
+    match "archive.html" $ do
         route $ idRoute `composeRoutes` appendIndex
         compile $ do
             posts <- recentFirst =<< loadAll (postsPattern)
@@ -124,7 +152,7 @@ main = hakyllWith configuration $ do
                 >>= relativizeAllUrls
 
 postsGrouper :: (MonadFail m, MonadMetadata m) => [Identifier] -> m [[Identifier]]
-postsGrouper = liftM (paginateEvery 3) . sortRecentFirst
+postsGrouper = liftM (paginateEvery 1) . sortRecentFirst
 
 postsPageId :: PageNumber -> Identifier
 postsPageId n = fromFilePath $ if (n == 1) then "index.html" else "Page/" ++ show n ++ "/index.html"
@@ -140,6 +168,9 @@ preparePostTemplateStrings = makeItem . unpack . replaceAll . pack . itemBody
         replaceCustomTemplateVar = replace "%%%" "$"
         replaceAll = replaceCustomTemplateVar . replaceDollar
 
+
+postCtxWithTags :: Tags -> Context String
+postCtxWithTags tags = tagsField "tags" tags <> postCtx
 
 postCtx :: Context String
 postCtx

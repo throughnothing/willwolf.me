@@ -47,6 +47,33 @@ li {
     color: $color_font;
 }
 
+p.tag-cloud {
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+    a {
+        margin: 10px 0px 10px 0px;
+        // display: block;
+        // float: left;
+    }
+}
+
+.tags {
+    font-size: 0.75em;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: darkgray;
+
+    a::before {
+        content: "#";
+    }
+    a {
+        color: inherit;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
 blockquote {
     margin: 40px 0;
     padding: 10px 50px;
@@ -54,6 +81,17 @@ blockquote {
     background-color: darken($color1, 2%);
     // border-radius: 10px ;
     color: darken($color1, 60%);
+}
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    .left, .right {
+        flex-basis: 50%;
+    }
+    .right {
+        text-align: right;
+    }
 }
 
 p.caption {
@@ -67,11 +105,11 @@ p.caption {
 }
 
 hr.post-separator {
-    margin: 0 0 50px 0;
+    margin: 10px 0 50px 0;
 }
 
 .post {
-    margin-bottom: 80px;
+    margin-bottom: 0px;
 }
 
 .post iframe {
