@@ -1,8 +1,7 @@
 ---
 title: Bitcoin in the event of a Government crackdown
 date: '2016-01-09T18:13:44-08:00'
-tags:
-- bitcoin
+tags: bitcoin, government
 ---
 I was re-reading an old [Mish article](http://globaleconomicanalysis.blogspot.com/2013/04/mish-interview-with-bitcoin-jesus.html) on Bitcoin, and read this phrase from Mish:
 

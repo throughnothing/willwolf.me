@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Successful People Read Books"
-categories:
+tags:
     - reading
     - productivity
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Best Christmas Gift You Can Give"
-categories:
+tags:
     - christmas
     - simplicity
 ---

@@ -2,7 +2,6 @@
 title: There's always a reason why "This time is different"
 date: '2015-02-24T21:57:25-08:00'
 tags:
-- text
 - economics
 ---
 

@@ -1,9 +1,7 @@
 ---
 title: "Jekyll-Mapping and Octopress"
 date: 2012-07-26 11:11
-categories:
-    - development
-    - octopress
+tags: programming, octopress
 ---
 
 For a while now, I've been wanting to add some sort of maps support to

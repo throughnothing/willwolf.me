@@ -2,7 +2,7 @@
 layout: post
 title: Processes, Processes, Processes
 date: 2014-03-03 23:58:27
-categories:
+tags: productivity
 ---
 Structured processes are incredibly useful, and often necessary,
 beasts.  They are, however, almost never the _most_ important things for a

@@ -2,7 +2,7 @@
 title: Market Valuations
 date: 2020-03-17
 # draft: true
-tags: test, test2
+tags: economics, markets
 ---
 
 I was doing some rough analysis of market valuations today compared to historical norms using a few long-term metrics that I like to monitor. These metrics are not timing signals, nor do they tell you where the market will go next.  They are useful to understand where we are in the cycle and where we currently sit on the valuation spectrum.
@@ -14,7 +14,7 @@ This analysis is done only looking at the S&P500 Index, as a proxy for "markets"
 CAPE is a crude metric that just tracks the price vs the 10 year trailing earnings.  This smooths out business cycles, and has proven to be a pretty good, but fuzzy, indicator of where business valuations stand relative to their long term, durable, earnings power. As you can see below, we've seen a significant improvement in this metric over recent weeks, but still remain in overvalued territory.
 
 ![Shiller PE](%%%url%%%/shillerpe.png)
-(source: https://www.gurufocus.com/shiller-PE.php)
+<p class="caption">source: https://www.gurufocus.com/shiller-PE.php</p>
 
 The historical mean for CAPE going back more than 100 years has been 17.  Today we stand at 24.2, which is 42.6% higher than the mean. A reversion to the historical mean would require a further 29.8% (42.6/142.6) decline from today's (3/17) close. This would take the S&P 500 to $1775.49.
 
@@ -24,12 +24,12 @@ At the 2007 market peak, the CAPE was 27.4 -- not much higher than where we stil
 Another indicator, made famous by Warren Buffett, is the proportion of the total Market Cap of all stocks relative to the US GDP. This is also a very crude metric, which can be impacted over time by things like private companies staying private longer (and being bigger), and public companies doing more and more business internationally, but I think it is still a useful heuristic to look at and consider. There are also counter-effects, such as government spending becoming a larger and larger portion of GDP, which would have the effect of moving this average down (businesses make up a smaller portion of GDP).  Below you can see the historical total market cap in blue, and US GDP in green.
 
 ![Total Market Cap to GDP](%%%url%%%/tmtgdp.png)
-<p class="caption">(source: https://www.gurufocus.com/stock-market-valuations.php)</p>
+<p class="caption">source: https://www.gurufocus.com/stock-market-valuations.php</p>
 
 Another way to look at this is by plotting the ratio between the two.  The historical average ratio is around 0.8 -- that is, where the total market cap of public stocks is around 80% of US GDP.
 
 ![Total Market Cap to GDP ratio](%%%url%%%/tmtgdpratio.png)
-<p class="caption">(source: https://www.gurufocus.com/stock-market-valuations.php)</p>
+<p class="caption">source: https://www.gurufocus.com/stock-market-valuations.php</p>
 
 At present, the total market cap is 115.9% of GDP, which is 30.9% ((115.9-80)/115.9) above the historical average of 80%. If we use the S&P500 as a proxy for total markets, it would need to fall to $1745.77 to be valued at the historical average levels using this metric.  The present valuations, using this metric, are still higher than they were at the peak of the market in late 2007 (the total market cap was 110.10% of GDP then)!  
 

@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "5 Ways to Enjoy Your Commute"
-categories:
+tags:
     - simplicity
+    - life
 ---
 > Patience is something you admire in the driver behind you and scorn in the
 one ahead.

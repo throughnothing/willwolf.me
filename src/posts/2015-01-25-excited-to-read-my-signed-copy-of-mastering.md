@@ -1,9 +1,7 @@
 ---
 title: My signed copy of Mastering Bitcoin
 date: '2015-01-25T19:42:00-08:00'
-tags:
-- Bitcoin
-- photo
+tags: bitcoin, photo
 ---
 Excited to read my signed copy of “Mastering Bitcoin”.  Thanks Andreas!
 

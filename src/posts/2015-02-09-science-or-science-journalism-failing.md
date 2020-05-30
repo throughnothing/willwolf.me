@@ -2,7 +2,6 @@
 title: Science, or Science Journalism, Failing?
 date: '2015-02-09T09:07:16-08:00'
 tags:
-- text
 - health
 - science
 ---

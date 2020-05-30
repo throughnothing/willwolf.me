@@ -1,9 +1,7 @@
 ---
 title: "Git Processes, Scripts and Ideas"
 date: 2012-03-16 02:56
-categories:
-- git
-- development
+tags: git, programming
 ---
 Lately I've been refining some of my git processes (as well as learning
 a lot about git along the way).  I thought I'd write up a post to share

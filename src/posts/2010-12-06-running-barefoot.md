@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Running Barefoot"
-categories:
+tags:
     - running
     - barefoot
     - health
+    - fitness
 ---
 > Running should be free, man.
 > -- Christopher McDougall

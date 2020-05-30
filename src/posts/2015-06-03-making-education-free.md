@@ -1,6 +1,7 @@
 ---
 title: Making Education “Free”!
 date: '2015-06-03T14:21:14-07:00'
+tags: economics, education
 ---
 
 I recently came across [this article](https://www.telesurtv.net/english/news/Chile-to-Have-Free-Higher-Education-by-2016-20141204-0049.html) discussing Chile’s move to make higher education “free”. From the article:

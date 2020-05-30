@@ -1,6 +1,6 @@
 ---
 title: "Barefoot Observations"
-categories:
+tags:
     - running
     - barefoot
     - health

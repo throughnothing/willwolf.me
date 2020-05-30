@@ -4,7 +4,7 @@ date: '2015-01-31T14:57:00-08:00'
 tags:
 - tech
 - bitcoin
-- apple pay
+- apple-pay
 ---
 Seth Godin wrote earlier today about the end of geography. Three of the most important inventions in the last 100 years, in his eyes, are:
 

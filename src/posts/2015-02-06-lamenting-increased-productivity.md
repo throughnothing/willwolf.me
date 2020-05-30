@@ -2,10 +2,7 @@
 layout: post
 title: Lamenting Increased Productivity
 date: '2015-02-06T12:14:00-08:00'
-tags:
-- text
-- economics
-- productivity
+tags: economics, productivity
 tumblr_url: http://blog.throughnothing.com/post/110273048509/lamenting-increased-productivity
 ---
 I recently read a post about Replacing Middle Management with APIs. The author concludes:

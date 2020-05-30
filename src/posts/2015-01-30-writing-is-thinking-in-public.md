@@ -1,7 +1,7 @@
 ---
 title: Writing is Thinking in Public
 date: '2015-01-30T11:33:39-08:00'
-tags:
+tags: writing
 ---
 I heard someone the other day mention that their blog was just them “thinking in public”. It struck me as a pretty novel way of looking at blogging. I’m someone who’s always chewing through crazy, and often terrible ideas (just ask my wife, she usually cringes when I tell her I have an “idea”). But I’ve realized that I don’t have a good record of my thoughts and their evolution over time.
 

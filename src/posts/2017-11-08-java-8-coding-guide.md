@@ -1,6 +1,7 @@
 ---
 title: Java 8 Coding Guide
 date: 2017-11-08
+tags: programming, java
 ---
 
 I’m getting into Java services at work, and I put together a guide with some principles / best practices to follow for Java 8.  A lot of these things become much more possible with Java 8 than they would have been in earlier versions of Java, but they can also be applied to other programming languages and technologies.

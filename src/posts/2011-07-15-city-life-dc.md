@@ -2,8 +2,7 @@
 layout: post
 title: City Life - DC
 date: '2011-07-15T00:00:00-07:00'
-tags:
-- text
+tags: life
 tumblr_url: http://blog.throughnothing.com/post/109461421119/city-life-dc
 ---
 
