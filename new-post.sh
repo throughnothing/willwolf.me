@@ -3,7 +3,7 @@ EDITOR="${EDITOR:-code}"
 
 DATE=$(date +"%Y-%m-%d")
 TITLE=$1
-MYTITLE=$(echo ${TITLE} | sed 's/ /-/g')
+MYTITLE=$(echo ${TITLE} | sed 's/ /-/g' | tr [:upper:] [:lower:])
 echo ${MYTITLE}
 NEWFILE=./src/posts/${DATE}-${MYTITLE}.md
 
@@ -16,7 +16,7 @@ echo "---" >> ${NEWFILE}
 echo "title: ${TITLE}" >> ${NEWFILE}
 echo "date: ${DATE}" >> ${NEWFILE}
 echo "draft: true" >> ${NEWFILE}
-echo "tags:"
+echo "tags:" >> ${NEWFILE}
 echo "---" >> ${NEWFILE}
 
 ${EDITOR} ${NEWFILE}
