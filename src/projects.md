@@ -41,6 +41,11 @@ title: Projects
   official Trezor team, and integrated into their official wallet cilent and
   website.
 
+* **[Loeb.purs](https://gist.github.com/throughnothing/1b9fff2e254e4d6df1e19b04c11f980f):**
+  Implementation of [Loeb's
+  Theorem](https://en.wikipedia.org/wiki/L%C3%B6b%27s_theorem) in Purescript,
+  just because.
+
 * **[Purescript Graphql](https://github.com/throughnothing/purescript-graphql):**
   Still a WIP, but this is an attempt to create a typesafe
   [GraphQL](https://graphql.org) library for Purescript.
@@ -54,6 +59,10 @@ title: Projects
   This is a simple [NaCL](https://nacl.cr.yp.to) wrapper for Purescript, such
   that the cryptographic primitives exposed by NaCL can be used in a typesafe,
   functional way in Purescript applications.
+
+* **[Octo-Indicator](https://github.com/throughnothing/octo-indicator):** Linux
+  app to show your github activity and notifications in the Gnome menubar. This
+  was mostly a toy to learn how to do this, implemented in Python.
 
 * **[Sque](https://github.com/throughnothing/Sque):** Sque is a simple,
   [STOMP](https://stomp.github.io)-based message queueing and de/serialization
