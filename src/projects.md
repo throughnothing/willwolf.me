@@ -4,13 +4,20 @@ title: Projects
 
 ## Current Projects
 
-* **[Prognosticator]():** Prognosticator is a web app for tracking prediction
-  probabilities over time.  It's still a work in progress, but I'm using it as
-  an app to learn more about [Halogen
-  (v5)](https://github.com/purescript-halogen/purescript-halogen), a typesfae UI
-  framework built for [Purescript](https://purescript.org).
+* **[Prognosticator](https://github.com/throughnothing/Prognosticator):**
+  Prognosticator is a web app for tracking prediction probabilities over time.
+  It's still a work in progress, but I'm using it as an app to learn more about
+  [Halogen (v5)](https://github.com/purescript-halogen/purescript-halogen), a
+  typesfae UI framework built for [Purescript](https://purescript.org).
 
-## Past Software Projects
+* **[Willwolf.me](https://github.com/throughnothing/willwolf.me):** This
+  website, of course. It's evolved from a php site many many years ago, to a
+  statically-built website for simplicity and ease of maintenance. It was first
+  built using [Jekyll](https://jekyllrb.com), but is currently generated using
+  [Hakyll](https://jaspervdj.be/hakyll/), a Haskell-based static site generator.
+  Why Hakyll? Well, mostly because I love functional programming.
+
+## Past Projects
 
 * **[Tezos HSM Signer](https://github.com/throughnothing/tezos-hsm-signer):**
   The Tezos HSM Signer interfaces with a [Tezos](https://tezos.com) full node to
