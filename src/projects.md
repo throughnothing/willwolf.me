@@ -48,6 +48,11 @@ title: Projects
   official Trezor team, and integrated into their official wallet cilent and
   website.
 
+* **[Sque](https://github.com/throughnothing/Sque):** Sque is a simple,
+  [STOMP](https://stomp.github.io)-based message queueing and de/serialization
+  framework for Perl, modeled heavily after Resque, but striving for a much
+  simpler implementation and use.
+
 * **[VimChat](https://github.com/throughnothing/vimchat):** Jabber chat client
   that runs inside the Vim text editor.  It supports jabber, as well as
   transports to enable connecting to other networks like IRC. Additionally, it
