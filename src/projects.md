@@ -12,20 +12,6 @@ title: Projects
 
 ## Past Software Projects
 
-* **[Purescript Graphql](https://github.com/throughnothing/purescript-graphql):**
-  Still a WIP, but this is an attempt to create a typesafe
-  [GraphQL](https://graphql.org) library for Purescript.
-
-* **[Purescript Base58](https://github.com/throughnothing/purescript-crypt-nacl):**
-  This is a simple base58 FFI wrapper for Purescript. Base58 is mostly used in
-  blockchain projects for relatively short, human-friendly addresses, and was
-  really created for use in Bitcoin.
-
-* **[Purescript NaCl](https://github.com/throughnothing/purescript-crypt-nacl):**
-  This is a simple [NaCL](https://nacl.cr.yp.to) wrapper for Purescript, such
-  that the cryptographic primitives exposed by NaCL can be used in a typesafe,
-  functional way in Purescript applications.
-
 * **[Tezos HSM Signer](https://github.com/throughnothing/tezos-hsm-signer):**
   The Tezos HSM Signer interfaces with a [Tezos](https://tezos.com) full node to
   offload cryptographic signing operations to a Hardware Security Module (HSM).
@@ -47,6 +33,20 @@ title: Projects
   wallets from the browser. Code from this repository was later used by the
   official Trezor team, and integrated into their official wallet cilent and
   website.
+
+* **[Purescript Graphql](https://github.com/throughnothing/purescript-graphql):**
+  Still a WIP, but this is an attempt to create a typesafe
+  [GraphQL](https://graphql.org) library for Purescript.
+
+* **[Purescript Base58](https://github.com/throughnothing/purescript-crypt-nacl):**
+  This is a simple base58 FFI wrapper for Purescript. Base58 is mostly used in
+  blockchain projects for relatively short, human-friendly addresses, and was
+  really created for use in Bitcoin.
+
+* **[Purescript NaCl](https://github.com/throughnothing/purescript-crypt-nacl):**
+  This is a simple [NaCL](https://nacl.cr.yp.to) wrapper for Purescript, such
+  that the cryptographic primitives exposed by NaCL can be used in a typesafe,
+  functional way in Purescript applications.
 
 * **[Sque](https://github.com/throughnothing/Sque):** Sque is a simple,
   [STOMP](https://stomp.github.io)-based message queueing and de/serialization
