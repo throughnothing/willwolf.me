@@ -60,6 +60,16 @@ title: Projects
   that the cryptographic primitives exposed by NaCL can be used in a typesafe,
   functional way in Purescript applications.
 
+* **[Pyckup](https://github.com/throughnothing/Pyckup):** Pyckup is a
+  command-line backup tool, based on
+  [duplicity](http://duplicity.nongnu.org/duplicity.1.html), which can very
+  easily and simply back up local files and directories in a space-efficient
+  way, by chunking, hashing, and de-duplicating file contents before backing up.
+  It also enables you to encrypt backups with a public PGP key, such that the
+  private key doesn't need to exist on the box you are backing up data from.
+  This tool is useful for backing up important scripts and configs on servers in
+  a secure, reliable, space-efficient way.
+
 * **[Octo-Indicator](https://github.com/throughnothing/octo-indicator):** Linux
   app to show your github activity and notifications in the Gnome menubar. This
   was mostly a toy to learn how to do this, implemented in Python.
