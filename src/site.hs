@@ -62,6 +62,13 @@ main = hakyllWith configuration $ do
             >>= loadAndApplyTemplate "templates/default.html" dropIndexHtmlUrlContext
             >>= relativizeAllUrls
 
+    match "projects.md" $ do
+        route $ setExtension "html"
+            `composeRoutes` appendIndex
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/default.html" dropIndexHtmlUrlContext
+            >>= relativizeAllUrls
+
     paginate <- buildPaginateWith postsGrouper postsPattern postsPageId
     tags <- buildTags postsPattern (fromCapture "archive/*/index.html")
 
