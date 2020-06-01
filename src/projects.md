@@ -2,6 +2,39 @@
 title: Projects
 ---
 
+# Projects
+<hr/>
+
+I'm almost always working on a few projects on the side, mostly to scratch an
+itch, or learn something new -- usually both.  Lately I've become increasingly
+fond of functional programming, and thus like to play around with
+[Haskell](http://haskell.org), [Purescript](https://www.purescript.org) (my
+favorite language to play with at the moment), and [ZIO](https://zio.dev)
+(quickly becoming the best functional library for Scala, IMO).
+
+Most of my projects and interests these days tend to be in the blockchain /
+crypto spaces, or the privacy / digital-self-sovereignty spaces. Functional,
+typesafe programming is incredibly useful in both of these, as they make code
+easier to reason about and formally prove things about. Correctness and ability
+to formulate mathematical proofs around key pieces of code are crucial for
+trusting the code your machines are running.  With decentralized, "trustless"
+networks, and in privacy-centric software, the correctness and verifiability of
+the code and smart contracts is crucial.
+
+I'm also very interested in [Rust](https://www.rust-lang.org), as I believe it
+is one of the most novel languages to come around in a long time, and offers
+very interesting guarantees around memory safety without needing garbage
+collection. This also makes Rust an incredibly useful tool for low-level
+applications that need to be very performant.  The typesystem in Rust is also
+sufficiently advanced enough to give quite good typesafety around your programs
+behavior when leverage correctly. I'm excited to see Rust becoming one of the
+de-facto standard tools for many blockchain projects.
+
+If you have ideas for fun or interesting projects, or tools you'd like to see,
+I'm always interested in new ideas and new projects, so let me know.
+
+
+
 ## Current Projects
 
 * **[Prognosticator](https://github.com/throughnothing/Prognosticator):**
