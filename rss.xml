@@ -7,8 +7,16 @@
         <description><![CDATA[William Wolf's home on the web.]]></description>
         <atom:link href="http://willwolf.me/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Sat, 30 May 2020 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Thu, 04 Jun 2020 00:00:00 UT</lastBuildDate>
         <item>
+    <title>Claiming Handshake (HNS) Airdrop Tokens</title>
+    <link>http://willwolf.me/2020/06/04/claiming-handshake-airdrop-tokens</link>
+    <description><![CDATA[I walk through how to claim your Handshake airdrop tokens]]></description>
+    <pubDate>Thu, 04 Jun 2020 00:00:00 UT</pubDate>
+    <guid>http://willwolf.me/2020/06/04/claiming-handshake-airdrop-tokens</guid>
+    <dc:creator>William Wolf</dc:creator>
+</item>
+<item>
     <title>Staying Healthy During Coronavirus</title>
     <link>http://willwolf.me/2020/05/30/staying-healthy-during-coronavirus</link>
     <description><![CDATA[<div class="post">
@@ -355,32 +363,6 @@
 ]]></description>
     <pubDate>Wed, 03 Jun 2015 21:21:14 UT</pubDate>
     <guid>http://willwolf.me/2015/06/03/making-education-free</guid>
-    <dc:creator>William Wolf</dc:creator>
-</item>
-<item>
-    <title>How the Government (and the Fed) are expediting the Robot Jobpocalypse</title>
-    <link>http://willwolf.me/2015/03/17/how-the-government-and-the-fed-are-expediting</link>
-    <description><![CDATA[<div class="post">
-  <h1><a href="/2015/03/17/how-the-government-and-the-fed-are-expediting">How the Government (and the Fed) are expediting the Robot Jobpocalypse</a></h1>
-  <span class="post-date">17 Mar 2015</span>
-  <hr/>
-  <div class="tags">
-    <a title="All pages tagged &#39;robots&#39;." href="/archive/robots/index.html">robots</a>, <a title="All pages tagged &#39;jobs&#39;." href="/archive/jobs/index.html">jobs</a>, <a title="All pages tagged &#39;fed&#39;." href="/archive/fed/index.html">fed</a>, <a title="All pages tagged &#39;government&#39;." href="/archive/government/index.html">government</a>, <a title="All pages tagged &#39;automation&#39;." href="/archive/automation/index.html">automation</a>
-  </div>
-  <p>Many people today seem to be lamenting the coming “Jobpocalypse” – that time where robots, technology, and automation more generally, replace all of our jobs, leaving us unemployed and impoverished. Nevermind that we’ve never seen technology eliminate jobs in net, as Paul Graham <a href="https://twitter.com/paulg/status/577239973650399232">mentioned yesterday</a>, let’s just look at what might be expediting the current trend of robots and job automation, at the expense of jobs in certain sectors.</p>
-<p>What is the main factor that would drive a business to look for robots to replace jobs that humans currently do? It’s pretty simple: <strong>Are the robots cheaper than humans at the given task?</strong></p>
-<p>Next we should ask what factors determine whether robots can do a given job cheaper than humans? I think this simply boils down to:</p>
-<ul>
-<li>The cost of human labor</li>
-<li>The cost of capital (robots, hardware, software, etc.)</li>
-</ul>
-<p>When the cost of labor rises, and the cost of capital decreases, you would expect to see a surge in investments to automate tasks away from humans.</p>
-<p>I would argue that the government (in the US, anyway) is, and has been, making the cost of human labor more expensive through minimum wage increases, healthcare costs, and rising taxes (payroll, etc.) in general. On the capital cost side, the government, in cooperation with the Fed, has been on a 45-year tear of falling interest rates, which makes money cheaper, decreases the cost of debt, and ultimately decreases the cost of capital.</p>
-<p>It’s pretty clear that we’re going to see more and more automation, and the government seems to be doing what it can to expedite the process as much as possible. While I’m not a fan of government intervention, I think the coming automation will be great for society, as I’ve written about before. As with past advancements, we’ll look back, glad we no longer have to till the fields, or drive ourselves around. We’ll be solving bigger and better problems, and that’s exciting.</p>
-</div>
-]]></description>
-    <pubDate>Tue, 17 Mar 2015 15:32:17 UT</pubDate>
-    <guid>http://willwolf.me/2015/03/17/how-the-government-and-the-fed-are-expediting</guid>
     <dc:creator>William Wolf</dc:creator>
 </item>
 
