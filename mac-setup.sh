@@ -14,7 +14,7 @@ function install_homebrew {
   if [ "$?" -eq "1" ]; then
     read -p "Homebrew not detected, would you like to set it up? (y/n): " yesno
     if [ "$yesno" == "y" ] || [ "$yesno" == "Y" ]; then
-      curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
       # Make sure git is installed
       brew install git
     fi
