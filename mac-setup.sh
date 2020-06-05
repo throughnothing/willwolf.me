@@ -42,13 +42,15 @@ function main {
   which git >> /dev/null
   if [ "$?" -eq "1" ]; then echo "Need Git!"; exit 1; fi
 
-  install_homebrow
+  install_homebrew
   clone_dotfiles
 
   pushd $INSTALLDIR >> /dev/null
 
   echo "Handing off to post-clone.sh script..."
   ./post-clone.sh
+  
+  popd >> /dev/null
 }
 
 main
