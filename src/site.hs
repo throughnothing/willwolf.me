@@ -25,7 +25,7 @@ main = hakyllWith configuration $ do
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx <> bodyField "description"
+            let feedCtx = bodyField "description" <> postCtx
             posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots "posts/*" "content"
             renderRss feedConfiguration feedCtx posts
 
