@@ -41,6 +41,11 @@ main = hakyllWith configuration $ do
             items <- loadAll "css/*" :: Compiler [Item String]
             makeItem $ concatMap itemBody items
 
+    -- Combine all CSS
+    create ["mac-setup.sh"] $ do
+        route idRoute
+        compile copyFileCompiler
+
     match "about.md" $ do
         route $ setExtension "html"
             `composeRoutes` appendIndex

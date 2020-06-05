@@ -17,8 +17,13 @@ clean: compile
 rebuild: compile
 	cd ${SRC} && ${STACK} exec ${SITE} rebuild
 
-serve: rebuild
+serve: update-mac-setup rebuild
 	cd ${SRC} && ${STACK} exec ${SITE} watch
 
 compile:
 	cd ${SRC} && ${STACK} build
+
+
+# Update mac-setup script from dotfiles repo
+update-mac-setup:
+	cd ${SRC} && curl -sSL https://raw.githubusercontent.com/throughnothing/dotfiles/master/mac-setup.sh > mac-setup.sh
