@@ -1,5 +1,5 @@
 #!/bin/bash
-EDITOR="${EDITOR:-code}"
+BLOG_EDITOR="${BLOG_EDITOR:-code}"
 WEBSITE=https://willwolf.me
 
 DATE=$(date +"%Y-%m-%d")
@@ -25,5 +25,5 @@ echo "# description: " >> ${NEWFILE}
 echo "tags:" >> ${NEWFILE}
 echo "---" >> ${NEWFILE}
 
-${EDITOR} ${NEWFILE}
+${BLOG_EDITOR} ${NEWFILE}
 
