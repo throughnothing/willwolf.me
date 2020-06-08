@@ -4,19 +4,19 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> Archive | willwolf.me </title>
-        <link rel="stylesheet" href="../all.css" />
+        <title> Playing With Observable Notebooks | willwolf.me </title>
+        <link rel="stylesheet" href="../../../../all.css" />
 
         
 
         <!-- Social Meta Tags -->
-        <meta property="og:title" content="Archive" /> 
+        <meta property="og:title" content="Playing With Observable Notebooks" /> 
         
             
         
         <meta property="og:type" content="website" /> 
         <meta property="og:image" content="https://willwolf.me/images/nyc.jpeg" /> 
-        <meta property="og:url" content="https://willwolf.me/archive/" /> 
+        <meta property="og:url" content="https://willwolf.me/2020/06/08/playing-with-observable-notebooks/" /> 
         <meta name="twitter:site" content="@throughnothing" /> 
         <meta name="twitter:creator" content="@throughnothing" /> 
         <meta name="twitter:card" content="summary" /> 
@@ -25,15 +25,15 @@
     <body>
 
         <div class="sidebar">
-            <a href="../" class="face-logo">
+            <a href="../../../../" class="face-logo">
             </a>
 
             <div class="side-nav">
-                <a href="../about">About</a>
-                <a href="../projects">Projects</a>
-                <a href="../archive">Archive</a>
-                <a href="../reading">Reading</a>
-                <a href="../tweets">Tweets</a>
+                <a href="../../../../about">About</a>
+                <a href="../../../../projects">Projects</a>
+                <a href="../../../../archive">Archive</a>
+                <a href="../../../../reading">Reading</a>
+                <a href="../../../../tweets">Tweets</a>
             </div>
 
             <div class="side-footer">
@@ -53,7 +53,7 @@
                 <a class="linkedin" target="_social" href="https://www.linkedin.com/in/throughnothing/">
                     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M13.632 13.635h-2.37V9.922c0-.886-.018-2.025-1.234-2.025-1.235 0-1.424.964-1.424 1.96v3.778h-2.37V6H8.51v1.04h.03c.318-.6 1.092-1.233 2.247-1.233 2.4 0 2.845 1.58 2.845 3.637v4.188zM3.558 4.955c-.762 0-1.376-.617-1.376-1.377 0-.758.614-1.375 1.376-1.375.76 0 1.376.617 1.376 1.375 0 .76-.617 1.377-1.376 1.377zm1.188 8.68H2.37V6h2.376v7.635zM14.816 0H1.18C.528 0 0 .516 0 1.153v13.694C0 15.484.528 16 1.18 16h13.635c.652 0 1.185-.516 1.185-1.153V1.153C16 .516 15.467 0 14.815 0z" fill-rule="nonzero"></path></svg>
                 </a>
-                <a class="rss" target="_rss" href="../rss.xml">
+                <a class="rss" target="_rss" href="../../../../rss.xml">
                     <svg aria-labelledby="simpleicons-rss-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-rss-icon">RSS icon</title><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"></path></svg>
                 </a>
             </div>
@@ -62,176 +62,38 @@
         </div>
 
         <div class="content">
-            <h1>Archive</h1>
+            <div class="post">
+  <h1><a href="../../../../2020/06/08/playing-with-observable-notebooks">Playing With Observable Notebooks</a></h1>
+  <span class="post-date">08 Jun 2020</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'programming'." href="../../../../archive/programming/">programming</a>, <a title="All pages tagged 'crypto'." href="../../../../archive/crypto/">crypto</a>
+  </div>
+  <p>I had been wanting to play around with the programming notebooks created by <a href="https://observablehq.com/">ObservableHQ</a>. They are a new type of programming notebook, very similar to <a href="https://jupyter.org/">Jupyter Notebooks</a>, but they run Javascript, and can run entirely in the browser. Observable notebooks also us an observable pattern, where all cells which depend on a variable are automatically updated whenever the underlying variables change. This also eliminates the reliance on ordering of cells, as they can be ordered in any way that makes sense, rather than ordered by their dependences. To learn about more differences butween Observables and Jupyter you can check out <a href="https://observablehq.com/@observablehq/observable-for-jupyter-users">Observable for Jupyter Users</a>.</p>
+<h2 id="bitcoin-futures-basis-trade">Bitcoin Futures Basis Trade</h2>
+<p>Yesterday I decided to see if I could build a quick futures basis rate calculator for Bitcoin futures. The “basis rate” is the spread that exists between a future, and the current spot price of an asset. When the asset futures are in contango, this rate will be positive, because the future price is higher than the current spot price. Conversely, the basis rate will be negative when the asset futures are in backwardation.</p>
+<p>It turned out to be super quick and easy. I’ve embedded the resulting table belowe, but you can also check out the entire notebook <a href="https://observablehq.com/@throughnothing/crypto-basis-trade-calculator">here</a>. I’m calculating the annualized APY for each futures product available on <a href="https://www.deribit.com/">Deribit</a> using their public <a href="https://docs.deribit.com/">v2 api</a>. The notebook updates itself every 5 seconds (adjustable by the user on the ObservableHQ site) with the latest prices and rates. Do note that I’m currently calculating the APY (annualized basis rate) based on the <code>mark_price</code> rather than the <code>last_price</code>. I’m also using the <code>BTC-PERPETUAL</code> as a proxy for the current spot price of Bitcoin, as you can’t actually trade spot on Deribit. As with any moving, volatile market, you may not actually be able to capture that APY, but it gives a good reference for comparison of where rates are at. This is also, obviously, not investment advice. The <code>percent_delta</code> column is the simple percentage delta between the <code>BTC-PERPETUAL</code> <code>mark_price</code>, and the respective futures’ <code>marke_price</code>, to give you an idea of the actual rate, vs the annualized APY.</p>
 <hr />
-<ul class="posts">
-  
-  <li>
-    <span class="postDate">08 Jun 2020 &raquo; </span>
-    <a href="../2020/06/08/playing-with-observable-notebooks">Playing With Observable Notebooks</a>
-  </li>
-  
-  <li>
-    <span class="postDate">04 Jun 2020 &raquo; </span>
-    <a href="../2020/06/04/claiming-handshake-airdrop-tokens">Claiming Handshake (HNS) Airdrop Tokens</a>
-  </li>
-  
-  <li>
-    <span class="postDate">30 May 2020 &raquo; </span>
-    <a href="../2020/05/30/staying-healthy-during-coronavirus">Staying Healthy During Coronavirus</a>
-  </li>
-  
-  <li>
-    <span class="postDate">18 May 2020 &raquo; </span>
-    <a href="../2020/05/18/im-not-a-necklace">I'm not a necklace</a>
-  </li>
-  
-  <li>
-    <span class="postDate">17 Mar 2020 &raquo; </span>
-    <a href="../2020/03/17/Market-Valuations">Market Valuations</a>
-  </li>
-  
-  <li>
-    <span class="postDate">08 Nov 2017 &raquo; </span>
-    <a href="../2017/11/08/java-8-coding-guide">Java 8 Coding Guide</a>
-  </li>
-  
-  <li>
-    <span class="postDate">06 Jul 2016 &raquo; </span>
-    <a href="../2016/07/05/us-and-them">Us and Them</a>
-  </li>
-  
-  <li>
-    <span class="postDate">04 Mar 2016 &raquo; </span>
-    <a href="../2016/03/04/ask-questions">Ask Questions!</a>
-  </li>
-  
-  <li>
-    <span class="postDate">10 Jan 2016 &raquo; </span>
-    <a href="../2016/01/09/bitcoin-in-the-event-of-a-government-crackdown">Bitcoin in the event of a Government crackdown</a>
-  </li>
-  
-  <li>
-    <span class="postDate">14 Jun 2015 &raquo; </span>
-    <a href="../2015/06/14/when-you-look-back-on-this-moment-in-history">When You Look Back On This Moment In History</a>
-  </li>
-  
-  <li>
-    <span class="postDate">03 Jun 2015 &raquo; </span>
-    <a href="../2015/06/03/making-education-free">Making Education “Free”!</a>
-  </li>
-  
-  <li>
-    <span class="postDate">17 Mar 2015 &raquo; </span>
-    <a href="../2015/03/17/how-the-government-and-the-fed-are-expediting">How the Government (and the Fed) are expediting the Robot Jobpocalypse</a>
-  </li>
-  
-  <li>
-    <span class="postDate">02 Mar 2015 &raquo; </span>
-    <a href="../2015/03/02/failing-wars-of-dollars-the-bitcoin-price-to-come">Failing Wars of Dollars; The Bitcoin Price to Come - CryptoCoinsNews</a>
-  </li>
-  
-  <li>
-    <span class="postDate">25 Feb 2015 &raquo; </span>
-    <a href="../2015/02/24/theres-always-a-reason-why-this-time-is">There's always a reason why "This time is different"</a>
-  </li>
-  
-  <li>
-    <span class="postDate">10 Feb 2015 &raquo; </span>
-    <a href="../2015/02/10/bitcoin-and-cash-only-businesses">Bitcoin and Cash-only Businesses</a>
-  </li>
-  
-  <li>
-    <span class="postDate">09 Feb 2015 &raquo; </span>
-    <a href="../2015/02/09/science-or-science-journalism-failing">Science, or Science Journalism, Failing?</a>
-  </li>
-  
-  <li>
-    <span class="postDate">08 Feb 2015 &raquo; </span>
-    <a href="../2015/02/08/disconnect">Disconnect</a>
-  </li>
-  
-  <li>
-    <span class="postDate">06 Feb 2015 &raquo; </span>
-    <a href="../2015/02/06/lamenting-increased-productivity">Lamenting Increased Productivity</a>
-  </li>
-  
-  <li>
-    <span class="postDate">01 Feb 2015 &raquo; </span>
-    <a href="../2015/02/01/get-your-loved-ones-off-facebook">Get your loved ones off Facebook.</a>
-  </li>
-  
-  <li>
-    <span class="postDate">31 Jan 2015 &raquo; </span>
-    <a href="../2015/01/31/transact-at-a-distance-but-securely">Transact at a Distance, but Securely</a>
-  </li>
-  
-  <li>
-    <span class="postDate">30 Jan 2015 &raquo; </span>
-    <a href="../2015/01/30/writing-is-thinking-in-public">Writing is Thinking in Public</a>
-  </li>
-  
-  <li>
-    <span class="postDate">26 Jan 2015 &raquo; </span>
-    <a href="../2015/01/25/excited-to-read-my-signed-copy-of-mastering">My signed copy of Mastering Bitcoin</a>
-  </li>
-  
-  <li>
-    <span class="postDate">03 Mar 2014 &raquo; </span>
-    <a href="../2014/03/03/Processes">Processes, Processes, Processes</a>
-  </li>
-  
-  <li>
-    <span class="postDate">26 Jul 2012 &raquo; </span>
-    <a href="../2012/07/26/jekyll-mapping-and-octopress">Jekyll-Mapping and Octopress</a>
-  </li>
-  
-  <li>
-    <span class="postDate">16 Mar 2012 &raquo; </span>
-    <a href="../2012/03/16/git-processes-scripts-and-ideas">Git Processes, Scripts and Ideas</a>
-  </li>
-  
-  <li>
-    <span class="postDate">15 Jul 2011 &raquo; </span>
-    <a href="../2011/07/15/city-life-dc">City Life - DC</a>
-  </li>
-  
-  <li>
-    <span class="postDate">08 Apr 2011 &raquo; </span>
-    <a href="../2011/04/08/single-speed">Single Speed</a>
-  </li>
-  
-  <li>
-    <span class="postDate">08 Dec 2010 &raquo; </span>
-    <a href="../2010/12/08/the-best-christmas-gift-you-can-give">The Best Christmas Gift You Can Give</a>
-  </li>
-  
-  <li>
-    <span class="postDate">06 Dec 2010 &raquo; </span>
-    <a href="../2010/12/06/running-barefoot">Running Barefoot</a>
-  </li>
-  
-  <li>
-    <span class="postDate">04 Dec 2010 &raquo; </span>
-    <a href="../2010/12/04/5-ways-to-enjoy-your-commute">5 Ways to Enjoy Your Commute</a>
-  </li>
-  
-  <li>
-    <span class="postDate">03 Dec 2010 &raquo; </span>
-    <a href="../2010/12/03/successful-people-read-books">Successful People Read Books</a>
-  </li>
-  
-  <li>
-    <span class="postDate">02 Dec 2010 &raquo; </span>
-    <a href="../2010/12/02/art">Art</a>
-  </li>
-  
-  <li>
-    <span class="postDate">12 Oct 2010 &raquo; </span>
-    <a href="../2010/10/12/barefoot-observations">Barefoot Observations</a>
-  </li>
-  
-</ul>
+<h3 id="current-deribit-bitcoin-futures-basis">Current Deribit Bitcoin Futures Basis</h3>
+<style>
+  .pretty-pager { display: none; }
+  #observablehq-00d20f62 { overflow: scroll }
+  #observablehq-00d20f62 th { font-weight: bold }
+
+</style>
+<div id="observablehq-00d20f62">
+
+</div>
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+import define from "https://api.observablehq.com/@throughnothing/crypto-basis-trade-calculator.js?v=3";
+const inspect = Inspector.into("#observablehq-00d20f62");
+(new Runtime).module(define, name => name === "my_table" ? inspect() : undefined);
+</script>
+<hr />
+<p>I think this will be a useful tool to prototype ideas quickly, and share them with others without having to have a server running or have each person set up a local development environment. I look forward to making use of this tool more in the future.</p>
+<p>I also want to play with <a href="https://polynote.org/">Polynote</a> a bit more, as it can leverage more languages (Scala, Python, Haskell), and is probably better suited for things that require a bit more computation, as well as things that may need to talk to private APIs.</p>
+</div>
 
         </div>
 
