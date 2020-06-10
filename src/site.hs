@@ -20,6 +20,7 @@ main = hakyllWith configuration $ do
     match "assets/*" $ route idRoute *> compile copyFileCompiler
     match "keybase.txt" $ route idRoute *> compile copyFileCompiler
     match "williamwolf.asc" $ route idRoute *> compile copyFileCompiler
+    match "williamwolf-polychain.asc" $ route idRoute *> compile copyFileCompiler
     match "templates/*" $ compile templateBodyCompiler
 
     create ["rss.xml"] $ do
