@@ -64,6 +64,27 @@
         <div class="content">
             
   <div class="post">
+  <h1><a href="../../2015/01/31/transact-at-a-distance-but-securely">Transact at a Distance, but Securely</a></h1>
+  <span class="post-date">31 Jan 2015</span>
+  <hr />
+  <div class="tags">
+    <a title="All pages tagged 'tech'." href="../../archive/tech/">tech</a>, <a title="All pages tagged 'bitcoin'." href="../../archive/bitcoin/">bitcoin</a>, <a title="All pages tagged 'crypto'." href="../../archive/crypto/">crypto</a>, <a title="All pages tagged 'apple-pay'." href="../../archive/apple-pay/">apple-pay</a>
+  </div>
+  <p>Seth Godin wrote earlier today about the end of geography. Three of the most important inventions in the last 100 years, in his eyes, are:</p>
+<ul>
+<li><strong>Credit cards</strong> – which enabled transactions to take place at a distance</li>
+<li><strong>The internet</strong> – which moved information from one end of the world to the other as easily as across the room</li>
+<li><strong>Cell phones</strong> – which cut the wires</li>
+</ul>
+<p>Credit cards definitely do enable transactions to take place at a distance, but I think there’s an element that is growing more important by the day with “transactions at a distance”, and that is security. There have been so many credit card thefts recently it’s hard to keep track of.</p>
+<p>Credit Cards are an archaic technology emphatically not built with internet security in mind. Security was (poorly) bolted on using repeatedly broken tools such as SSL, and trust through networks of PCI-certified vendors.  Don’t get me wrong, credit cards were great for getting us to where we are, but now we’re seeing that the combination of the three things listed above enable exciting new ways to transact at a distance, but securely (for real this time).</p>
+<p>Apple Pay is one of these new technologies that tries to up the security game when transacting at a distance. I think whats more exciting, however, are the open standards and technologies that are being built to tackle this security problem. The biggest one at the moment is Bitcoin.</p>
+<p>Bitcoin technology allows people to transact at a distance, much like credit cards, but transactions on this network can happen securely over insecure channels (the internet, public wifi, etc.). Seth says those were three of the most important inventions of the last 100 years. New technologies like Apple Pay, and the Bitcoin blockchain combine the internet, cell phones, and electronic payments to bring us something even better and more secure. What will we be saying about these technologies in 100 years?  How about in 5 years?</p>
+</div>
+
+  <hr class="post-separator" />
+
+  <div class="post">
   <h1><a href="../../2015/01/30/writing-is-thinking-in-public">Writing is Thinking in Public</a></h1>
   <span class="post-date">30 Jan 2015</span>
   <hr />
@@ -133,95 +154,6 @@
 <p>After a bit of tinkering, I ended up with <a href="https://github.com/throughnothing/jekyll-mapping/compare/refactor">this changeset</a> that gave me pretty much everything I wanted (for now):</p>
 <script src="https://gist.github.com/throughnothing/3183238.js"></script>
 <p>With this, I can put multiple layers on a map (I usually put a <code>.gpx</code> layer for the day, as well as a layer from flickr with my geotagged photoset for that day in each relevant post), and display multiple posts, each with a map, per page.</p>
-</div>
-
-  <hr class="post-separator" />
-
-  <div class="post">
-  <h1><a href="../../2012/03/16/git-processes-scripts-and-ideas">Git Processes, Scripts and Ideas</a></h1>
-  <span class="post-date">16 Mar 2012</span>
-  <hr />
-  <div class="tags">
-    <a title="All pages tagged 'git'." href="../../archive/git/">git</a>, <a title="All pages tagged 'programming'." href="../../archive/programming/">programming</a>
-  </div>
-  <p>Lately I’ve been refining some of my git processes (as well as learning a lot about git along the way). I thought I’d write up a post to share some of the ways i’ve been using git.</p>
-<h2 id="workflow">Workflow</h2>
-<p>Our typical workflow at <a href="https://www.crowdtilt.com">crowdtilt</a> is pretty standard. We have a <code>dev</code> branch, a <code>master</code> branch, and various feature/topic branches. We also make heavy use of github for pull requests/code reviews.</p>
-<p>When I go to develop a new feature/bugfix, I start by creating a new branch off of the latest <code>dev</code>, and start coding. I often make many small commits along the way because I’m a strong believer in commit early, commit often. I also push my branch to github pretty frequently just to be on the safe side.</p>
-<p>Once my feature branch has been tested, and is ready to be merged into <code>dev</code>, I rebase all of my small commits into 1. We try to keep all of our PR’s to 1 commit just to keep our git history clean, useful, and readable as a history of concise and (hopefully) small changes. To do this, I have been simply using:</p>
-<pre><code>$ git rebase -i dev</code></pre>
-<p>This will drop me into vim with a lits of all the commits between <code>dev</code>’s <code>HEAD</code> and my current branch’s <code>HEAD</code>. It will look something like this:</p>
-<pre><code>pick 1dea3ff Commit #1
-pick 57a5a28 Commit #2
-pick 3f21ade Commit #3</code></pre>
-<p>I simply squash all the commits into one by replacing <code>pick</code> with <code>s</code> on all but the first line. This gives me something like this:</p>
-<pre><code>pick 1dea3ff Commit #1
-s 57a5a28 Commit #2
-s 3f21ade Commit #3</code></pre>
-<p>This tells git that I want to squash all of these commits into one. Once I quit and save it’ll then let me give a new commit message for my new mega-commit.</p>
-<p>Here I try to follow convention with a short summary on the first line, and then a lengthier description describing my feature/bugfix/whatever in a paragraph below that.</p>
-<p>Once I have my branch neatly tidied up with one descriptive commit, it’s time to pull request.</p>
-<h2 id="pull-requests-and-hub">Pull Requests and hub</h2>
-<p>I love the github web interface for reviewing code and checking out diffs, but it is very tedious to go to the website, find your branch, and make the pull request through the web interface. Enter <a href="https://github.com/defunkt/hub">hub</a> – a wonderful command-line tool that lets you create pull requests (amongst lots of other cool things) right from the command line.</p>
-<p>To do a pull request right from my coding directory, I can simply run:</p>
-<pre><code>$ hub pull-request &quot;Pull Request Title&quot;</code></pre>
-<p>The caveat here is that hub (and github, too) default all pull requests to merge into the <code>master</code> branch. We always merge into <code>dev</code>, and then merge <code>dev</code> into <code>master</code> when we are ready to deploy changes to production (I’ll talk more about our deploy processes in another article). So to get it to merge into <code>dev</code>, we must run the following:</p>
-<pre><code>$ hub pull-request &quot;Pull Request Title&quot; -b dev</code></pre>
-<p>This is closer to what we need, but by default what this will do is setup a pull request on github from <code>throughnothing:feature-branch</code> to <code>crowdtilt:dev</code>. It does this because it assumes that I want to do a pull request from my users fork to the original users repository. We don’t really have each developer fork our repos, we just all work on the same repo in our own branches, so we really want it to do a pull-request from <code>crowdtilt:feature-branch</code> to <code>crowdtilt:dev</code>. This means we need:</p>
-<pre><code>$ hub pull-request &quot;Pull Request Title&quot; -b dev -h crowdtilt:feature-branch</code></pre>
-<p>It seemed really simple at first, but now it’s a lot to type. Time for some <code>~/.bashrc</code> magic. To make things as simple as possible for our development process, I’ve written this little bash function to put in our <code>~/.bashrc</code> files to smooth things out:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="../../page/5/#cb7-1"></a><span class="fu">pullreq()</span> <span class="kw">{</span></span>
-<span id="cb7-2"><a href="../../page/5/#cb7-2"></a>    [ <span class="ex">-z</span> <span class="va">$BRANCH</span> ] <span class="kw">&amp;&amp;</span> <span class="va">BRANCH=</span><span class="st">&quot;dev&quot;</span></span>
-<span id="cb7-3"><a href="../../page/5/#cb7-3"></a>    <span class="va">HEAD=$(</span><span class="fu">git</span> symbolic-ref HEAD <span class="op">2&gt;</span> /dev/null<span class="va">)</span></span>
-<span id="cb7-4"><a href="../../page/5/#cb7-4"></a>    [ <span class="ex">-z</span> <span class="va">$HEAD</span> ] <span class="kw">&amp;&amp;</span> <span class="bu">return</span> <span class="co"># Return if no head</span></span>
-<span id="cb7-5"><a href="../../page/5/#cb7-5"></a>    <span class="va">REMOTE=</span><span class="kw">`</span><span class="fu">cat</span> .git/config <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;remote </span><span class="dt">\&quot;</span><span class="st">origin</span><span class="dt">\&quot;</span><span class="st">&quot;</span> -A 2 <span class="kw">|</span> <span class="fu">tail</span> -n1 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/.*:\([^\/]*\).*/\1/'</span><span class="kw">`</span></span>
-<span id="cb7-6"><a href="../../page/5/#cb7-6"></a></span>
-<span id="cb7-7"><a href="../../page/5/#cb7-7"></a>    <span class="ex">hub</span> pull-request -b <span class="va">$BRANCH</span> -h <span class="va">$REMOTE</span>:<span class="va">${HEAD#</span>refs/heads/<span class="va">}</span> <span class="va">$1</span></span>
-<span id="cb7-8"><a href="../../page/5/#cb7-8"></a><span class="kw">}</span></span></code></pre></div>
-<p>This accepts a <code>BRANCH</code> environment variable that can be set, but will default to <code>dev</code> (which is pretty much 90+% of our use cases). It also parses the github user that the origin of the repository</p>
-<p>Not only has <code>hub</code> greatly streamlined our pull request process, but when combined with the bash function, it eliminates errors of pull requesting feature branches to be merged into <code>master</code> (and even having them <em>accidentally</em> merged into master directly – that never happens, right?) instead of <code>dev</code>.</p>
-<p>Using this script, when we’re ready to do a deploy and merge <code>dev</code> into <code>master</code> we simply can run (from the <code>dev</code> branch):</p>
-<pre><code>$ BRANCH=master pullreq</code></pre>
-<p>And the pull request will be created to merge dev into master so we can review it on github.</p>
-<h2 id="managing-branch-chaos">Managing Branch Chaos</h2>
-<p>I said earlier that I was a believer in commit early, commit often. Well, I’m also a believer in small branches. We pretty much make branches for everything. Even if it’s just a simple css change, or a one-line bug-fix, I like to quarantine changesets into a branch of their own. So many times i’ll be caught in the middle of a simple change and have to go tend to something else. Having branches lets me quickly commit “saving my place”, or “WIP” in my branch, and get to work looking at something in another branch. My feature branch will be there waiting for me when I’m ready to go back to it.</p>
-<p>Additionally, smaller branches make for smaller merges, which are easier to review, and less prone to introducing glaring errors that could have been caught.</p>
-<p>A side-effect of all this branching and pushing and merging is that you can quickly get confused about which branches have been merged and which haven’t. The list of branches shown on github and on the command line grows to make it harder for you to find the branches you still care about. So of course, we can delete the branches as we go, but this is very tedious to do so frequently as you have to delete the branch locally, and on github:</p>
-<pre><code>$ pullreq
-# Review code on github
-$ git checkout dev &amp;&amp; git merge feature-branch &amp;&amp; git push origin dev
-$ gut branch -D feature-branch  # delete feature-branch locally
-$ git push origin :feature-branch # delete feature-branch on github</code></pre>
-<p>Enter more <code>~/.bashrc</code> goodness. I wanted a way to streamline this process as well because i was typing the above waaay too frequently, so I came up with two handy bash functions:</p>
-<pre><code>git_purge_local_branches() {
-  [ -z $1 ] &amp;&amp; return
-  BRANCHES=`git branch --merged $1 | grep -v '^*' | grep -v 'master' | grep -v 'dev' | tr -d '\n'`
-  echo &quot;Running: git branch -d $BRANCHES&quot;
-  git branch -d $BRANCHES
-}
-
-git_purge_remote_branches() {
-  [ -z $1 ] &amp;&amp; return
-  git remote prune origin
-
-  BRANCHES=`git branch -r --merged $1 | grep 'origin' | grep -v '/master$' | grep -v '/dev$' | sed 's/origin\//:/g' | tr -d '\n'`
-  echo &quot;Running: git push origin $BRANCHES&quot;
-  git push origin $BRANCHES
-}</code></pre>
-<p><code>git_purge_local_branches()</code> will – as the name implies – purge local branches that have been merged into the branch you give it. And <code>git_purge_remote_branches()</code> will do the same but it will remove the branches from the <code>origin</code> remote. So every now and then, when we get a lot of branches hanging around getting in our way, we can clean them up with:</p>
-<pre><code>$ git_purge_local_branches dev
-$ git_purge_remote_branches dev</code></pre>
-<p>And of course, because running 2 commands just became too much, I created <code>git_purge</code>…one purge to rule them all:</p>
-<pre><code>git_purge() {
-  branch=$1
-  [ -z $branch ] &amp;&amp; branch=&quot;dev&quot;
-  git_purge_local_branches $branch
-  git_purge_remote_branches $branch
-}</code></pre>
-<p>So now its super easy to manage our branch chaos. When I start to see too many branches building up, I can simply <code>git_purge</code> and it’ll wipe out any branches locally and on the origin that have already been merged into dev. Then we’re back to a blissful state of branch zen.</p>
-<h2 id="final-thoughts">Final Thoughts</h2>
-<p>That pretty much sums up my current git processes. I really enjoy how streamlined things have become, how well our processes work, and how easy it is to keep our branches clean and clutter-free while at the same time encouraging us to branch, branch, branch!</p>
-<p>How are you using git? Tell me how I can make my workflow even better and more kick-ass :)</p>
 </div>
 
   <hr class="post-separator" />
