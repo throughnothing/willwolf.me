@@ -1,0 +1,76 @@
+==================================================================
+https://keybase.io/throughnothing
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://throughnothing.com
+  * I am throughnothing (https://keybase.io/throughnothing) on keybase.
+  * I have a public key with fingerprint D2A3 32BC 2B61 2C33 9FAB  1C89 5840 84D4 423D 17F3
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.4.7"
+        },
+        "key": {
+            "fingerprint": "d2a332bc2b612c339fab1c89584084d4423d17f3",
+            "host": "keybase.io",
+            "key_id": "584084D4423D17F3",
+            "uid": "a6ec033db681355008fea2052cb7e000",
+            "username": "throughnothing"
+        },
+        "merkle_root": {
+            "ctime": 1403111882,
+            "hash": "c362844449217c420a6988fbd69b7a474a7ee3ac1f46872c9340b57955e52e4039265399651c32d78d54d2d00292694fb1ab21f99ea859a12c00d022a630d742",
+            "seqno": 20447
+        },
+        "service": {
+            "hostname": "throughnothing.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1403111960,
+    "expire_in": 157680000,
+    "prev": "9331d9d076eb4b09653801d3b014df52857036be9705f968b382313e285df59d",
+    "seqno": 10,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Comment: GPGTools - http://gpgtools.org
+
+owFtkltsFUUYx08LHgRirCKXCMRmJVVoOZ3b7s40IS3a6gsYhIQAoR5ndmbP2XK6
+e7q7rTb1QKIYw0mMtBgevKE+gMUYCApJjUGUoJHLA9pAiDwQE9QWHyR4SQk0ztQa
+JXGfZuf/+/7z/b+Z3ffMyNTWbGrbOfrYqoU3as6MicyG904vGrBEJPutlgHLKwUq
+TM0q5N3KarG2qX7BE5ULovowkirXldRPM01Wn4qTIAo1BXIk51qVJoObYj8ICyou
+x4HxsiTiGCPhIeFA5GHMfC6gR5lNCaBEEoKwhK6PtWUxStI7TrWmPPOB1Lt/8+2G
+b4fuE4bvnRK4ozyAsRQOhdi2AaC+4gjYyBOuAgAYMFHxdKS0GEe9hWIYpUXdpum6
+W8XbSiofR9FUdC8NDAgJwBBCSpHuiydFXephB1GiP4ag6xEEuMMo9YV0mHA5cQl3
+lcLcgz5xqIs8hgkQtstsW9lIaT+GHBsz5tjQw0i6VNpEIgkA0gIjvoBcIOgzpji1
+GdfTAkAChLiDgXQJ0kES1RNGVgsChLgV8xv3BZ4ybZvZ/W/EnBd168pyHKWRF5W0
+XkzTcotJPpL2l03Bc0rkp63yIgilGcx/Lhhq9M6pMAc0Wer5chCrfGAI23WoHjUw
+56g+bckwhpJJ4DpKEAF0ZkwBlFgASKRvI2q7ADtCMRfYPnOowBRhiJUWtMzkv1mh
+Nk15QXsmQSHkaW+srMqumiUzMzW1mexdteYJZ+bMrvvnXa/omDUJqydb0dBnralz
+6dwzM3qqc291NWfPzvvhKbz20c43B7O32wieNXdd477xZ3c37a2MWz99ezryL/R8
+d379u8eHz835fPTWn78ePCWTL7K/hFXvlUrD8a7zIyPzj148trl58drJ7cu/bFj2
+zR+LJl649yu17rWtq75OX97/4frfmo/uffuRjqeXft/+6saXLh+6+XhS3f7g6PuF
+w0NDJydWn9h0943SG2O/Hz7yycT9A5P8xx1P7t94Yentmxs+7hxcueDUpauDW/oa
+6x/ede2Dtx66snxkeE9p5sKuq1u2Hhzud3Y2LHv906Tu5+tj9y2ue3HegQdWXLNK
+Vw50nuhYc/2j7HjrjjPVy3vaepaszr9T2/gX
+=A880
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/throughnothing
+
+==================================================================

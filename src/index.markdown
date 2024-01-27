@@ -1,6 +1,0 @@
----
-title: Home
----
-
-$partial("templates/post-list.html")$
-

@@ -1,0 +1,31 @@
+
+body {
+    padding: 40px;
+    background-color: #FFF;
+    color: #000;
+    font-family: 'Space Mono', sans-serif;
+    font-size: 12pt;
+    width: 600px;
+}
+
+h1 {
+    font-size: 20pt;
+}
+
+a {
+    text-decoration: none;
+    color: #E65B55;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* Styles for Goodreads Widgets */
+body center { display: none; }
+.gr_custom_container_1706386657 {
+}
+
+.gr_custom_container_1706386657 a {
+    color: #000;
+}
