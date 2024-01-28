@@ -4,7 +4,7 @@
   "description": "My home on the web.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "eleventy --serve"
   },
   "keywords": [],
   "author": "",

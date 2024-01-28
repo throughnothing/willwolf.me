@@ -13,6 +13,6 @@ npm install
 ## Local Server
 
 ```
-npx @11ty/eleventy --serve --input src
+npm run dev
 ```
 
