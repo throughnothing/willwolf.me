@@ -12,9 +12,13 @@ I studied Computer Engineering, Music, and Math at [Virginia Tech](https://vt.ed
 
 
 
-[X](https://x.com/throughnothing)
-| [Github](https://github.com/throughnothing)
-| [Linkedin](https://www.linkedin.com/in/throughnothing)
-| [Books](https://www.goodreads.com/user/show/7295031-will)
-| [Photos](https://flickr.com/photos/throughnothing/)
-| [PGP](/williamwolf.asc)
+<div class="about-links">
+
+* [X](https://x.com/throughnothing)
+* [Github](https://github.com/throughnothing)
+* [Linkedin](https://www.linkedin.com/in/throughnothing)
+* [Books](https://www.goodreads.com/user/show/7295031-will)
+* [Photos](https://flickr.com/photos/throughnothing/)
+* [PGP](/williamwolf.asc)
+
+</div>
