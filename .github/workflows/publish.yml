@@ -18,6 +18,7 @@ jobs:
         uses: TartanLlama/actions-eleventy@master
         with:
           args: --input=src
+          install_dependencies: true
 
       - name: Deploy site
         uses: peaceiris/actions-gh-pages@v3

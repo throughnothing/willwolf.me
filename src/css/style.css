@@ -21,6 +21,17 @@ a:hover {
 }
 
 
+code {
+    background-color: #EFEFEF;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+pre {
+    border-radius: 4px;
+}
+
+
 /* Styles for Goodreads Widgets */
 body center { display: none; }
 .gr_custom_container_1706386657 {
