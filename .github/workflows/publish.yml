@@ -17,7 +17,6 @@ jobs:
       - name: Build with 11ty
         uses: TartanLlama/actions-eleventy@master
         with:
-          args: --input=src
           install_dependencies: true
 
       - name: Deploy site
