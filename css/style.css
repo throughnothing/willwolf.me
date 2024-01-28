@@ -1,15 +1,20 @@
 
 body {
-    padding: 40px;
+    margin: 0;
     background-color: #FFF;
     color: #000;
     font-family: 'Space Mono', sans-serif;
-    font-size: 12pt;
-    width: 650px;
+    font-size: 11pt;
+}
+
+main {
+    margin: 40px;
+    max-width: 550px;
 }
 
 h1 {
     font-size: 20pt;
+    margin: 35px 0;
 }
 
 a {
@@ -30,6 +35,36 @@ code {
 pre {
     border-radius: 4px;
 }
+
+
+/* About Links */
+.about-links ul {
+    margin: 0;
+    padding: 0;
+}
+
+.about-links ul li {
+    display: inline;
+}
+
+.about-links ul li:not(:first-child):before {
+    content: " | ";
+}
+
+@media screen and (max-width: 540px) {
+    /* .about-links ul::before {
+        content: "Links:";
+    } */
+    .about-links ul li {
+        display: block;
+    }
+
+    .about-links ul li::before {
+        content: " - " !important;
+    }
+  }
+
+
 
 
 /* Styles for Goodreads Widgets */
